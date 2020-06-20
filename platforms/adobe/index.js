@@ -1,9 +1,9 @@
 const reactShim = require("./react-shim");
 const React = require("react");
 const ReactDOM = require("react-dom");
-const CreateChartScreen = require("../../src/screens/CreateChart.js").default;
-const TemplatesScreen = require("../../src/screens/Templates.js").default;
-const MyAccountScreen = require("../../src/screens/MyAccount.js").default;
+const CreateChartScreen = require("../../src/Adobe/CreateChart.js").default;
+const TemplatesScreen = require("../../src/Adobe/Templates.js").default;
+const MyAccountScreen = require("../../src/Adobe/MyAccount.js").default;
 
 function createChart(selection) {
   let dialog;

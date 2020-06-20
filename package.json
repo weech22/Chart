@@ -21,6 +21,7 @@
     "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-preloaders": "^3.0.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
@@ -35,6 +36,7 @@
     "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.10.1"
+    "@babel/plugin-transform-react-jsx": "^7.10.1",
+    "copy-webpack-plugin": "^6.0.2"
   }
 }

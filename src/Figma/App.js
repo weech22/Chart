@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import store from "./configureStore";
+import store from "../configureStore";
 import { Provider } from "react-redux";
-import MainView from "./components/MainView";
+import Navigator from "./Navigator";
+import { outcomingMessageTypes } from "./constants";
 
-import { figmaMessageHandler } from "./services";
+import {
+  messageHandler as initializeMessageHandler,
+  postMessage,
+} from "./services";
 
 const Root = styled.div`
   display: flex;
@@ -15,18 +19,16 @@ const Root = styled.div`
   justify-content: center;
 `;
 
-figmaMessageHandler();
-
 export default () => {
-  useEffect(
-    () => parent.postMessage({ pluginMessage: { type: "created" } }, "*"),
-    []
-  );
+  useEffect(() => {
+    initializeMessageHandler();
+    postMessage({ type: outcomingMessageTypes.APP_MOUNTED });
+  }, []);
 
   return (
     <Provider store={store}>
       <Root>
-        <MainView />
+        <Navigator />
       </Root>
     </Provider>
   );

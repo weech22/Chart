@@ -1,0 +1,33 @@
+{
+  "id": "514fed56",
+  "name": "Chart2",
+  "version": "0.0.1",
+
+  "host": {
+    "app": "XD",
+    "minVersion": "21.0"
+  },
+
+  "uiEntryPoints": [
+    {
+      "type": "menu",
+      "label": "Create chart",
+      "commandId": "createChart"
+    },
+    {
+      "type": "menu",
+      "label": "Templates",
+      "commandId": "templates"
+    },
+    {
+      "type": "menu",
+      "label": "My account",
+      "commandId": "myAccount"
+    },
+    {
+      "type": "menu",
+      "label": "Support",
+      "commandId": "support"
+    }
+  ]
+}

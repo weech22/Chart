@@ -11,7 +11,7 @@ export const MODULES = {
   TEMPLATE: "TEMPLATE",
   CHART: "CHART",
   SETTINGS: "SETTINGS",
-  ROUTER: "ROUTER",
+  FIGMA: "FIGMA",
 };
 
 export const FIGMA_UI = {

@@ -6,7 +6,7 @@ import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./modules";
 
 import templates from "./modules/templates";
-import router from "./modules/router";
+import figma from "./modules/figma";
 /* import chart from "./modules/chart";
 import settings from "./modules/settings"; */
 
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   //chart,
   templates,
-  router,
+  figma,
   //settings,
 });
 

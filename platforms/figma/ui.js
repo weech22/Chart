@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import FigmaApp from "../../src/FigmaApp";
+import App from "../../src/Figma/App";
 
 ReactDOM.render(
-  React.createElement(FigmaApp, null),
+  React.createElement(App, null),
   document.getElementById("react-page")
 );

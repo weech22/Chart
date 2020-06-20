@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const { css } = require("styled-components");
 
@@ -99,6 +100,19 @@ const adobeConfig = {
   externals: {
     scenegraph: "scenegraph",
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(`${__dirname}/platforms/adobe`, "manifest.json"),
+          to: path.resolve(`${__dirname}/platforms/adobe`, "build"),
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
+  ],
 };
 
 /*
