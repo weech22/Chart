@@ -1,0 +1,17 @@
+{
+  "name": "chart-for-figma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@figma/plugin-typings": "^1.15.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react-dom": "^16.9.8"
+  }
+}

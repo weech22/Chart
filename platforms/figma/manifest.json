@@ -1,0 +1,16 @@
+{
+  "name": "chart2",
+  "id": "855028222750389757",
+  "api": "1.0.0",
+  "main": "build/code.js",
+  "ui": "build/ui.html",
+  "menu": [
+    { "name": "Create chart", "command": "CREATE_CHART" },
+    { "name": "Update chart", "command": "UPDATE_CHART" },
+    { "name": "Edit chart", "command": "EDIT_CHART" },
+    { "separator": true },
+    { "name": "Templates", "command": "TEMPLATES" },
+    { "separator": true },
+    { "name": "My account", "command": "MY_ACCOUNT" }
+  ]
+}
