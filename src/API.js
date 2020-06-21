@@ -1,7 +1,7 @@
-const URL = "https://jsonplaceholder.typicode.com/";
-const PROXY = "https://cors-anywhere.herokuapp.com/";
+const URL = "https://jsonplaceholder.typicode.com";
+const PROXY = "https://cors-anywhere.herokuapp.com";
 
+// TODO: Use proxy only for figma somehow
 export const ENDPOINTS = {
-  GET_TEMPLATES: (category = "todo", count = 2) =>
-    `${PROXY}/${URL}/${category}/${count}`,
+  TEMPLATES: (category = "todos", id = 2) => `${URL}/${category}/${count}`,
 };

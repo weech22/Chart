@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import store from "../configureStore";
+import styled, { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
+
+import { standartTheme } from "../styles";
 import Navigator from "./Navigator";
+import store from "../configureStore";
 import { outcomingMessageTypes } from "./constants";
 
 import {
@@ -11,12 +13,11 @@ import {
 } from "./services";
 
 const Root = styled.div`
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100vw;
   height: 100vh;
-  align-items: center;
-  justify-content: center;
 `;
 
 export default () => {
@@ -27,9 +28,11 @@ export default () => {
 
   return (
     <Provider store={store}>
-      <Root>
-        <Navigator />
-      </Root>
+      <ThemeProvider theme={standartTheme}>
+        <Root>
+          <Navigator />
+        </Root>
+      </ThemeProvider>
     </Provider>
   );
 };

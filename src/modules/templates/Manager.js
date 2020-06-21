@@ -1,10 +1,10 @@
 import * as R from "ramda";
 import { ENDPOINTS } from "../../API";
 
-export const getTemplates = (filters) =>
+const fetchTemplates = () =>
   fetch(ENDPOINTS.TEMPLATES()).then((res) => res.json());
 
-export const deleteTemplate = ({ id, token }) =>
+const deleteTemplate = ({ id, token }) =>
   fetch(ENDPOINTS.TEMPLATE(id), {
     method: "DELETE",
     headers: {
@@ -13,7 +13,7 @@ export const deleteTemplate = ({ id, token }) =>
     },
   });
 
-export const updateTemplate = ({ body, accessToken }) =>
+const updateTemplate = ({ body, accessToken }) =>
   fetch(ENDPOINTS.TEMPLATES(), {
     method: "PUT",
     headers: {
@@ -24,7 +24,7 @@ export const updateTemplate = ({ body, accessToken }) =>
     body,
   }).then((res) => res.json());
 
-export const createTemplate = ({ body, accessToken }) =>
+const createTemplate = ({ body, accessToken }) =>
   fetch(ENDPOINTS.TEMPLATES(), {
     method: "POST",
     headers: {
@@ -34,5 +34,13 @@ export const createTemplate = ({ body, accessToken }) =>
     body,
   }).then((res) => res.json());
 
-export const getTemplateById = ({ id }) =>
+const getTemplateById = ({ id }) =>
   fetch(ENDPOINTS.TEMPLATE(id)).then((res) => res.json());
+
+export default {
+  fetchTemplates,
+  deleteTemplate,
+  updateTemplate,
+  createTemplate,
+  getTemplateById,
+};

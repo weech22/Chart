@@ -1,1 +1,16 @@
-export { default as lineChart } from "./line-chart.png";
+export { default as lineChart } from "./linechart.svg";
+export { default as areaChart } from "./areachart.svg";
+export { default as stackedAreaChart } from "./stackedareachart.svg";
+export { default as streamGraph } from "./streamgraph.svg";
+export { default as verticalBarChart } from "./verticalbarchart.svg";
+export { default as horizontalBarChart } from "./horizontalbarchart.svg";
+export { default as groupedBarChart } from "./groupedbarchart.svg";
+export { default as groupedHorizontalBarChart } from "./groupedhorizontalbarchart.svg";
+export { default as pieChart } from "./piechart.svg";
+export { default as donutChart } from "./donutchart.svg";
+export { default as progressChart } from "./progresschart.svg";
+export { default as sparkline } from "./sparkline.svg";
+export { default as scatterPlot } from "./scatterplot.svg";
+export { default as candlestickChart } from "./candlestickchart.svg";
+export { default as histogram } from "./histogram.svg";
+export { default as heatmap } from "./heatmap.svg";
