@@ -20,9 +20,11 @@
     "html-webpack-plugin": "4.0.0-beta.4",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
+    "react-datasheet": "^1.4.4",
     "react-dom": "^16.13.1",
     "react-preloaders": "^3.0.3",
     "react-redux": "^7.2.0",
+    "react-tabs": "^3.1.1",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-form": "^8.3.6",
@@ -37,6 +39,8 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.10.1",
-    "copy-webpack-plugin": "^6.0.2"
+    "copy-webpack-plugin": "^6.0.2",
+    "file-loader": "^6.0.0",
+    "ttf-loader": "^1.0.2"
   }
 }

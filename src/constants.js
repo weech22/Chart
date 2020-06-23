@@ -70,88 +70,69 @@ fields: [
   },
 ],
  */
-export const tabs = [
-  {
+export const tabs = {
+  [chartTypes.LINE_CHART]: {
     title: "Line chart",
-    type: chartTypes.LINE_CHART,
     icon: assets.icons.lineChart,
   },
-  {
+  [chartTypes.AREA_CHART]: {
     title: "Area chart",
-    type: chartTypes.AREA_CHART,
     icon: assets.icons.areaChart,
   },
-  {
+  [chartTypes.STACKED_AREA_CHART]: {
     title: "Stacked area chart",
-    type: chartTypes.STACKED_AREA_CHART,
     icon: assets.icons.stackedAreaChart,
   },
-  {
+  [chartTypes.STREAM_GRAPH]: {
     title: "Stream graph",
-    type: chartTypes.SREAM_GRAPH,
     icon: assets.icons.streamGraph,
   },
-
-  {
+  [chartTypes.VERTICAL_BAR_CHART]: {
     title: "Vertical bar chart",
-    type: chartTypes.VERTICAL_BAR_CHART,
     icon: assets.icons.verticalBarChart,
   },
-  {
+  [chartTypes.HORIZONTAL_BAR_CHART]: {
     title: "Horizontal bar chart",
-    type: chartTypes.HORIZONTAL_BAR_CHART,
     icon: assets.icons.horizontalBarChart,
   },
-  {
+  [chartTypes.GROUPED_BAR_CHART]: {
     title: "Grouped bar chart",
-    type: chartTypes.GROUPED_BAR_CHART,
     icon: assets.icons.groupedBarChart,
   },
-  {
+  [chartTypes.GROUPED_HORIZONTAL_BAR_CHART]: {
     title: "Grouped horizontal bar chart",
-    type: chartTypes.GROUPED_HORIZONTAL_BAR_CHART,
     icon: assets.icons.groupedHorizontalBarChart,
   },
-
-  {
+  [chartTypes.PIE_CHART]: {
     title: "Pie chart",
-    type: chartTypes.PIE_CHART,
     icon: assets.icons.pieChart,
   },
-  {
+  [chartTypes.DONUT_CHART]: {
     title: "Donut chart",
-    type: chartTypes.DONUT_CHART,
     icon: assets.icons.donutChart,
   },
-  {
+  [chartTypes.PROGRESS_CHART]: {
     title: "Progress chart",
-    type: chartTypes.PROGRESS_CHART,
     icon: assets.icons.progressChart,
   },
-  {
+  [chartTypes.SPARKLINE]: {
     title: "Sparkline",
-    type: chartTypes.SPARKLINE,
     icon: assets.icons.sparkline,
   },
-
-  {
+  [chartTypes.SCATTER_PLOT]: {
     title: "Scatter plot",
-    type: chartTypes.SCATTER_PLOT,
     icon: assets.icons.scatterPlot,
   },
-  {
+  [chartTypes.CANDLESTICK_CHART]: {
     title: "Candlestick chart",
-    type: chartTypes.CANDLESTICK_CHART,
     icon: assets.icons.candlestickChart,
   },
-  {
+  [chartTypes.HISTOGRAM]: {
     title: "Histogram",
-    type: chartTypes.HISTOGRAM,
     icon: assets.icons.histogram,
   },
-  {
+  [chartTypes.HEATMAP]: {
     title: "Heatmap",
-    type: chartTypes.HEATMAP,
     icon: assets.icons.heatmap,
   },
-];
+};

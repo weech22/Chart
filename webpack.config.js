@@ -35,7 +35,7 @@ const figmaConfig = (_, argv) => ({
 
       {
         test: /\.css$/,
-        exclude: /(node_modules|bower_components|adobe|sketch)/,
+        exclude: /(bower_components|adobe|sketch)/,
         loader: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
 
@@ -87,7 +87,7 @@ const adobeConfig = {
       },
       {
         test: /\.css$/,
-        exclude: /(node_modules|bower_components|figma|sketch)/,
+        exclude: /(bower_components|figma|sketch)/,
         use: ["style-loader", "css-loader"],
       },
       {

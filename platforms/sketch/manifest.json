@@ -1,7 +1,0 @@
-{
-  "name": "chart2",
-  "id": "855028222750389757",
-  "api": "1.0.0",
-  "main": "dist/code.js",
-  "ui": "dist/ui.html"
-}

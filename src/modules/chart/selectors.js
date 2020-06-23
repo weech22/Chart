@@ -1,4 +1,5 @@
 import * as R from "ramda";
+import { tabs } from "../../constants";
 
 const getChart = R.prop("chart");
 

@@ -1,11 +1,9 @@
 import * as R from "ramda";
 import { createAction, handleActions, combineActions } from "redux-actions";
 import { combineReducers } from "redux";
-import { modules } from "../../constants";
+import { modules, chartTypes } from "../../constants";
 
-export const selectTemplate = createAction(
-  `${modules.TEMPLATES}/SELECT_TEMPLATE`
-);
+export const selectChartTab = createAction(`${modules.CHART}/SELECT_CHART_TAB`);
 
 export const updateTemplate = createAction(
   `${modules.TEMPLATES}/UPDATE_TEMPLATE`
@@ -13,9 +11,9 @@ export const updateTemplate = createAction(
 
 const currentChart = handleActions(
   {
-    [updateTemplate]: () => "LINE_CHART",
+    [selectChartTab]: (_, { payload }) => payload,
   },
-  "LINE_CHART"
+  chartTypes.LINE_CHART
 );
 
 const ChartReducer = combineReducers({

@@ -6,9 +6,10 @@ import * as R from "ramda";
 import { getIsPro } from "../modules/account";
 import { getCurrentChart } from "../modules/chart";
 
-const Root = styled.button`
+const Root = styled.span`
   width: 32px;
   height: 32px;
+  margin: 0;
   appearance: none;
   outline: none;
   cursor: pointer;
@@ -26,14 +27,24 @@ const Root = styled.button`
   background-position: center center;
   background-repeat: no-repeat;
   background-color: ${({ isActive }) => (isActive ? "#fff" : "transparent")};
-  transition: background-color 0.2s;
-  box-shadow: ${({ isActive }) =>
-    isActive ? "0px 4px 12px rgba(0, 0, 0, 0.1)" : "none"};
 `;
 
 // TODO: Helper isDisabled function(isPro, chartType)
-const ChartTabButtonDumb = ({ icon, type, isPro, currentChart }) => (
-  <Root icon={icon} disabled={!isPro} isActive={currentChart === type} />
+const ChartTabButtonDumb = ({
+  icon,
+  type,
+  isPro,
+  currentChart,
+  key,
+  onClick,
+}) => (
+  <Root
+    key={key}
+    icon={icon}
+    disabled={isPro}
+    isActive={currentChart === type}
+    onClick={() => onClick(type)}
+  />
 );
 
 const ChartTabButton = connect(
