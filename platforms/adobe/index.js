@@ -1,9 +1,12 @@
 const reactShim = require("./react-shim");
 const React = require("react");
 const ReactDOM = require("react-dom");
-const CreateChartScreen = require("../../src/Adobe/CreateChart.js").default;
-const TemplatesScreen = require("../../src/Adobe/Templates.js").default;
-const MyAccountScreen = require("../../src/Adobe/MyAccount.js").default;
+const CreateChartScreen = require("../../src/platforms/Adobe/CreateChart.js")
+  .default;
+const TemplatesScreen = require("../../src/platforms/Adobe/Templates.js")
+  .default;
+const MyAccountScreen = require("../../src/platforms/Adobe/MyAccount.js")
+  .default;
 
 function createChart(selection) {
   let dialog;
@@ -11,6 +14,7 @@ function createChart(selection) {
   function getDialog() {
     if (dialog == null) {
       dialog = document.createElement("dialog");
+
       ReactDOM.render(
         <CreateChartScreen dialog={dialog} selection={selection} />,
         dialog

@@ -1,4 +1,4 @@
-figma.showUI(__html__, { width: 496, height: 400 });
+figma.showUI(__html__, { width: 520, height: 418 });
 
 figma.ui.onmessage = (msg) => {
   //if (msg.type === "created") {

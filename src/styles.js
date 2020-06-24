@@ -6,11 +6,3 @@ export const standartTheme = {
   black: "#000000",
   white: "#FFFFFF",
 };
-
-export const adobeMainView = styled.div`
-  background: green;
-`;
-
-export const figmaMainView = styled.div`
-  background: green;
-`;

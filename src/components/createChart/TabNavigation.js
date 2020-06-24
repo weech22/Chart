@@ -4,20 +4,21 @@ import { connect } from "react-redux";
 
 import { selectChartTab } from "../../modules/chart";
 import { tabs } from "../../constants";
-import ChartTabButton from "../ChartTabButton";
+import ChartTabButton from "../common/ChartTabButton";
+import { isFigma, isAdobe } from "../../utils";
 
 const Root = styled.div`
-  max-width: 88px;
-  height: 400px;
   padding: 8px;
   background: ${({ theme: { grey } }) => grey};
+  height: 400px;
+  flex-basis: 88px;
+  min-width: ${isAdobe ? "88px" : "0"};
 `;
 
 const TabContainer = styled.div`
   display: flex;
-  max-height: 320px;
-  width: 100%;
   height: 100%;
+  max-height: 320px;
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-between;

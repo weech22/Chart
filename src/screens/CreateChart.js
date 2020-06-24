@@ -4,8 +4,6 @@ import styled from "styled-components";
 import { MainView, TabNavigation } from "../components/createChart";
 
 const Root = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
 `;
 

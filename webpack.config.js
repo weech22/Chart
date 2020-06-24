@@ -115,14 +115,63 @@ const adobeConfig = {
   ],
 };
 
-/*
 const sketchConfig = {
-  target: "web",
+  entry: "./platforms/sketch/src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "lib.js",
+    path: path.resolve(
+      `${__dirname}/platforms/sketch/chart2.sketchplugin/Contents`,
+      "Resources"
+    ),
+    filename: "main.js",
   },
-  //…
-}; */
+  plugins: [
+    new HtmlWebpackPlugin({
+      template:
+        "./platforms/sketch/resources/screens/CreateChart/create-chart.html",
+      filename: "ui.html",
+      inlineSource: ".(js)$",
+      chunks: ["ui"],
+    }),
+    new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(`${__dirname}/platforms/sketch/src`),
+          to: path.resolve(
+            `${__dirname}/platforms/sketch/chart2.sketchplugin/Contents`,
+            "Sketch"
+          ),
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components|figma|sketch)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/react"],
+          },
+        },
+      },
+      {
+        test: /\.css$/,
+        exclude: /(bower_components|figma|sketch)/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif|webp|svg)$/,
+        exclude: /(node_modules|bower_components|figma|sketch)/,
+        loader: [{ loader: "url-loader" }],
+      },
+    ],
+  },
+};
 
-module.exports = [figmaConfig, adobeConfig /* sketchConfig */];
+module.exports = [figmaConfig, adobeConfig /* , sketchConfig */];

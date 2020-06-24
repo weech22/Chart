@@ -5,7 +5,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin: 0 0 8px 0;
+  margin: 0;
 `;
 
 const Select = styled.select`

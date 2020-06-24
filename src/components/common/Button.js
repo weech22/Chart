@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { platform, isAdobe, isFigma } from "../../utils";
 
 const Root = styled.span`
+  display: flex;
+  align-items: center;
   border-radius: 4px;
-  height: 32px;
+  max-height: 32px;
   background: ${({ theme: { pink } }) => pink};
   padding: 8px;
   border: none;
@@ -13,7 +16,6 @@ const Root = styled.span`
   color: ${({ theme: { white } }) => white};
   appearance: none;
   outline: none;
-  flex-grow: 0;
 `;
 
 const Button = ({ children }) => <Root>{children}</Root>;
