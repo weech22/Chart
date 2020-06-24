@@ -11,7 +11,7 @@ export default () => {
     <div
       style={{
         width: "530px",
-        height: "415px",
+        height: "410px",
       }}
     >
       <Provider store={store}>

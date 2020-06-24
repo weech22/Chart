@@ -6,12 +6,13 @@ const Root = styled.div`
   flex-direction: column;
   padding: 0;
   margin: 0;
+  position: relative;
 `;
 
 const Select = styled.select`
   border-radius: 4px;
   width: 180px;
-  background: ${({ theme: { pink } }) => pink};
+  height: 32px;
   appearance: none;
   padding: 0;
   margin: 0;
@@ -20,12 +21,13 @@ const Select = styled.select`
 const Label = styled.span`
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
-  margin-bottom: 6px;
+  position: absolute;
+  top: -17px;
 `;
 
 const optionsDummy = ["opt1", "opt2", "opt3"];
 
-const Dropdown = ({ options = optionsDummy, label = "Style" }) => (
+export default ({ options = optionsDummy, label = "Style" }) => (
   <Root>
     <Label>{label}</Label>
     <Select>
@@ -37,5 +39,3 @@ const Dropdown = ({ options = optionsDummy, label = "Style" }) => (
     </Select>
   </Root>
 );
-
-export default Dropdown;

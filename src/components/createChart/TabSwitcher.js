@@ -13,6 +13,7 @@ import { isFigma, isAdobe, platform } from "../../utils";
 
 const Root = styled.div`
   padding: 0 16px 16px 16px;
+  flex-basis: 100%;
 `;
 
 const StyledTabs = styled(Tabs)``;
@@ -39,8 +40,8 @@ const StyledTabList = styled(TabList)`
   background-color: ${({ theme: { grey } }) => grey};
   padding: 4px;
   justify-content: space-between;
-  max-height: 32px;
-  max-width: 376px;
+  max-width: ${isFigma ? "376px" : "100%"};
+  margin: 0;
 `;
 
 const StyledTabPanel = styled(TabPanel)``;

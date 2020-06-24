@@ -18,6 +18,6 @@ const Root = styled.span`
   outline: none;
 `;
 
-const Button = ({ children }) => <Root>{children}</Root>;
-
-export default Button;
+export default ({ children, className }) => (
+  <Root className={className}>{children}</Root>
+);
