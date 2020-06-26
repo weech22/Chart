@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 
 import { getIsPro } from "../../modules/account";
-import { getCurrentChart } from "../../modules/chart";
+import { getCurrentChart, selectChartTab } from "../../modules/chart";
 
 const Root = styled.span`
   width: 32px;

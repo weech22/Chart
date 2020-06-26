@@ -1,45 +1,44 @@
 import { call, all, put, takeLatest, select, delay } from "redux-saga/effects";
+import { reset } from "redux-form";
+
 import Manager from "./Manager";
+import {
+  createChartRequest,
+  createChartSuccess,
+  createChartFailure,
+  selectChartTabRequest,
+  selectChartTabSuccess,
+} from "./duck";
+import { getCurrentChart } from "./selectors";
+import { forms } from "../../constants";
 
-/* function* fetchTemplatesSaga() {
-  console.log("fetch saga");
+function* createChartSaga({ payload }) {
   try {
-    const templates = yield call(Manager.fetchTemplates);
-    console.log("3232323232", templates);
-    // yield put(getTemplatesSuccess());
+    yield put(createChartSuccess());
   } catch (ex) {
-    console.log(ex);
-    // yield put(getTemplatesFailure(ex.localeMessage));
+    yield put(createChartFailure(ex));
   }
 }
 
-function* deleteTemplateSaga({ payload: id }) {
+function* selectChartTabSaga({ payload: nextChart }) {
   try {
+    const curerntChart = yield select(getCurrentChart);
+    console.log("curerntChart", curerntChart);
+    console.log("nextChart", nextChart);
+    if (nextChart !== curerntChart) {
+      yield put(reset(forms.RANDOM));
+      yield put(selectChartTabSuccess(nextChart));
+    }
   } catch (ex) {
-    //
+    console.log("ex", ex);
+    // yield put(createChartFailure(ex));
   }
 }
-
-function* updateTemplateSaga({ payload }) {
-  try {
-  } catch (ex) {
-    //
-  }
-}
-
-function* createTemplateSaga({ payload }) {
-  try {
-  } catch (ex) {
-    yield put(createTemplateFailure(ex));
-  }
-} */
 
 function* accountSaga() {
   yield all([
-    /*   takeLatest(fetchTemplatesRequest, fetchTemplatesSaga),
-    takeLatest(deleteTemplateRequest, deleteTemplateSaga),
-    takeLatest(updateTemplate, updateTemplateSaga),
-    takeLatest(createTemplateRequest, createTemplateSaga), */
+    takeLatest(createChartRequest, createChartSaga),
+    takeLatest(selectChartTabRequest, selectChartTabSaga),
   ]);
 }
 

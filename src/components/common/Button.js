@@ -18,6 +18,8 @@ const Root = styled.span`
   outline: none;
 `;
 
-export default ({ children, className }) => (
-  <Root className={className}>{children}</Root>
+export default ({ children, className, onClick }) => (
+  <Root className={className} onClick={onClick}>
+    {children}
+  </Root>
 );

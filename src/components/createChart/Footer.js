@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { submit } from "redux-form";
+import { connect } from "react-redux";
 
-import { Button, Dropdown, Link } from "../common";
+import { Button, Link } from "../common";
 import { isFigma } from "../../utils";
+import { forms } from "../../constants";
 
 const Root = styled.div`
   width: 100%;
@@ -25,19 +28,18 @@ const ButtonBlock = styled.div`
 
 const StyledLink = styled(Link)``;
 
-// TODO: template list
-const Footer = () => (
+const FooterDumb = ({ submitCreateChartForm }) => (
   <Root>
-    <Dropdown />
+    <StyledLink>Customize chart style</StyledLink>
     <ButtonBlock>
       <StyledLink>Support</StyledLink>
-      <StyledButton>Create chart</StyledButton>
+      <StyledButton onClick={submitCreateChartForm}>Create chart</StyledButton>
     </ButtonBlock>
   </Root>
 );
 
-/* const Title = connect(R.applySpec({ currentChart: getCurrentChart }))(
-  TitleDumb
-); */
+const Footer = connect(null, {
+  submitCreateChartForm: () => submit(forms.RANDOM),
+})(FooterDumb);
 
 export default Footer;

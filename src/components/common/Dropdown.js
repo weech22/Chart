@@ -1,21 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
+import { isFigma } from "../../utils";
+import assets from "../../assets";
+import Link from "../common/Link";
+
 const Root = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
   position: relative;
+  width: 180px;
 `;
 
 const Select = styled.select`
   border-radius: 4px;
-  width: 180px;
+  width: 100%;
   height: 32px;
   appearance: none;
   padding: 0;
   margin: 0;
+  border: none;
+  outline: none;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 8px);
+  background-image: url(${assets.icons.arrowDown});
+  text-indent: ${isFigma ? "8" : "0"}px;
+  text-overflow: ellipsis;
 `;
 
 const Label = styled.span`
@@ -25,17 +37,39 @@ const Label = styled.span`
   top: -17px;
 `;
 
-const optionsDummy = ["opt1", "opt2", "opt3"];
+const Option = styled.option`
+  padding: 8px;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: ${({ theme: { grey } }) => grey};
+`;
 
-export default ({ options = optionsDummy, label = "Style" }) => (
-  <Root>
-    <Label>{label}</Label>
-    <Select>
-      {options.map((option) => (
-        <option style={{ background: "red" }} key={Math.random(100)}>
-          {option}
-        </option>
-      ))}
-    </Select>
-  </Root>
-);
+const StyledLink = styled(Link)`
+  font-size: 12px;
+`;
+
+export default ({ options = {}, label, className, small, labelLink }) => {
+  const seletOptions = Object.keys(options).map((option) => ({
+    value: options[option].value,
+    label: options[option].label,
+  }));
+
+  return (
+    <Root className={className} small={small}>
+      <Label>
+        {label}
+        {labelLink && (
+          <StyledLink href="labelLink.action">{labelLink.label}</StyledLink>
+        )}
+      </Label>
+      <Select>
+        {seletOptions.map(({ value, label }) => (
+          <Option key={value} value={value}>
+            {label}
+          </Option>
+        ))}
+      </Select>
+    </Root>
+  );
+};

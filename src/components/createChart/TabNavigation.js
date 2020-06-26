@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { selectChartTab } from "../../modules/chart";
+import { selectChartTabRequest } from "../../modules/chart";
 import { tabs } from "../../constants";
 import ChartTabButton from "../common/ChartTabButton";
 import { isFigma, isAdobe } from "../../utils";
@@ -29,6 +29,7 @@ const TabNavigationDumb = ({ selectChartTab }) => {
     type: chartType,
     ...tabs[chartType],
   }));
+
   return (
     <Root>
       <TabContainer>
@@ -45,6 +46,8 @@ const TabNavigationDumb = ({ selectChartTab }) => {
   );
 };
 
-const TabNavigation = connect(null, { selectChartTab })(TabNavigationDumb);
+const TabNavigation = connect(null, { selectChartTab: selectChartTabRequest })(
+  TabNavigationDumb
+);
 
 export default TabNavigation;

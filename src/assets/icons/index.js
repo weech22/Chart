@@ -14,3 +14,5 @@ export { default as scatterPlot } from "./scatterplot.png";
 export { default as candlestickChart } from "./candlestickchart.png";
 export { default as histogram } from "./histogram.png";
 export { default as heatmap } from "./heatmap.png";
+
+export { default as arrowDown } from "./arrow-down.png";
