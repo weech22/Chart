@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
 
-import { getCurrentChart } from "../../modules/chart";
+import { getCurrentChart } from "../../modules/createChart";
 import { tabs } from "../../constants";
 
 const Root = styled.div`

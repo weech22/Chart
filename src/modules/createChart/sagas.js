@@ -1,7 +1,6 @@
 import { call, all, put, takeLatest, select, delay } from "redux-saga/effects";
 import { reset } from "redux-form";
 
-import Manager from "./Manager";
 import {
   createChartRequest,
   createChartSuccess,
@@ -14,24 +13,22 @@ import { forms } from "../../constants";
 
 function* createChartSaga({ payload }) {
   try {
+    const currentChart = yield select(getCurrentChart);
+    const chartToCreate = { ...payload, chartType: currentChart };
+
+    console.log("chartToCreate", chartToCreate);
     yield put(createChartSuccess());
   } catch (ex) {
+    console.log(ex);
     yield put(createChartFailure(ex));
   }
 }
 
 function* selectChartTabSaga({ payload: nextChart }) {
-  try {
-    const curerntChart = yield select(getCurrentChart);
-    console.log("curerntChart", curerntChart);
-    console.log("nextChart", nextChart);
-    if (nextChart !== curerntChart) {
-      yield put(reset(forms.RANDOM));
-      yield put(selectChartTabSuccess(nextChart));
-    }
-  } catch (ex) {
-    console.log("ex", ex);
-    // yield put(createChartFailure(ex));
+  const currentChart = yield select(getCurrentChart);
+  if (nextChart !== currentChart) {
+    yield put(reset(forms.RANDOM));
+    yield put(selectChartTabSuccess(nextChart));
   }
 }
 

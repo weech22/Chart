@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 
 import { Link } from "../common";
+import { startSyncAPI } from "../../modules/createChart";
 
 const StyledLink = styled(Link)`
   font-size: 12px;
@@ -14,16 +15,14 @@ const Root = styled.div`
   padding-top: 8px;
 `;
 
-const JSON = () => (
+const JSONDumb = ({ startSyncAPI }) => (
   <Root>
-    <StyledLink>Sync with HTTPS API</StyledLink>
+    <StyledLink onClick={startSyncAPI}>Sync with HTTPS API</StyledLink>
     {" or "}
     <StyledLink>upload JSON</StyledLink>
   </Root>
 );
 
-/* const Title = connect(R.applySpec({ currentChart: getCurrentChart }))(
-  TitleDumb
-);
- */
+const JSON = connect(null, { startSyncAPI })(JSONDumb);
+
 export default JSON;

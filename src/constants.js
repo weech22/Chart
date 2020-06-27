@@ -1,4 +1,5 @@
 import assets from "./assets";
+import { scatterPlot } from "./assets/icons";
 
 export const forms = {
   RANDOM: "RANDOM",
@@ -6,7 +7,7 @@ export const forms = {
 
 export const modules = {
   TEMPLATE: "TEMPLATE",
-  CHART: "CHART",
+  CREATE_CHART: "CREATE_CHART",
   SETTINGS: "SETTINGS",
   FIGMA: "FIGMA",
   ACCOUNT: "ACCOUNT",
@@ -45,6 +46,33 @@ export const chartTypes = {
   HEATMAP: "HEATMAP",
 };
 
+export const freeChartTypes = [chartTypes.LINE_CHART, chartTypes.AREA_CHART];
+
+export const navigationTabs = [
+  { type: chartTypes.LINE_CHART, icon: assets.icons.lineChart },
+  { type: chartTypes.AREA_CHART, icon: assets.icons.areaChart },
+  { type: chartTypes.STACKED_AREA_CHART, icon: assets.icons.stackedAreaChart },
+  { type: chartTypes.STREAM_GRAPH, icon: assets.icons.streamGraph },
+  { type: chartTypes.VERTICAL_BAR_CHART, icon: assets.icons.verticalBarChart },
+  {
+    type: chartTypes.HORIZONTAL_BAR_CHART,
+    icon: assets.icons.horizontalBarChart,
+  },
+  { type: chartTypes.GROUPED_BAR_CHART, icon: assets.icons.groupedBarChart },
+  {
+    type: chartTypes.GROUPED_HORIZONTAL_BAR_CHART,
+    icon: assets.icons.groupedHorizontalBarChart,
+  },
+  { type: chartTypes.PIE_CHART, icon: assets.icons.pieChart },
+  { type: chartTypes.DONUT_CHART, icon: assets.icons.donutChart },
+  { type: chartTypes.PROGRESS_CHART, icon: assets.icons.progressChart },
+  { type: chartTypes.SPARKLINE, icon: assets.icons.sparkline },
+  { type: chartTypes.SCATTER_PLOT, icon: assets.icons.scatterPlot },
+  { type: chartTypes.CANDLESTICK_CHART, icon: assets.icons.candlestickChart },
+  { type: chartTypes.HISTOGRAM, icon: assets.icons.histogram },
+  { type: chartTypes.HEATMAP, icon: assets.icons.heatmap },
+];
+
 export const dataDistributionTypes = {
   RANDOM: { value: "RANDOM", label: "Random" },
   TREND_UP: { value: "TREND_UP", label: "Trend up" },
@@ -56,10 +84,14 @@ export const dataDistributionTypes = {
   MIXED: { value: "MIXED", label: "Mixed" },
 };
 
+export const scatterPlotTypes = {
+  SCATTER: { value: "SCATTER", label: "Scatter" },
+  BUBBLE: { value: "BUBBLE", label: "Bubble" },
+};
+
 export const tabs = {
   [chartTypes.LINE_CHART]: {
     title: "Line chart",
-    icon: assets.icons.lineChart,
     proTip: "",
     fields: {
       data: [
@@ -67,16 +99,20 @@ export const tabs = {
           name: "lines",
           label: "Lines",
           type: "input",
+          defaultValue: 1,
         },
         {
           name: "points",
           label: "Points",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -84,11 +120,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -103,16 +141,20 @@ export const tabs = {
           name: "areas",
           label: "Areas",
           type: "input",
+          defaultValue: 2,
         },
         {
           name: "points",
           label: "Points",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -120,11 +162,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -139,16 +183,20 @@ export const tabs = {
           name: "areas",
           label: "Areas",
           type: "input",
+          defaultValue: 2,
         },
         {
           name: "points",
           label: "Points",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -156,11 +204,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -175,16 +225,20 @@ export const tabs = {
           name: "areas",
           label: "Areas",
           type: "input",
+          defaultValue: 2,
         },
         {
           name: "points",
           label: "Points",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -192,11 +246,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -211,16 +267,20 @@ export const tabs = {
           name: "stacks",
           label: "Stacks",
           type: "input",
+          defaultValue: 1,
         },
         {
           name: "bars",
           label: "Bars",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -228,11 +288,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -247,16 +309,20 @@ export const tabs = {
           name: "stacks",
           label: "Stacks",
           type: "input",
+          defaultValue: 1,
         },
         {
           name: "bars",
           label: "Bars",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -264,11 +330,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -283,16 +351,20 @@ export const tabs = {
           name: "categories",
           label: "Categories",
           type: "input",
+          defaultValue: 2,
         },
         {
           name: "bars",
           label: "Bars",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -300,11 +372,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -319,16 +393,20 @@ export const tabs = {
           name: "categories",
           label: "Categories",
           type: "input",
+          defaultValue: 2,
         },
         {
           name: "bars",
           label: "Bars",
           type: "input",
+          defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
           type: "select",
+          options: dataDistributionTypes,
+          defaultValue: dataDistributionTypes.RANDOM.value,
         },
       ],
       range: [
@@ -336,11 +414,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -355,6 +435,7 @@ export const tabs = {
           name: "segments",
           label: "Segments",
           type: "input",
+          defaultValue: 5,
         },
       ],
     },
@@ -369,6 +450,7 @@ export const tabs = {
           name: "segments",
           label: "Segments",
           type: "input",
+          defaultValue: 5,
         },
       ],
     },
@@ -389,6 +471,7 @@ export const tabs = {
           name: "points",
           label: "Points",
           type: "input",
+          defaultValue: 20,
         },
       ],
     },
@@ -403,11 +486,14 @@ export const tabs = {
           name: "type",
           label: "Type",
           type: "select",
+          options: scatterPlotTypes,
+          defaultValue: scatterPlotTypes.SCATTER.value,
         },
         {
           name: "points",
           label: "Points",
           type: "input",
+          defaultValue: 20,
         },
       ],
       range: [
@@ -415,21 +501,25 @@ export const tabs = {
           name: "y-min",
           label: "Y-Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "y-max",
           label: "Y-Max",
           type: "input",
+          defaultValue: 100,
         },
         {
           name: "x-min",
           label: "X-Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "x-max",
           label: "X-Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -444,6 +534,7 @@ export const tabs = {
           name: "candles",
           label: "Candles",
           type: "input",
+          defaultValue: 10,
         },
       ],
       range: [
@@ -451,11 +542,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -470,6 +563,7 @@ export const tabs = {
           name: "dataPoints",
           label: "Data points",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },
@@ -484,11 +578,13 @@ export const tabs = {
           name: "columns",
           label: "Columns",
           type: "input",
+          defaultValue: 6,
         },
         {
           name: "rows",
           label: "Rows",
           type: "input",
+          defaultValue: 4,
         },
       ],
       range: [
@@ -496,11 +592,13 @@ export const tabs = {
           name: "min",
           label: "Min",
           type: "input",
+          defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
           type: "input",
+          defaultValue: 100,
         },
       ],
     },

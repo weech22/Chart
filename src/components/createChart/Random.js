@@ -4,26 +4,16 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 
 import { isEmpty } from "../../utils";
-import { Field, reduxForm, Form, getFormInitialValues } from "redux-form";
-import { getCurrentChart, createChartRequest } from "../../modules/chart";
+import { Field, reduxForm, Form } from "redux-form";
+import { getCurrentChart, createChartRequest } from "../../modules/createChart";
 import { tabs, forms, dataDistributionTypes } from "../../constants";
 import Input from "../common/Input";
 import Dropdown from "../common/Dropdown";
 
-const initialValues = () => ({
-  areas: 2,
-  lines: 1,
-  bars: 5,
-  segments: 5,
+const initialValues = {
   min: 0,
   max: 100,
-  xmin: 0,
-  xmax: 100,
-  ymin: 0,
-  ymax: 100,
-  candles: 10,
-  points: 20,
-});
+};
 
 const Root = styled.div`
   margin-right: -8px;
@@ -68,44 +58,43 @@ const getComponent = (type) => {
   if (type === "select") return StyledDropdown;
 };
 
-const RandomDumb = ({
-  currentChart,
-  createChart,
-  handleSubmit,
-  initialValues,
-}) => {
+const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
   const {
     fields: { range: rangeFields, data: dataFields } = { range: [], data: [] },
     proTip = "",
   } = tabs[currentChart];
-  console.log("initialValues", initialValues);
+
   return (
     <Root>
       <Form onSubmit={handleSubmit(createChart)}>
         {!isEmpty(dataFields) && (
           <FieldLine>
-            {dataFields.map(({ name, type, label }) => (
-              <Field
-                name={name}
-                component={getComponent(type)}
-                label={label}
-                key={name}
-                type={type === "input" && "number"}
-                options={type === "select" && dataDistributionTypes}
-                small={name === "type"}
-              />
-            ))}
+            {dataFields.map(
+              ({ name, type, label, defaultValue, options = {} }) => (
+                <Field
+                  name={name}
+                  component={getComponent(type)}
+                  label={label}
+                  key={name}
+                  type={type}
+                  options={options}
+                  small={name === "type"}
+                  defaultValue={defaultValue}
+                />
+              )
+            )}
           </FieldLine>
         )}
         {!isEmpty(rangeFields) && (
           <FieldLine>
-            {rangeFields.map(({ name, type, label }) => (
+            {rangeFields.map(({ name, type, label, defaultValue }) => (
               <Field
                 name={name}
-                type={type === "input" && "number"}
+                type={type}
                 component={getComponent(type)}
                 label={label}
                 key={name}
+                defaultValue={defaultValue}
               />
             ))}
           </FieldLine>
@@ -120,8 +109,9 @@ const RandomDumb = ({
 };
 
 const Random = R.compose(
-  connect(R.applySpec({ currentChart: getCurrentChart, initialValues }), {
+  connect(R.applySpec({ currentChart: getCurrentChart }), {
     createChart: createChartRequest,
+    initialValues: () => initialValues,
   }),
   reduxForm({
     form: forms.RANDOM,

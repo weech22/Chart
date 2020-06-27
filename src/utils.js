@@ -1,3 +1,5 @@
+import { freeChartTypes } from "./constants";
+
 export const isFigma = window.name === "Plugin Iframe";
 export const isAdobe = window.name === undefined;
 
@@ -14,3 +16,6 @@ export const isEmpty = (array) => {
   }
   return false;
 };
+
+export const isChartDisabled = (isPro, chartType) =>
+  !(isPro || freeChartTypes.includes(chartType));

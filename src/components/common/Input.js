@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { platform, isAdobe, isFigma } from "../../utils";
 
@@ -20,7 +20,6 @@ const Input = styled.input`
   color: ${({ theme: { black } }) => black};
   outline: none;
   appearance: none;
-  box-sizing: border-box;
   margin: 0;
   padding: 8px;
   height: 32px;
@@ -35,9 +34,9 @@ const Label = styled.span`
 export default ({
   className,
   label,
-  type,
-  input: { onChange },
+  input: { onChange, value },
   meta: { touched, error },
+  defaultValue,
 }) => {
   const handleChange = useCallback(
     ({ target: { value } }) => {
@@ -46,12 +45,23 @@ export default ({
     [onChange]
   );
 
+  useEffect(() => {
+    if (!value) {
+      onChange(defaultValue);
+    }
+  });
+
   const isError = useMemo(() => error && touched, [error, touched]);
 
   return (
     <Root className={className}>
       <Label>{label}</Label>
-      <Input type={type} onChange={handleChange} isError={isError} />
+      <Input
+        type="number"
+        onChange={handleChange}
+        isError={isError}
+        value={value || defaultValue}
+      />
     </Root>
   );
 };

@@ -7,3 +7,5 @@ export { default as Random } from "./Random";
 export { default as Table } from "./Table";
 export { default as TabSwitcher } from "./TabSwitcher";
 export { default as Spreadsheet } from "./Spreadsheet";
+export { default as SyncData } from "./SyncData";
+export { default as CustomStyle } from "./CustomStyle";

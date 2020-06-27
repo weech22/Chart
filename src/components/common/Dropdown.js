@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
 import { isFigma } from "../../utils";
@@ -49,11 +49,32 @@ const StyledLink = styled(Link)`
   font-size: 12px;
 `;
 
-export default ({ options = {}, label, className, small, labelLink }) => {
+export default ({
+  options = {},
+  label,
+  className,
+  small,
+  labelLink,
+  input: { onChange, value },
+  defaultValue,
+}) => {
   const seletOptions = Object.keys(options).map((option) => ({
     value: options[option].value,
     label: options[option].label,
   }));
+
+  useEffect(() => {
+    if (!value) {
+      onChange(defaultValue);
+    }
+  });
+
+  const handleChange = useCallback(
+    ({ target: { value } }) => {
+      onChange(value);
+    },
+    [onChange]
+  );
 
   return (
     <Root className={className} small={small}>
@@ -63,7 +84,7 @@ export default ({ options = {}, label, className, small, labelLink }) => {
           <StyledLink href="labelLink.action">{labelLink.label}</StyledLink>
         )}
       </Label>
-      <Select>
+      <Select onChange={handleChange}>
         {seletOptions.map(({ value, label }) => (
           <Option key={value} value={value}>
             {label}

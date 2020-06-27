@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Title, TabSwitcher, Footer } from "./";
+import { Title, TabSwitcher, Footer } from ".";
 
 const Root = styled.div`
   background: ${({ theme: { white } }) => white};
@@ -10,10 +10,4 @@ const Root = styled.div`
   flex-direction: column;
 `;
 
-export default () => (
-  <Root>
-    <Title />
-    <TabSwitcher />
-    <Footer />
-  </Root>
-);
+export default () => <Root>Style: Line chart</Root>;

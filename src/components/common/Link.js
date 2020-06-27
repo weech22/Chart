@@ -9,6 +9,8 @@ const Root = styled.a`
   color: ${({ theme: { pink } }) => pink};
 `;
 
-export default ({ children, className }) => (
-  <Root className={className}>{children}</Root>
+export default ({ children, className, onClick }) => (
+  <Root className={className} onClick={onClick}>
+    {children}
+  </Root>
 );

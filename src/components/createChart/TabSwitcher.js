@@ -7,7 +7,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import { Random, Table, JSON } from "./";
 
-import { getCurrentChart } from "../../modules/chart";
+import { getCurrentChart } from "../../modules/createChart";
 import { tabs } from "../../constants";
 import { isFigma, isAdobe, platform } from "../../utils";
 

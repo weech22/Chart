@@ -1,11 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
+import * as R from "ramda";
 import { connect } from "react-redux";
 
-import { selectChartTabRequest } from "../../modules/chart";
-import { tabs } from "../../constants";
+import {
+  selectChartTabRequest,
+  getCurrentChart,
+} from "../../modules/createChart";
+import { getIsPro } from "../../modules/account";
+import { navigationTabs } from "../../constants";
 import ChartTabButton from "../common/ChartTabButton";
-import { isFigma, isAdobe } from "../../utils";
+import { isAdobe, isChartDisabled } from "../../utils";
 
 const Root = styled.div`
   padding: 8px;
@@ -24,30 +29,30 @@ const TabContainer = styled.div`
   justify-content: space-between;
 `;
 
-const TabNavigationDumb = ({ selectChartTab }) => {
-  const tabsToRender = Object.keys(tabs).map((chartType) => ({
-    type: chartType,
-    ...tabs[chartType],
-  }));
-
+const TabNavigationDumb = memo(({ selectChartTab, currentChart, isPro }) => {
   return (
     <Root>
       <TabContainer>
-        {tabsToRender.map(({ type, icon }) => (
+        {navigationTabs.map(({ type, icon }) => (
           <ChartTabButton
             icon={icon}
             type={type}
             key={type}
-            onClick={selectChartTab}
+            isActive={currentChart === type}
+            isDisabled={isChartDisabled(isPro, type)}
+            selectChartTab={selectChartTab}
           />
         ))}
       </TabContainer>
     </Root>
   );
-};
+});
 
-const TabNavigation = connect(null, { selectChartTab: selectChartTabRequest })(
-  TabNavigationDumb
-);
+const TabNavigation = connect(
+  R.applySpec({ currentChart: getCurrentChart, isPro: getIsPro }),
+  {
+    selectChartTab: selectChartTabRequest,
+  }
+)(TabNavigationDumb);
 
 export default TabNavigation;

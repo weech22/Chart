@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { platform, isAdobe, isFigma } from "../../utils";
 
 const Root = styled.span`
   display: flex;

@@ -7,19 +7,17 @@ import { rootSaga } from "./modules";
 
 import templates from "./modules/templates";
 import figma from "./modules/figma";
-import chart from "./modules/chart";
+import createChart from "./modules/createChart";
 import account from "./modules/account";
-//import settings from "./modules/settings";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   form: formReducer,
-  chart,
+  createChart,
   account,
   templates,
   figma,
-  //settings,
 });
 
 export const sagaMiddleware = createSagaMiddleware();

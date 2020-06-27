@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import { createAction, handleActions, combineActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import { combineReducers } from "redux";
 import { modules } from "../../constants";
 
@@ -15,7 +15,7 @@ const isPro = handleActions(
   {
     [updateTemplate]: R.T,
   },
-  false
+  true
 );
 
 const AccountReducer = combineReducers({
