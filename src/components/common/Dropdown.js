@@ -28,6 +28,7 @@ const Select = styled.select`
   background-image: url(${assets.icons.arrowDown});
   text-indent: ${isFigma ? "8" : "0"}px;
   text-overflow: ellipsis;
+  font-size: 14px;
 `;
 
 const Label = styled.span`
@@ -38,6 +39,7 @@ const Label = styled.span`
 `;
 
 const Option = styled.option`
+  font-size: 14px;
   padding: 8px;
   appearance: none;
   border: none;
@@ -56,7 +58,6 @@ export default ({
   small,
   labelLink,
   input: { onChange, value },
-  defaultValue,
 }) => {
   const seletOptions = Object.keys(options).map((option) => ({
     value: options[option].value,
@@ -65,7 +66,7 @@ export default ({
 
   useEffect(() => {
     if (!value) {
-      onChange(defaultValue);
+      onChange(options[0]);
     }
   });
 
@@ -84,7 +85,7 @@ export default ({
           <StyledLink href="labelLink.action">{labelLink.label}</StyledLink>
         )}
       </Label>
-      <Select onChange={handleChange}>
+      <Select onChange={handleChange} value={value}>
         {seletOptions.map(({ value, label }) => (
           <Option key={value} value={value}>
             {label}

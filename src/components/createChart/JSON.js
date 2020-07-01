@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
 
+import { SyncedData } from "./";
 import { Link } from "../common";
-import { startSyncAPI } from "../../modules/createChart";
+import {
+  startSyncAPI,
+  getIsAPISynced,
+  getIsJSONUploaded,
+  uploadJSONRequest,
+} from "../../modules/createChart";
 
 const StyledLink = styled(Link)`
   font-size: 12px;
@@ -15,14 +21,32 @@ const Root = styled.div`
   padding-top: 8px;
 `;
 
-const JSONDumb = ({ startSyncAPI }) => (
+const InstructionsLine = styled.div`
+  margin-bottom: 6px;
+`;
+
+const JSONDumb = ({
+  startSyncAPI,
+  isAPISynced,
+  isJSONUploaded,
+  uploadJSON,
+}) => (
   <Root>
-    <StyledLink onClick={startSyncAPI}>Sync with HTTPS API</StyledLink>
-    {" or "}
-    <StyledLink>upload JSON</StyledLink>
+    <InstructionsLine>
+      <StyledLink onClick={startSyncAPI}>Sync with HTTPS API</StyledLink>
+      {" or "}
+      <StyledLink onClick={uploadJSON}>upload JSON</StyledLink>
+    </InstructionsLine>
+    {(isAPISynced || isJSONUploaded) && <SyncedData discardable />}
   </Root>
 );
 
-const JSON = connect(null, { startSyncAPI })(JSONDumb);
+const JSON = connect(
+  R.applySpec({
+    isAPISynced: getIsAPISynced,
+    isJSONUploaded: getIsJSONUploaded,
+  }),
+  { startSyncAPI, uploadJSON: uploadJSONRequest }
+)(JSONDumb);
 
 export default JSON;

@@ -12,6 +12,8 @@ const Root = styled.div`
 `;
 
 const Input = styled.input`
+  appearance: none;
+  height: 32px;
   border: none;
   border-radius: 4px;
   background: ${({ theme: { grey } }) => grey};
@@ -19,11 +21,10 @@ const Input = styled.input`
   line-height: 16px;
   color: ${({ theme: { black } }) => black};
   outline: none;
-  appearance: none;
-  margin: 0;
   padding: 8px;
-  height: 32px;
+  margin: 0;
 `;
+
 const Label = styled.span`
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
@@ -34,9 +35,11 @@ const Label = styled.span`
 export default ({
   className,
   label,
-  input: { onChange, value },
+  type,
+  input: { onChange, value = "" },
   meta: { touched, error },
   defaultValue,
+  placeholder,
 }) => {
   const handleChange = useCallback(
     ({ target: { value } }) => {
@@ -57,7 +60,8 @@ export default ({
     <Root className={className}>
       <Label>{label}</Label>
       <Input
-        type="number"
+        placeholder={placeholder}
+        type={type}
         onChange={handleChange}
         isError={isError}
         value={value || defaultValue}

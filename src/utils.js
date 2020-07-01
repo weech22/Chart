@@ -1,4 +1,5 @@
 import { freeChartTypes } from "./constants";
+import * as R from "ramda";
 
 export const isFigma = window.name === "Plugin Iframe";
 export const isAdobe = window.name === undefined;
@@ -9,13 +10,9 @@ export const platform = () =>
 // Adobe Figma Sketch
 export const afs = (a, f, s) => (isAdobe ? a : isFigma ? f : s);
 
-export const isEmpty = (array) => {
-  if (!array) return true;
-  if (array && array.length === 0) {
-    return true;
-  }
-  return false;
-};
+export const isEmpty = R.isEmpty;
 
 export const isChartDisabled = (isPro, chartType) =>
   !(isPro || freeChartTypes.includes(chartType));
+
+export const equalIgnoreOrder = R.compose(isEmpty, R.symmetricDifference);

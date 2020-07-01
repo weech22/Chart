@@ -1,8 +1,9 @@
 import assets from "./assets";
-import { scatterPlot } from "./assets/icons";
 
 export const forms = {
   RANDOM: "RANDOM",
+  SYNC_DATA: "SYNC_DATA",
+  SYNCED_DATA: "SYNCED_DATA",
 };
 
 export const modules = {
@@ -87,6 +88,13 @@ export const dataDistributionTypes = {
 export const scatterPlotTypes = {
   SCATTER: { value: "SCATTER", label: "Scatter" },
   BUBBLE: { value: "BUBBLE", label: "Bubble" },
+};
+
+export const syncDataTypes = {
+  API: "API",
+  JSON: "JSON",
+  CSV: "CSV",
+  GS: "GS",
 };
 
 export const tabs = {

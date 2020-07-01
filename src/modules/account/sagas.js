@@ -2,13 +2,13 @@ import { call, all, put, takeLatest, select, delay } from "redux-saga/effects";
 import Manager from "./Manager";
 
 /* function* fetchTemplatesSaga() {
-  console.log("fetch saga");
+  
   try {
     const templates = yield call(Manager.fetchTemplates);
-    console.log("3232323232", templates);
+    
     // yield put(getTemplatesSuccess());
   } catch (ex) {
-    console.log(ex);
+    
     // yield put(getTemplatesFailure(ex.localeMessage));
   }
 }

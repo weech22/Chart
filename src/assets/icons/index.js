@@ -16,3 +16,6 @@ export { default as histogram } from "./histogram.png";
 export { default as heatmap } from "./heatmap.png";
 
 export { default as arrowDown } from "./arrow-down.png";
+export { default as cross } from "./cross.svg";
+export { default as tick } from "./tick.png";
+export { default as minus } from "./minus.png";

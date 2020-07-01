@@ -10,11 +10,6 @@ import { tabs, forms, dataDistributionTypes } from "../../constants";
 import Input from "../common/Input";
 import Dropdown from "../common/Dropdown";
 
-const initialValues = {
-  min: 0,
-  max: 100,
-};
-
 const Root = styled.div`
   margin-right: -8px;
 `;
@@ -111,7 +106,6 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
 const Random = R.compose(
   connect(R.applySpec({ currentChart: getCurrentChart }), {
     createChart: createChartRequest,
-    initialValues: () => initialValues,
   }),
   reduxForm({
     form: forms.RANDOM,

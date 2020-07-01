@@ -1,7 +1,7 @@
 import * as R from "ramda";
-import { createAction, handleActions } from "redux-actions";
+import { createAction, handleActions, combineActions } from "redux-actions";
 import { combineReducers } from "redux";
-import { modules, chartTypes } from "../../constants";
+import { modules, chartTypes, syncDataTypes } from "../../constants";
 
 export const selectChartTabRequest = createAction(
   `${modules.CREATE_CHART}/SELECT_CHART_TAB_REQUEST`
@@ -77,6 +77,38 @@ export const stopAddColor = createAction(
   `${modules.CREATE_CHART}/STOP_ADD_COLOR`
 );
 
+export const uploadCSVRequest = createAction(
+  `${modules.CREATE_CHART}/UPLOAD_CSV_REQUEST`
+);
+
+export const uploadCSVSuccess = createAction(
+  `${modules.CREATE_CHART}/UPLOAD_CSV_SUCCESS`
+);
+
+export const uploadCSVFailure = createAction(
+  `${modules.CREATE_CHART}/UPLOAD_CSV_FAILURE`
+);
+
+export const uploadJSONRequest = createAction(
+  `${modules.CREATE_CHART}/UPLOAD_JSON_REQUEST`
+);
+
+export const uploadJSONSuccess = createAction(
+  `${modules.CREATE_CHART}/UPLOAD_JSON_SUCCESS`
+);
+
+export const uploadJSONFailure = createAction(
+  `${modules.CREATE_CHART}/UPLOAD_JSON_FAILURE`
+);
+
+export const discardSyncedData = createAction(
+  `${modules.CREATE_CHART}/DISCARD_SYNCED_DATA`
+);
+
+export const prepareGSForSync = createAction(
+  `${modules.CREATE_CHART}/PREPARE_GS_FOR_SYNC`
+);
+
 // TODO: saveColor, editColor?
 
 export const clearTable = createAction(`${modules.CREATE_CHART}/CLEAR_TABLE`);
@@ -105,6 +137,7 @@ const isSyncGSShowing = handleActions(
   {
     [startSyncGS]: R.T,
     [stopSyncGS]: R.F,
+    [syncGSSuccess]: R.F,
   },
   false
 );
@@ -113,6 +146,7 @@ const isSyncAPIShowing = handleActions(
   {
     [startSyncAPI]: R.T,
     [stopSyncAPI]: R.F,
+    [syncAPISuccess]: R.F,
   },
   false
 );
@@ -133,6 +167,42 @@ const isAddColorShowing = handleActions(
   false
 );
 
+const gsSheets = handleActions(
+  {
+    [prepareGSForSync]: (_, { payload }) => payload,
+    [stopSyncGS]: R.F,
+    [syncGSSuccess]: R.F,
+  },
+  []
+);
+
+const syncedData = handleActions(
+  {
+    [syncGSSuccess]: (_, { payload: { data, source } }) => ({
+      data,
+      source,
+      type: syncDataTypes.GS,
+    }),
+    [syncAPISuccess]: (_, { payload: { data, source } }) => ({
+      data,
+      source,
+      type: syncDataTypes.API,
+    }),
+    [uploadJSONSuccess]: (_, { payload: { data, source } }) => ({
+      data,
+      source,
+      type: syncDataTypes.JSON,
+    }),
+    [uploadCSVSuccess]: (_, { payload: { data, source } }) => ({
+      data,
+      source,
+      type: syncDataTypes.CSV,
+    }),
+    [discardSyncedData]: () => ({ data: null, type: null }),
+  },
+  { data: null, type: null }
+);
+
 const CreateChartReducer = combineReducers({
   currentChart,
   isCreatingChart,
@@ -140,6 +210,8 @@ const CreateChartReducer = combineReducers({
   isSyncAPIShowing,
   isCustomStyleShowing,
   isAddColorShowing,
+  gsSheets,
+  syncedData,
 });
 
 export default CreateChartReducer;

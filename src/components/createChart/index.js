@@ -9,3 +9,4 @@ export { default as TabSwitcher } from "./TabSwitcher";
 export { default as Spreadsheet } from "./Spreadsheet";
 export { default as SyncData } from "./SyncData";
 export { default as CustomStyle } from "./CustomStyle";
+export { default as SyncedData } from "./SyncedData";

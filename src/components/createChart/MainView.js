@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import * as R from "ramda";
+import { TabSwitcher, Footer } from "./";
+import Title from "./Title";
 
-import { Title, TabSwitcher, Footer } from "./";
+import { getCurrentChart } from "../../modules/createChart";
+import { tabs } from "../../constants";
 
 const Root = styled.div`
   background: ${({ theme: { white } }) => white};
@@ -10,10 +15,20 @@ const Root = styled.div`
   flex-direction: column;
 `;
 
-export default () => (
+const StyledTitle = styled(Title)`
+  padding: 16px 16px 8px 16px;
+`;
+
+const MainViewDumb = ({ currentChart }) => (
   <Root>
-    <Title />
+    <StyledTitle>{tabs[currentChart].title}</StyledTitle>
     <TabSwitcher />
     <Footer />
   </Root>
 );
+
+const MainView = connect(R.applySpec({ currentChart: getCurrentChart }))(
+  MainViewDumb
+);
+
+export default MainView;
