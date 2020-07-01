@@ -5,7 +5,7 @@ import * as R from "ramda";
 import { Field, reduxForm } from "redux-form";
 
 import { forms } from "../../constants";
-import { isFigma, isEmpty } from "../../utils";
+import { isFigma } from "../../utils";
 import { Title } from "./";
 import { CloseButton, Button, Input, Link, Dropdown } from "../";
 
@@ -98,7 +98,7 @@ const SyncDataDumb = ({
   const label = isSyncGSShowing ? gsLabel : apiLabel;
   const buttonCaption = isSyncAPIShowing
     ? apiButtonCaption
-    : !isEmpty(gsSheets)
+    : !R.isEmpty(gsSheets)
     ? gsImportButtonCaption
     : gsButtonCaption;
 
@@ -118,7 +118,7 @@ const SyncDataDumb = ({
         placeholder={placeholder}
       />
 
-      {!isEmpty(gsSheets) && isSyncGSShowing && (
+      {!R.isEmpty(gsSheets) && isSyncGSShowing && (
         <Field
           name="gsSheet"
           component={StyledDropdown}

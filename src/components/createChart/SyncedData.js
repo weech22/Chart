@@ -30,7 +30,7 @@ const StyledLink = styled(Link)``;
 const FieldBlock = styled.div`
   display: flex;
   margin-top: 24px;
-  max-height: ${isFigma ? "164" : "136"}px;
+  max-height: ${isFigma ? "158" : "136"}px;
 `;
 
 const Col = styled.div`
@@ -75,6 +75,14 @@ const SyncedDataDumb = ({
     case syncDataTypes.API:
       options = Object.keys(data[0]);
 
+      break;
+    case syncDataTypes.CSV:
+      options = data[0];
+
+      break;
+    case syncDataTypes.JSON:
+      console.log("data", data);
+      options = Object.keys(data[0]);
       break;
     default:
       options = [];

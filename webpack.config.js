@@ -18,7 +18,7 @@ const figmaConfig = (_, argv) => ({
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components|adobe|sketch)/,
+        exclude: [/(node_modules|bower_components|adobe|sketch)/],
         use: {
           loader: "babel-loader",
           options: {
@@ -99,6 +99,8 @@ const adobeConfig = {
   },
   externals: {
     scenegraph: "scenegraph",
+    application: "application",
+    uxp: "uxp",
   },
   plugins: [
     new CopyPlugin({

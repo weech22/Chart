@@ -10,9 +10,17 @@ export const platform = () =>
 // Adobe Figma Sketch
 export const afs = (a, f, s) => (isAdobe ? a : isFigma ? f : s);
 
-export const isEmpty = R.isEmpty;
-
 export const isChartDisabled = (isPro, chartType) =>
   !(isPro || freeChartTypes.includes(chartType));
 
-export const equalIgnoreOrder = R.compose(isEmpty, R.symmetricDifference);
+export const equalIgnoreOrder = R.compose(R.isEmpty, R.symmetricDifference);
+
+export const readFileContent = (file) => {
+  const reader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    reader.onload = (event) => resolve(event.target.result);
+    reader.onerror = (error) => reject(error);
+    reader.readAsText(file);
+  }).then((data) => data);
+};

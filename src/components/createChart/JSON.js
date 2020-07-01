@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+
 import * as R from "ramda";
 
 import { SyncedData } from "./";
@@ -11,6 +12,7 @@ import {
   getIsJSONUploaded,
   uploadJSONRequest,
 } from "../../modules/createChart";
+import { isAdobe, isFigma } from "../../utils";
 
 const StyledLink = styled(Link)`
   font-size: 12px;
@@ -30,16 +32,33 @@ const JSONDumb = ({
   isAPISynced,
   isJSONUploaded,
   uploadJSON,
-}) => (
-  <Root>
-    <InstructionsLine>
-      <StyledLink onClick={startSyncAPI}>Sync with HTTPS API</StyledLink>
-      {" or "}
-      <StyledLink onClick={uploadJSON}>upload JSON</StyledLink>
-    </InstructionsLine>
-    {(isAPISynced || isJSONUploaded) && <SyncedData discardable />}
-  </Root>
-);
+}) => {
+  const handleClick = (event) => {
+    document.getElementById("hiddenFileInput").click();
+  };
+
+  const handleUploadJSON = isAdobe ? uploadCSV : handleClick;
+
+  return (
+    <Root>
+      <InstructionsLine>
+        <StyledLink onClick={startSyncAPI}>Sync with HTTPS API</StyledLink>
+        {" or "}
+        <StyledLink onClick={handleUploadJSON}>upload JSON</StyledLink>
+        {isFigma && (
+          <input
+            accept="application/JSON"
+            id="hiddenFileInput"
+            style={{ display: "none" }}
+            type="file"
+            onChange={(e) => uploadJSON(e.target.files)}
+          />
+        )}
+      </InstructionsLine>
+      {(isAPISynced || isJSONUploaded) && <SyncedData discardable />}
+    </Root>
+  );
+};
 
 const JSON = connect(
   R.applySpec({

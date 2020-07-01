@@ -170,8 +170,10 @@ const isAddColorShowing = handleActions(
 const gsSheets = handleActions(
   {
     [prepareGSForSync]: (_, { payload }) => payload,
-    [stopSyncGS]: R.F,
-    [syncGSSuccess]: R.F,
+    [stopSyncGS]: R.always([]),
+    [syncGSSuccess]: R.always([]),
+    [discardSyncedData]: R.always([]),
+    [syncAPIRequest]: R.always([]),
   },
   []
 );

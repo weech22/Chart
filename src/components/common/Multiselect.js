@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import * as R from "ramda";
 
-import { isFigma, isEmpty, equalIgnoreOrder } from "../../utils";
+import { isFigma, equalIgnoreOrder } from "../../utils";
 import assets from "../../assets";
 import Link from "../common/Link";
 import MultiselectOption from "./MultiselectOption";
@@ -15,7 +15,7 @@ const Root = styled.div`
 
 const Options = styled.div`
   overflow-y: scroll;
-  height: ${isFigma ? "164" : "133"}px;
+  height: ${isFigma ? "158" : "128"}px;
   padding: 8px;
 `;
 
@@ -51,7 +51,7 @@ export default ({ className, label, options, input: { onChange, value } }) => {
   };
 
   useEffect(() => {
-    if (!isEmpty(value)) {
+    if (!R.isEmpty(value)) {
       setCheckedOptions(value);
     }
   }, [value]);
@@ -75,12 +75,12 @@ export default ({ className, label, options, input: { onChange, value } }) => {
 
   const someChecked = useMemo(
     () =>
-      !equalIgnoreOrder(options, checkedOptions) && !isEmpty(checkedOptions),
+      !equalIgnoreOrder(options, checkedOptions) && !R.isEmpty(checkedOptions),
     [options, checkedOptions]
   );
 
   const isOptionChecked = (option) => checkedOptions.includes(option);
-
+  console.log("label", label);
   return (
     <Root className={className}>
       <Label>{label}</Label>

@@ -1,6 +1,7 @@
 const reactShim = require("./react-shim");
 const React = require("react");
 const ReactDOM = require("react-dom");
+
 const CreateChartScreen = require("../../src/platforms/Adobe/CreateChart.js")
   .default;
 const TemplatesScreen = require("../../src/platforms/Adobe/Templates.js")

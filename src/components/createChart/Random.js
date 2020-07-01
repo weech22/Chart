@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
-
-import { isEmpty } from "../../utils";
 import { Field, reduxForm, Form } from "redux-form";
+
 import { getCurrentChart, createChartRequest } from "../../modules/createChart";
 import { tabs, forms, dataDistributionTypes } from "../../constants";
 import Input from "../common/Input";
@@ -62,7 +61,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
   return (
     <Root>
       <Form onSubmit={handleSubmit(createChart)}>
-        {!isEmpty(dataFields) && (
+        {!R.isNil(dataFields) && (
           <FieldLine>
             {dataFields.map(
               ({ name, type, label, defaultValue, options = {} }) => (
@@ -80,7 +79,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
             )}
           </FieldLine>
         )}
-        {!isEmpty(rangeFields) && (
+        {!R.isNil(rangeFields) && (
           <FieldLine>
             {rangeFields.map(({ name, type, label, defaultValue }) => (
               <Field
@@ -95,7 +94,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
           </FieldLine>
         )}
       </Form>
-      {isEmpty(dataFields) && isEmpty(rangeFields) && (
+      {R.isEmpty(dataFields) && R.isEmpty(rangeFields) && (
         <NoFieldsMessage>{getNoFieldsMessage(currentChart)}</NoFieldsMessage>
       )}
       {proTip && <ProTip>Pro tip: {proTip}</ProTip>}

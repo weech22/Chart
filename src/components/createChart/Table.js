@@ -6,7 +6,7 @@ import * as R from "ramda";
 import { SyncedData } from "./";
 import { Link } from "../common";
 import Spreadsheet from "./Spreadsheet";
-import { isAdobe } from "../../utils";
+import { isAdobe, isFigma } from "../../utils";
 import {
   startSyncGS,
   getIsGSSynced,
@@ -36,18 +36,33 @@ const TableDumb = ({
   isCSVUploaded,
   uploadCSV,
   syncedData,
-}) => (
-  <Root>
-    <InstructionsLine>
-      {"Type or paste data into table. "}
-      <StyledLink onClick={startSyncGS}>Sync with Google Sheet</StyledLink>
-      {" or "}
-      <StyledLink onClick={uploadCSV}>upload CSV</StyledLink>
-    </InstructionsLine>
-    {(isGSSynced || isCSVUploaded) && <SyncedData discardable />}
-    {!isAdobe && !isGSSynced && !isCSVUploaded && <Spreadsheet />}
-  </Root>
-);
+}) => {
+  const handleClick = (event) => {
+    document.getElementById("hiddenFileInput").click();
+  };
+  const handleUploadCSV = isAdobe ? uploadCSV : handleClick;
+  return (
+    <Root>
+      <InstructionsLine>
+        {"Type or paste data into table. "}
+        <StyledLink onClick={startSyncGS}>Sync with Google Sheet</StyledLink>
+        {" or "}
+        <StyledLink onClick={handleUploadCSV}>upload CSV</StyledLink>
+        {isFigma && (
+          <input
+            accept=".csv"
+            id="hiddenFileInput"
+            style={{ display: "none" }}
+            type="file"
+            onChange={(e) => uploadCSV(e.target.files)}
+          />
+        )}
+      </InstructionsLine>
+      {(isGSSynced || isCSVUploaded) && <SyncedData discardable />}
+      {!isAdobe && !isGSSynced && !isCSVUploaded && <Spreadsheet />}
+    </Root>
+  );
+};
 
 const Table = connect(
   R.applySpec({ isGSSynced: getIsGSSynced, isCSVUploaded: getIsCSVUploaded }),

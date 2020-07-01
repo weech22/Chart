@@ -1,6 +1,8 @@
 import { call, all, put, takeLatest, select, delay } from "redux-saga/effects";
 import { reset } from "redux-form";
+import * as Papa from "papaparse";
 
+import { uploadFile } from "../../platforms/Adobe/utils";
 import {
   createChartRequest,
   createChartSuccess,
@@ -21,9 +23,11 @@ import {
   uploadJSONFailure,
   prepareGSForSync,
 } from "./duck";
+
 import Manager from "./Manager";
 import { getCurrentChart } from "./selectors";
 import { forms } from "../../constants";
+import { isAdobe, readFileContent } from "../../utils";
 
 // TODO: Send active tab
 function* createChartSaga({ payload }) {
@@ -110,23 +114,41 @@ function* syncAPIRequestSaga({ payload: { syncAPI: url } }) {
   }
 }
 
-function* uploadCSVSaga({ payload }) {
-  console.log("payload, csv", payload);
+function* uploadCSVSaga({ payload: FileList }) {
   try {
-    yield put(syncAPISuccess());
+    if (isAdobe) {
+      const { fileName, fileContent } = yield call(uploadFile, "csv");
+      const data = Papa.parse(fileContent).data;
+      yield put(uploadCSVSuccess({ data, source: { title: fileName } }));
+    } else {
+      const file = FileList[0];
+      const fileContent = yield call(readFileContent, file);
+      const fileName = file.name;
+      const data = Papa.parse(fileContent).data;
+      yield put(uploadCSVSuccess({ data, source: { title: fileName } }));
+    }
   } catch (ex) {
     console.log(ex);
-    yield put(syncAPIFailure(ex));
+    yield put(uploadCSVFailure(ex));
   }
 }
 
-function* uploadJSONSaga({ payload }) {
-  console.log("payload, json", payload);
+function* uploadJSONSaga({ payload: FileList }) {
   try {
-    yield put(syncAPISuccess());
+    if (isAdobe) {
+      const { fileName, fileContent } = yield call(uploadFile, "json");
+      const data = JSON.parse(fileContent);
+      yield put(uploadJSONSuccess({ data, source: { title: fileName } }));
+    } else {
+      const file = FileList[0];
+      const fileContent = yield call(readFileContent, file);
+      const fileName = file.name;
+      const data = JSON.parse(fileContent);
+      yield put(uploadJSONSuccess({ data, source: { title: fileName } }));
+    }
   } catch (ex) {
     console.log(ex);
-    yield put(syncAPIFailure(ex));
+    yield put(uploadJSONFailure(ex));
   }
 }
 

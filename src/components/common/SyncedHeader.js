@@ -15,6 +15,7 @@ const Root = styled.div`
   align-items: center;
   border-radius: 4px;
   padding-left: 8px;
+  color: ${({ theme: { black } }) => black};
 `;
 
 const StyledLink = styled(Link)`
@@ -31,6 +32,7 @@ const Title = styled.span`
   max-width: ${isFigma ? "240" : "270"}px;
   overflow: hidden;
   white-space: nowrap;
+  color: ${({ theme: { black } }) => black};
 `;
 
 const StyledCloseButton = styled(CloseButton)`
