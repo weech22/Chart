@@ -5,6 +5,8 @@ span.data-grid-container:focus {
 
 .data-grid-container .data-grid {
   width: 1000px;
+  font-size: 12px;
+  font-weight: bold;
   table-layout: fixed;
   border-collapse: collapse;
 }

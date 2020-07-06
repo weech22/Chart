@@ -32,7 +32,7 @@ export default function () {
       .catch(console.error);
   });
 
-  browserWindow.loadURL(require("./Resources/createChart.html"));
+  browserWindow.loadURL(require("./Resources/updateChart.html"));
 }
 
 export function onShutdown() {

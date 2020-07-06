@@ -6,16 +6,14 @@ import "./react-datasheet.css";
 
 const Container = styled.div`
   width: 374px;
-  height: 196px;
+  height: 212px;
   overflow: scroll;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: none;
-  border: 1px solid green;
 `;
 
 const Scroller = styled.div`
   height: 100%;
-  border: 1px solid red;
 `;
 
 const defaultGrid = [

@@ -32,13 +32,15 @@ const InstructionsLine = styled.div`
 
 const TableFooter = styled.div`
   margin-top: -18px;
-  margin-bottom: -10px;
+  margin-bottom: -8px;
+  padding-top: 8px;
+  background: white;
+  z-index: 2;
+
   display: flex;
   justify-content: space-between;
+
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  padding-top: 30px;
-  background: white;
 `;
 
 const Controls = styled.div`
