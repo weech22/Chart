@@ -2,7 +2,7 @@ import BrowserWindow from "sketch-module-web-view";
 import { getWebview } from "sketch-module-web-view/remote";
 import UI from "sketch/ui";
 
-const webviewIdentifier = "chart2.webview";
+const webviewIdentifier = "chart2.update-chart.webview";
 
 export default function () {
   const options = {
@@ -32,7 +32,7 @@ export default function () {
       .catch(console.error);
   });
 
-  browserWindow.loadURL(require("../Resources/updateChart.html"));
+  browserWindow.loadURL(require("./Resources/createChart.html"));
 }
 
 export function onShutdown() {

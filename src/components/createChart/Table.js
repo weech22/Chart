@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
@@ -30,6 +30,23 @@ const InstructionsLine = styled.div`
   margin-bottom: 6px;
 `;
 
+const TableFooter = styled.div`
+  margin-top: -18px;
+  margin-bottom: -10px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding-top: 30px;
+  background: white;
+`;
+
+const Controls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+`;
+
 const TableDumb = ({
   startSyncGS,
   isGSSynced,
@@ -59,7 +76,18 @@ const TableDumb = ({
         )}
       </InstructionsLine>
       {(isGSSynced || isCSVUploaded) && <SyncedData discardable />}
-      {!isAdobe && !isGSSynced && !isCSVUploaded && <Spreadsheet />}
+      {!isAdobe && !isGSSynced && !isCSVUploaded && (
+        <Fragment>
+          <Spreadsheet />
+          <TableFooter>
+            <StyledLink>How to use Table data?</StyledLink>
+            <Controls>
+              <StyledLink>Transpose</StyledLink>
+              <StyledLink>Clear table</StyledLink>
+            </Controls>
+          </TableFooter>
+        </Fragment>
+      )}
     </Root>
   );
 };

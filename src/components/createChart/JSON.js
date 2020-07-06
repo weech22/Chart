@@ -37,7 +37,7 @@ const JSONDumb = ({
     document.getElementById("hiddenFileInput").click();
   };
 
-  const handleUploadJSON = isAdobe ? uploadCSV : handleClick;
+  const handleUploadJSON = isAdobe ? uploadJSON : handleClick;
 
   return (
     <Root>
