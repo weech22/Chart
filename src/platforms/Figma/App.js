@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 
-import { standartTheme } from "../../styles";
+import { standartTheme } from "@app/styles";
 import Navigator from "./Navigator";
-import store from "../../configureStore";
+import store from "@app/configureStore";
 import { outcomingMessageTypes } from "./constants";
-import "../../index.css";
+import "@app/index.css";
 
 import {
   messageHandler as initializeMessageHandler,

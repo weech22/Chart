@@ -16,9 +16,9 @@ export const getIsSyncAPIShowing = R.pipe(
   R.prop("isSyncAPIShowing")
 );
 
-export const getIsCustomStyleShowing = R.pipe(
+export const getIsCustomizeStyleShowing = R.pipe(
   getCreateChart,
-  R.prop("isCustomStyleShowing")
+  R.prop("isCustomizeStyleShowing")
 );
 
 export const getIsAPISynced = (state) => {
@@ -54,3 +54,19 @@ export const getIsJSONUploaded = (state) => {
 };
 
 export const getGSSheets = R.pipe(getCreateChart, R.prop("gsSheets"));
+
+export const getTableGrid = R.pipe(getCreateChart, R.prop("tableGrid"));
+
+export const getTableSize = (state) => {
+  const tableGrid = state.createChart.tableGrid;
+
+  return {
+    cols: tableGrid[0].length - 1,
+    rows: tableGrid.length - 1,
+  };
+};
+
+export const getIsColorPickerShowing = R.pipe(
+  getCreateChart,
+  R.prop("isColorPickerShowing")
+);

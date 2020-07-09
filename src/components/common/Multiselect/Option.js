@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
-import { isFigma } from "../../utils";
-import assets from "../../assets";
-import Link from "../common/Link";
+import assets from "@assets";
 
 const Root = styled.div`
   display: flex;

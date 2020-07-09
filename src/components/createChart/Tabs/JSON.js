@@ -1,18 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-
 import * as R from "ramda";
 
-import { SyncedData } from "./";
-import { Link } from "../common";
+import { Link, SyncedData } from "@components/common";
+import { isAdobe, isFigma } from "@app/utils";
 import {
   startSyncAPI,
   getIsAPISynced,
   getIsJSONUploaded,
   uploadJSONRequest,
-} from "../../modules/createChart";
-import { isAdobe, isFigma } from "../../utils";
+} from "@modules/createChart";
 
 const StyledLink = styled(Link)`
   font-size: 12px;
@@ -33,7 +31,7 @@ const JSONDumb = ({
   isJSONUploaded,
   uploadJSON,
 }) => {
-  const handleClick = (event) => {
+  const handleClick = () => {
     document.getElementById("hiddenFileInput").click();
   };
 

@@ -1,7 +1,9 @@
 import * as R from "ramda";
 import { createAction, handleActions, combineActions } from "redux-actions";
 import { combineReducers } from "redux";
-import { modules, chartTypes, syncDataTypes } from "../../constants";
+import { modules, chartTypes, syncDataTypes, GRID_SIZE } from "../../constants";
+
+import { generateEmptyGrid } from "../../utils";
 
 export const selectChartTabRequest = createAction(
   `${modules.CREATE_CHART}/SELECT_CHART_TAB_REQUEST`
@@ -61,20 +63,22 @@ export const syncAPIFailure = createAction(
   `${modules.CREATE_CHART}/SYNC_API_FAILURE`
 );
 
-export const startCustomStyle = createAction(
-  `${modules.CREATE_CHART}/START_CUSTOM_STYLE`
+export const startCustomizeStyle = createAction(
+  `${modules.CREATE_CHART}/START_CUSTOMIZE_STYLE`
 );
 
-export const stopCustomStyle = createAction(
-  `${modules.CREATE_CHART}/STOP_CUSTOM_STYLE`
+export const stopCustomizeStyle = createAction(
+  `${modules.CREATE_CHART}/STOP_CUSTOMIZE_STYLE`
 );
 
-export const startAddColor = createAction(
-  `${modules.CREATE_CHART}/START_ADD_COLOR`
+export const submitStyle = createAction(`${modules.CREATE_CHART}/SUBMIT_STYLE`);
+
+export const showColorPicker = createAction(
+  `${modules.CREATE_CHART}/SHOW_COLOR_PICKER`
 );
 
-export const stopAddColor = createAction(
-  `${modules.CREATE_CHART}/STOP_ADD_COLOR`
+export const hideColorPicker = createAction(
+  `${modules.CREATE_CHART}/HIDE_COLOR_PICKER`
 );
 
 export const uploadCSVRequest = createAction(
@@ -112,6 +116,12 @@ export const prepareGSForSync = createAction(
 // TODO: saveColor, editColor?
 
 export const clearTable = createAction(`${modules.CREATE_CHART}/CLEAR_TABLE`);
+
+export const updateTable = createAction(`${modules.CREATE_CHART}/UPDATE_TABLE`);
+
+export const transposeTable = createAction(
+  `${modules.CREATE_CHART}/TRANSPOSE_TABLE`
+);
 
 export const openExternalLink = createAction(
   `${modules.CREATE_CHART}/OPEN_EXTERNAL_LINK`
@@ -151,18 +161,18 @@ const isSyncAPIShowing = handleActions(
   false
 );
 
-const isCustomStyleShowing = handleActions(
+const isCustomizeStyleShowing = handleActions(
   {
-    [startCustomStyle]: R.T,
-    [stopCustomStyle]: R.F,
+    [startCustomizeStyle]: R.T,
+    [stopCustomizeStyle]: R.F,
   },
   false
 );
 
-const isAddColorShowing = handleActions(
+const isColorPickerShowing = handleActions(
   {
-    [startAddColor]: R.T,
-    [stopAddColor]: R.F,
+    [showColorPicker]: R.T,
+    [hideColorPicker]: R.F,
   },
   false
 );
@@ -205,15 +215,24 @@ const syncedData = handleActions(
   { data: null, type: null }
 );
 
+const a = generateEmptyGrid(GRID_SIZE);
+const tableGrid = handleActions(
+  {
+    [updateTable]: (_, { payload }) => payload,
+  },
+  a
+);
+
 const CreateChartReducer = combineReducers({
   currentChart,
   isCreatingChart,
   isSyncGSShowing,
   isSyncAPIShowing,
-  isCustomStyleShowing,
-  isAddColorShowing,
+  isCustomizeStyleShowing,
+  isColorPickerShowing,
   gsSheets,
   syncedData,
+  tableGrid,
 });
 
 export default CreateChartReducer;

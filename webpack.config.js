@@ -11,7 +11,7 @@ const figmaConfig = (_, argv) => ({
 
   entry: {
     ui: "./platforms/figma/ui.js",
-    code: "./platforms/figma/code.ts",
+    code: "./platforms/figma/code.js",
   },
 
   module: {
@@ -25,12 +25,6 @@ const figmaConfig = (_, argv) => ({
             presets: ["@babel/react"],
           },
         },
-      },
-
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /(node_modules|bower_components|adobe|sketch)/,
       },
 
       {
@@ -50,7 +44,15 @@ const figmaConfig = (_, argv) => ({
     uxp: "uxp",
   },
 
-  resolve: { extensions: [".tsx", ".ts", ".jsx", ".js"] },
+  resolve: {
+    alias: {
+      ["@modules"]: path.resolve(__dirname, "src/modules"),
+      ["@components"]: path.resolve(__dirname, "src/components"),
+      ["@screens"]: path.resolve(__dirname, "src/screens"),
+      ["@assets"]: path.resolve(__dirname, "src/assets"),
+      ["@app"]: path.join(__dirname, "src"),
+    },
+  },
 
   output: {
     path: path.resolve(`${__dirname}/platforms/figma`, "build"),
@@ -76,6 +78,15 @@ const adobeConfig = {
     libraryTarget: "commonjs2",
   },
   devtool: "none",
+  resolve: {
+    alias: {
+      ["@modules"]: path.resolve(__dirname, "src/modules"),
+      ["@components"]: path.resolve(__dirname, "src/components"),
+      ["@screens"]: path.resolve(__dirname, "src/screens"),
+      ["@assets"]: path.resolve(__dirname, "src/assets"),
+      ["@app"]: path.join(__dirname, "src"),
+    },
+  },
   module: {
     rules: [
       {

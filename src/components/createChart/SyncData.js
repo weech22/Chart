@@ -4,11 +4,9 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 import { Field, reduxForm } from "redux-form";
 
-import { forms } from "../../constants";
-import { isFigma } from "../../utils";
-import { Title } from "./";
-import { CloseButton, Button, Input, Link, Dropdown } from "../";
-
+import { forms } from "@app/constants";
+import { isFigma, isAdobe } from "@app/utils";
+import { Title, Button, Input, Link, Dropdown } from "@components/common";
 import {
   getIsSyncGSShowing,
   getIsSyncAPIShowing,
@@ -17,36 +15,32 @@ import {
   getGSSheets,
   syncGSRequest,
   syncAPIRequest,
-} from "../../modules/createChart";
+} from "@modules/createChart";
 
 const Root = styled.div`
-  box-sizing: border-box;
   background: ${({ theme: { white } }) => white};
-  padding: 0 16px;
-  padding-top: 16px;
+  box-sizing: ${isFigma ? "border-box" : "auto"};
+  padding: ${isAdobe ? "16px 0px 0 16px" : "16px 16px 0 16px"};
   height: 400px;
-  flex-basis: 100%;
+  border: 1px solid red;
+  flex-basis: ${isAdobe ? "100%" : "auto"};
   width: ${isFigma ? "496px" : "auto"};
   display: flex;
   flex-direction: column;
-  position: relative;
-`;
-
-const StyledCloseButton = styled(CloseButton)`
-  position: absolute;
-  right: 15px;
-  top: 15px;
 `;
 
 const StyledInput = styled(Input)`
-  width: 100%;
-  margin-top: 4px;
-  margin-bottom: 16px;
+  width: ${isAdobe ? "calc(100% - 16px)" : "100%"};
+  margin: 4px 0 16px 0;
 `;
 
 const StyledDropdown = styled(Dropdown)`
   margin-top: 24px;
   margin-bottom: 16px;
+`;
+
+const StyledTitle = styled(Title)`
+  padding: ${isAdobe ? "0 8px 0 0" : "0"};
 `;
 
 const StyledButton = styled(Button)`
@@ -56,7 +50,8 @@ const StyledButton = styled(Button)`
 const LabelLine = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
+  width: ${isAdobe ? "calc(100% - 16px)" : "100%"};
+  margin-top: 16px;
 `;
 
 const StyledLink = styled(Link)`
@@ -104,9 +99,7 @@ const SyncDataDumb = ({
 
   return (
     <Root>
-      <StyledCloseButton onClick={closeModal} />
-
-      <Title>{title}</Title>
+      <StyledTitle onClose={closeModal}>{title}</StyledTitle>
       <LabelLine>
         <Label>{label}</Label>
         <StyledLink>Try an example</StyledLink>

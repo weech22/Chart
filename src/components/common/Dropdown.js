@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
-import { isFigma } from "../../utils";
-import assets from "../../assets";
-import Link from "../common/Link";
+import { isFigma } from "@app/utils";
+import assets from "@app/assets";
+import Link from "./Link";
 
 const Root = styled.div`
   display: flex;
@@ -59,7 +59,7 @@ export default ({
   labelLink,
   input: { onChange, value },
 }) => {
-  const seletOptions = Object.keys(options).map((option) => ({
+  const selectOptions = Object.keys(options).map((option) => ({
     value: options[option].value,
     label: options[option].label,
   }));
@@ -86,7 +86,7 @@ export default ({
         )}
       </Label>
       <Select onChange={handleChange} value={value}>
-        {seletOptions.map(({ value, label }) => (
+        {selectOptions.map(({ value, label }) => (
           <Option key={value} value={value}>
             {label}
           </Option>

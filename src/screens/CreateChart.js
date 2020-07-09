@@ -3,23 +3,34 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
 
-import { MainView, TabNavigation, SyncData } from "../components/createChart";
+import {
+  MainView,
+  Charts,
+  SyncData,
+  CustomizeStyle,
+} from "@components/createChart";
+
 import {
   getIsSyncGSShowing,
   getIsSyncAPIShowing,
-} from "../modules/createChart";
+  getIsCustomizeStyleShowing,
+} from "@modules/createChart";
 
 const Root = styled.div`
   display: flex;
 `;
 
-const CreateChartDumb = ({ IsSyncAPIShowing, IsSyncGSShowing }) => {
+const CreateChartDumb = ({
+  isSyncAPIShowing,
+  isSyncGSShowing,
+  isCustomizeStyleShowing,
+}) => {
   return (
     <Root>
-      {(IsSyncAPIShowing || IsSyncGSShowing) && <SyncData />}
-      {!(IsSyncAPIShowing || IsSyncGSShowing) && (
+      {(isSyncAPIShowing || isSyncGSShowing) && <SyncData />}
+      {!(isSyncAPIShowing || isSyncGSShowing || isCustomizeStyleShowing) && (
         <Fragment>
-          <TabNavigation />
+          <Charts />
           <MainView />
         </Fragment>
       )}
@@ -29,8 +40,8 @@ const CreateChartDumb = ({ IsSyncAPIShowing, IsSyncGSShowing }) => {
 
 const CreateChart = connect(
   R.applySpec({
-    IsSyncAPIShowing: getIsSyncAPIShowing,
-    IsSyncGSShowing: getIsSyncGSShowing,
+    isSyncAPIShowing: getIsSyncAPIShowing,
+    isSyncGSShowing: getIsSyncGSShowing,
   })
 )(CreateChartDumb);
 

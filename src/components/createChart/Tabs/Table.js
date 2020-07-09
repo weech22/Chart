@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
 
-import { SyncedData } from "./";
-import { Link } from "../common";
-import Spreadsheet from "./Spreadsheet";
-import { isAdobe, isFigma } from "../../utils";
+import { Link, Spreadsheet, SyncedData } from "@components/common";
+import { isAdobe, isFigma } from "@app/utils";
 import {
   startSyncGS,
   getIsGSSynced,
   getIsCSVUploaded,
   uploadCSVRequest,
   getSyncedData,
-} from "../../modules/createChart";
+  clearTable,
+  transposeTable,
+} from "@modules/createChart";
 
 const Root = styled.div`
   padding-top: 8px;
@@ -55,10 +55,13 @@ const TableDumb = ({
   isCSVUploaded,
   uploadCSV,
   syncedData,
+  clearTable,
+  transposeTable,
 }) => {
-  const handleClick = (event) => {
+  const handleClick = () => {
     document.getElementById("hiddenFileInput").click();
   };
+
   const handleUploadCSV = isAdobe ? uploadCSV : handleClick;
   return (
     <Root>
@@ -84,8 +87,8 @@ const TableDumb = ({
           <TableFooter>
             <StyledLink>How to use Table data?</StyledLink>
             <Controls>
-              <StyledLink>Transpose</StyledLink>
-              <StyledLink>Clear table</StyledLink>
+              <StyledLink onClick={transposeTable}>Transpose</StyledLink>
+              <StyledLink onClick={clearTable}>Clear table</StyledLink>
             </Controls>
           </TableFooter>
         </Fragment>
@@ -100,6 +103,8 @@ const Table = connect(
     startSyncGS,
     uploadCSV: uploadCSVRequest,
     syncedData: getSyncedData,
+    clearTable,
+    transposeTable,
   }
 )(TableDumb);
 

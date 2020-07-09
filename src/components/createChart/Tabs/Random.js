@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 import { Field, reduxForm, Form } from "redux-form";
 
-import { getCurrentChart, createChartRequest } from "../../modules/createChart";
-import { tabs, forms, dataDistributionTypes } from "../../constants";
-import Input from "../common/Input";
-import Dropdown from "../common/Dropdown";
+import { getCurrentChart, createChartRequest } from "@modules/createChart";
+import { tabs, forms, dataDistributionTypes } from "@app/constants";
+import { Input, Dropdown } from "@components/common";
 
 const Root = styled.div`
   margin-right: -8px;

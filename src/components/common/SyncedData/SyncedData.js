@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { submit } from "redux-form";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import * as R from "ramda";
 
-import { Button, Link, SyncedHeader, Multiselect, Dropdown } from "../common";
-
-import { getSyncedData, discardSyncedData } from "../../modules/createChart";
-import { isFigma } from "../../utils";
-import { forms, syncDataTypes } from "../../constants";
+import Link from "../Link";
+import Multiselect from "../Multiselect";
+import Dropdown from "../Dropdown";
+import SyncedHeader from "./SyncedHeader";
+import { getSyncedData, discardSyncedData } from "@modules/createChart";
+import { isFigma } from "@app/utils";
+import { forms, syncDataTypes } from "@app/constants";
 
 const Root = styled.div`
   flex: 1;
@@ -81,15 +82,11 @@ const SyncedDataDumb = ({
 
       break;
     case syncDataTypes.JSON:
-      console.log("data", data);
       options = Object.keys(data[0]);
       break;
     default:
       options = [];
   }
-
-  console.log("type", type);
-  console.log("options", options);
 
   return (
     <Root>

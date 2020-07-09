@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
-
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
-import { Random, Table, JSON } from "./";
+import Random from "./Random";
+import Table from "./Table";
+import JSON from "./JSON";
 
-import { getCurrentChart } from "../../modules/createChart";
-import { tabs } from "../../constants";
-import { isFigma, isAdobe, platform } from "../../utils";
+import { isFigma } from "@app/utils";
 
 const Root = styled.div`
   padding: 0 16px 16px 16px;
@@ -19,6 +18,7 @@ const Root = styled.div`
 const StyledTabs = styled(Tabs)``;
 
 const StyledTab = styled(Tab)`
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +46,8 @@ const StyledTabList = styled(TabList)`
 
 const StyledTabPanel = styled(TabPanel)``;
 
-const TabSwitcher = () => {
+// TODO: Lift acive tab to state
+const TabMenu = () => {
   const [selected, setSelected] = useState(0);
 
   return (
@@ -75,4 +76,4 @@ const TabSwitcher = () => {
   );
 };
 
-export default TabSwitcher;
+export default TabMenu;

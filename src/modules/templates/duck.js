@@ -101,9 +101,12 @@ const isCreatingTemplate = handleActions(
 
 const templateList = handleActions(
   {
-    [fetchTemplatesRequest]: R.T,
+    [fetchTemplatesRequest]: R.always([]),
   },
-  false
+  [
+    { label: "Default template", value: 0 },
+    { label: "Cool template", value: 2 },
+  ]
 );
 
 const TemplatesReducer = combineReducers({

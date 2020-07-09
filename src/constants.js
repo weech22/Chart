@@ -1,4 +1,13 @@
 import assets from "./assets";
+import { generateEmptyGrid } from "./utils";
+
+export const styleSettingsTypes = {
+  SETTINGS: "SETTINGS",
+  LABELS: "LABELS",
+  GRID: "GRID",
+};
+
+export const GRID_SIZE = 10;
 
 export const forms = {
   RANDOM: "RANDOM",

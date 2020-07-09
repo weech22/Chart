@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { submit } from "redux-form";
 import { connect } from "react-redux";
 
-import { CloseButton, Link } from "../common";
-import { isFigma } from "../../utils";
-import { forms, syncDataTypes } from "../../constants";
+import { CloseButton, Link } from "@components/common";
+import { isFigma } from "@app/utils";
+import { syncDataTypes } from "@app/constants";
 
 const Root = styled.div`
   position: relative;
@@ -50,14 +49,9 @@ const sourceTypes = {
   [syncDataTypes.JSON]: "Uploaded JSON:",
 };
 
-const SyncedHeaderDumb = ({
-  onClose,
-  type,
-  source: { title, url },
-  discardable,
-}) => (
+const SyncedHeader = ({ onClose, type, source: { title, url } }) => (
   <Root>
-    {discardable && <StyledCloseButton onClick={onClose} />}
+    {onClose && <StyledCloseButton onClick={onClose} />}
     {sourceTypes[type]}
     {type === syncDataTypes.GS || type === syncDataTypes.API ? (
       <StyledLink>{title}</StyledLink>
@@ -66,7 +60,5 @@ const SyncedHeaderDumb = ({
     )}
   </Root>
 );
-
-const SyncedHeader = connect(null, {})(SyncedHeaderDumb);
 
 export default SyncedHeader;

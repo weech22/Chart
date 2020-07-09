@@ -8,10 +8,8 @@ const Root = styled.button`
   appearance: none;
   outline: none;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-
   opacity: ${({ isActive, disabled }) =>
     disabled ? "0.5" : isActive ? "1" : "0.5"};
-
   border-radius: 8px;
   border: none;
   background-image: url(${({ icon }) => icon});
@@ -30,7 +28,8 @@ const Root = styled.button`
   }
 `;
 
-const ChartTabButton = memo(
+// TODO: Wrap everything in the project in useCallback + memo
+const TabButton = memo(
   ({ icon, selectChartTab, isActive, isDisabled, type }) => {
     const onClick = useCallback(() => {
       selectChartTab(type);
@@ -47,4 +46,4 @@ const ChartTabButton = memo(
   }
 );
 
-export default ChartTabButton;
+export default TabButton;

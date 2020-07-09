@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import * as R from "ramda";
 
-import { isFigma, equalIgnoreOrder } from "../../utils";
-import assets from "../../assets";
-import Link from "../common/Link";
-import MultiselectOption from "./MultiselectOption";
+import { isFigma, equalIgnoreOrder } from "@app/utils";
+
+import Option from "./Option";
 
 const Root = styled.div`
   border-radius: 4px;
@@ -31,11 +30,11 @@ const Label = styled.span`
   top: -17px;
 `;
 
-const HeaderOption = styled(MultiselectOption)`
+const HeaderOption = styled(Option)`
   font-weight: bold;
 `;
 
-const StyledOption = styled(MultiselectOption)`
+const StyledOption = styled(Option)`
   margin-bottom: 16px;
 `;
 
@@ -80,7 +79,7 @@ export default ({ className, label, options, input: { onChange, value } }) => {
   );
 
   const isOptionChecked = (option) => checkedOptions.includes(option);
-  console.log("label", label);
+
   return (
     <Root className={className}>
       <Label>{label}</Label>

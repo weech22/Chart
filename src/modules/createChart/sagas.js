@@ -22,12 +22,15 @@ import {
   uploadJSONSuccess,
   uploadJSONFailure,
   prepareGSForSync,
+  clearTable,
+  transposeTable,
+  updateTable,
 } from "./duck";
 
 import Manager from "./Manager";
-import { getCurrentChart } from "./selectors";
+import { getCurrentChart, getTableGrid } from "./selectors";
 import { forms } from "../../constants";
-import { isAdobe, readFileContent } from "../../utils";
+import { isAdobe, readFileContent, transpose, clearGrid } from "../../utils";
 
 // TODO: Send active tab
 function* createChartSaga({ payload }) {
@@ -152,6 +155,28 @@ function* uploadJSONSaga({ payload: FileList }) {
   }
 }
 
+function* clearTableSaga() {
+  try {
+    const table = yield select(getTableGrid);
+    const clearedTable = yield call(clearGrid, table);
+    yield put(updateTable(clearedTable));
+  } catch (ex) {
+    console.log(ex);
+  }
+}
+
+function* transposeTableSaga() {
+  try {
+    const table = yield select(getTableGrid);
+
+    const trasposedTable = yield call(transpose, table);
+
+    yield put(updateTable(trasposedTable));
+  } catch (ex) {
+    console.log(ex);
+  }
+}
+
 function* accountSaga() {
   yield all([
     takeLatest(createChartRequest, createChartSaga),
@@ -160,6 +185,8 @@ function* accountSaga() {
     takeLatest(syncAPIRequest, syncAPIRequestSaga),
     takeLatest(uploadCSVRequest, uploadCSVSaga),
     takeLatest(uploadJSONRequest, uploadJSONSaga),
+    takeLatest(clearTable, clearTableSaga),
+    takeLatest(transposeTable, transposeTableSaga),
   ]);
 }
 
