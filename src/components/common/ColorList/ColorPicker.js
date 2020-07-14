@@ -3,6 +3,7 @@ import styled from "styled-components";
 import * as R from "ramda";
 import { CustomPicker } from "react-color";
 import tinycolor from "tinycolor2";
+
 import {
   Saturation,
   EditableInput,
@@ -100,29 +101,70 @@ const hexInputStyles = {
   },
 };
 
+// TODO: Save alpha in state and pass it back onSaveC
 const ColorPicker = memo(({ color, onChange }) => {
   const [hsl, setHsl] = useState({});
   const [hsv, setHsv] = useState({});
   const [hex, setHex] = useState("");
+  const [updateTimer, setUpdateTimer] = useState(null);
 
   useEffect(() => {
-    const newColor = tinycolor(color.hsl);
+    return () => {
+      clearTimeout(updateTimer);
+      setUpdateTimer(null);
+    };
+  }, []);
 
-    if (!R.equals(hsl, newColor.toHsl())) {
-      setHsv(newColor.toHsv());
-      setHsl(newColor.toHsl());
-      setHex(newColor.toHex());
-    }
+  const handleAsyncUpdate = () => {
+    clearTimeout(updateTimer);
+
+    setUpdateTimer(
+      setTimeout(() => {
+        // TODO: substitute this abomination for initial check to avoid doing onChange(hsl) on 1st render
+
+        if (!R.equals(hsl, {}) && !R.equals(hsl, { h: 0, s: 0, l: 0, a: 1 })) {
+          onChange(hsl);
+        }
+      }, 200)
+    );
+  };
+
+  useEffect(() => {
+    setHsl(color);
   }, [color]);
 
+  useEffect(() => {
+    const newColor = tinycolor(hsl);
+
+    setHsv(newColor.toHsv());
+    setHex(newColor.toHex());
+
+    handleAsyncUpdate();
+  }, [hsl]);
+
   const handleHueChange = (hue) => {
-    onChange(hue);
+    const newColor = tinycolor(hue);
+
+    setHsv(newColor.toHsv());
+    setHex(newColor.toHex());
+    setHsl(hue);
   };
 
   const handleSaturationChange = (hsv) => {
-    const newColor = tinycolor(hsv);
-    onChange(newColor.toHsl());
+    const newColor = tinycolor(hsv).toHsl();
+    console.log("hsv", hsv);
+    setHsv(hsv);
+    setHsl(newColor);
   };
+
+  const handleHexChange = (value) => {
+    const newValue = value.substring(0, 6).toUpperCase();
+
+    setHex(newValue);
+    onChange(newValue);
+  };
+
+  // TODO: Substitute these inputs for mine
 
   return (
     <Container>
@@ -150,7 +192,7 @@ const ColorPicker = memo(({ color, onChange }) => {
         <EditableInput
           style={hexInputStyles}
           value={hex}
-          onChange={onChange} //
+          onChange={handleHexChange} //
         />
 
         <EditableInput

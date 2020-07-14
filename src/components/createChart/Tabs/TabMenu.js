@@ -13,6 +13,7 @@ import { isFigma } from "@app/utils";
 const Root = styled.div`
   padding: 0 16px 16px 16px;
   flex-basis: 100%;
+  flex: 1;
 `;
 
 const StyledTabs = styled(Tabs)``;

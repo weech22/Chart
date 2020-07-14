@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 
 import { Title, Footer } from "@components/common";
-import { hideColorPicker } from "@modules/createChart";
+import { hideColorPicker, getCurrentlyEditedColor } from "@modules/createChart";
 import ColorPicker from "./ColorPicker";
 import { isAdobe } from "@app/utils";
 
@@ -38,28 +38,31 @@ const StyledTitle = styled(Title)`
   padding: ${isAdobe ? "8px 7px 0 16px" : "16px 16px 4px 16px"};
 `;
 
-// TODO: Store the whole color object
-const defaultColor = {
-  hsl: { h: 3, s: 0.2, l: 0.2, a: 1 },
-  hex: "#3d2a29",
-  rgb: { r: 61, g: 42, b: 41, a: 1 },
-  hsv: { h: 3, s: 0.33, v: 0.23998, a: 1 },
-};
-
 const ColorPickerModalDumb = ({
   className,
   hideColorPicker,
-  color = defaultColor,
+  currentlyEditedColor: { color, onSaveColor },
 }) => {
-  const [currentColor, pickColor] = useState(defaultColor);
+  const [currentColor, pickColor] = useState({});
 
   useEffect(() => {
     pickColor(color);
   }, [color]);
 
+  useEffect(() => {}, [currentColor]);
+
+  const handleChange = ({ hsl }) => {
+    pickColor(hsl);
+  };
+
+  const handleSave = () => {
+    onSaveColor(currentColor);
+    hideColorPicker();
+  };
+
   const footerControls = {
     mainButton: {
-      onClick: () => {},
+      onClick: handleSave,
       caption: "Save color",
     },
   };
@@ -68,15 +71,16 @@ const ColorPickerModalDumb = ({
     <Backdrop className={className}>
       <Root>
         <StyledTitle onClose={hideColorPicker}>Color</StyledTitle>
-        <ColorPicker color={currentColor} onChange={pickColor} />
+        <ColorPicker color={currentColor} onChange={handleChange} />
         <Footer controls={footerControls} />
       </Root>
     </Backdrop>
   );
 };
 
-const ColorPickerModal = connect(null, { hideColorPicker })(
-  ColorPickerModalDumb
-);
+const ColorPickerModal = connect(
+  R.applySpec({ currentlyEditedColor: getCurrentlyEditedColor }),
+  { hideColorPicker }
+)(ColorPickerModalDumb);
 
 export default ColorPickerModal;

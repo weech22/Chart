@@ -12,7 +12,6 @@ import { isFigma, isAdobe, platform } from "@app/utils";
 
 const Root = styled.div`
   padding: 0 16px;
-  flex: 1;
 `;
 
 const StyledTabs = styled(Tabs)``;
@@ -33,7 +32,11 @@ const StyledTabList = styled(TabList)`
   margin: 0;
 `;
 
-const StyledTabPanel = styled(TabPanel)``;
+const StyledTabPanel = styled(TabPanel)`
+  overflow-y: scroll;
+  max-height: 196px;
+  padding: 0;
+`;
 
 const StyleTabSwitcher = () => {
   const [selected, setSelected] = useState(0);
@@ -54,14 +57,15 @@ const StyleTabSwitcher = () => {
         <StyledTabPanel>
           <ColorsTab />
         </StyledTabPanel>
+
         <StyledTabPanel>
-          <SettingsTab type={styleSettingsTypes.SETTINGS} />
+          <SettingsTab tab={styleSettingsTypes.SETTINGS} />
         </StyledTabPanel>
         <StyledTabPanel>
-          <SettingsTab type={styleSettingsTypes.LABELS} />
+          <SettingsTab tab={styleSettingsTypes.LABELS} />
         </StyledTabPanel>
         <StyledTabPanel>
-          <SettingsTab type={styleSettingsTypes.GRID} />
+          <SettingsTab tab={styleSettingsTypes.GRID} />
         </StyledTabPanel>
       </StyledTabs>
     </Root>

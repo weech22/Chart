@@ -2,37 +2,47 @@ import React from "react";
 import styled from "styled-components";
 import * as R from "ramda";
 import { connect } from "react-redux";
+import tinycolor from "tinycolor2";
+import { Form, Field, reduxForm } from "redux-form";
 
+import { forms } from "@app/constants";
 import { ColorList } from "@components/common";
-import DocumentColors from "./DocumentColors";
+import { customizeStyleConfig } from "@config";
+import { useThisStyleRequest, getCurrentChart } from "@modules/createChart";
 
 const Root = styled.div`
-  display: flex;
   padding-top: 16px;
+  padding-right: 16px;
+  flex: 1;
 `;
 
-const Column = styled.div`
-  display: flex;
-  flex-basis: 50%;
-`;
+const ColorsTabDumb = ({ handleSubmit, currentChart }) => {
+  const colors = customizeStyleConfig[currentChart].COLORS.map((color) =>
+    tinycolor(color).toHsl()
+  );
 
-const ColorsTabDumb = ({}) => (
-  <Root>
-    <Column>
-      <ColorList
-        colors={[
-          { r: 21, g: 7, b: 2, a: 0.12 },
-          { r: 34, g: 12, b: 12, a: 0.4 },
-          { r: 4, g: 1, b: 22, a: 1 },
-        ]}
-      />
-    </Column>
-    <Column>
-      <DocumentColors />
-    </Column>
-  </Root>
-);
+  return (
+    <Form onSubmit={handleSubmit(useThisStyleRequest)}>
+      <Root>
+        <Field
+          component={ColorList}
+          dafaultValue={colors}
+          withDocumentColors
+          name={`${currentChart}_colors`}
+        />
+      </Root>
+    </Form>
+  );
+};
 
-const ColorsTab = connect(R.applySpec({}), {})(ColorsTabDumb);
+const ColorsTab = R.compose(
+  connect(R.applySpec({ currentChart: getCurrentChart }), {}),
+  reduxForm({
+    form: forms.CUSTOM_STYLE,
+    enableReinitialize: true,
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+  })
+)(ColorsTabDumb);
 
 export default ColorsTab;

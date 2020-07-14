@@ -1,15 +1,15 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import tinycolor from "tinycolor2";
 
 import assets from "@assets";
-import { rgbToHex, numToPercent } from "@app/utils";
+import { numToPercent } from "@app/utils";
 
 const ColorSample = styled.span`
-  width: 24px;
-  height: 24px;
+  width: ${({ isBig }) => (isBig ? "32" : "24")}px;
+  height: ${({ isBig }) => (isBig ? "32" : "24")}px;
   flex-shrink: 0;
-  background-color: ${({ color: { r, g, b, a } }) =>
-    `rgba(${r},${g},${b},${a})`};
+  background-color: ${({ color }) => `#${tinycolor(color).toHex()}`};
   border-radius: 4px;
 `;
 
@@ -19,10 +19,10 @@ const HexColor = styled.span`
 
 const Root = styled.div`
   display: flex;
-  height: 24px;
+  height: ${({ isBig }) => (isBig ? "32" : "24")}px;
   border-radius: 4px;
   padding-right: 8px;
-  width: 184px;
+  width: 100%;
   background: ${({ theme: { grey } }) => grey};
   align-items: center;
   cursor: pointer;
@@ -36,7 +36,7 @@ const InfoBlock = styled.span`
 
 const Opacity = styled.span`
   ${Root}:hover & {
-    display: none;
+    display: ${({ isInList }) => (isInList ? "none" : "block")};
   }
 `;
 
@@ -96,20 +96,24 @@ const ColorItem = ({
     [index]
   );
 
+  const isInList = !!remove && !!moveDown && !!moveUp;
+
   return (
-    <Root className={className} onClick={onClick}>
-      <ColorSample color={color} />
+    <Root className={className} onClick={onClick} isBig={!isInList}>
+      <ColorSample color={color} isBig={!isInList} />
       <InfoBlock>
-        <HexColor>{rgbToHex(color.r, color.g, color.b)}</HexColor>
-        <Opacity>{numToPercent(color.a)}</Opacity>
-        <ControlBlock>
-          <Button image={assets.icons.smallArrowUp} onClick={handleMoveUp} />
-          <StyledButton
-            image={assets.icons.smallArrowDown}
-            onClick={handleMoveDown}
-          />
-          <Button image={assets.icons.minus} onClick={handleRemove} />
-        </ControlBlock>
+        <HexColor>{tinycolor(color).toHex().toUpperCase()}</HexColor>
+        <Opacity isInList={isInList}>{numToPercent(color.a)}</Opacity>
+        {isInList && (
+          <ControlBlock>
+            <Button image={assets.icons.smallArrowUp} onClick={handleMoveUp} />
+            <StyledButton
+              image={assets.icons.smallArrowDown}
+              onClick={handleMoveDown}
+            />
+            <Button image={assets.icons.minus} onClick={handleRemove} />
+          </ControlBlock>
+        )}
       </InfoBlock>
     </Root>
   );

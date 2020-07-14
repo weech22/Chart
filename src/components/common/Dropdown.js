@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
+import * as R from "ramda";
 
 import { isFigma } from "@app/utils";
 import assets from "@app/assets";
@@ -11,7 +12,7 @@ const Root = styled.div`
   padding: 0;
   margin: 0;
   position: relative;
-  width: 180px;
+  width: 100%;
 `;
 
 const Select = styled.select`
@@ -58,6 +59,7 @@ export default ({
   small,
   labelLink,
   input: { onChange, value },
+  defaultValue,
 }) => {
   const selectOptions = Object.keys(options).map((option) => ({
     value: options[option].value,
@@ -65,8 +67,12 @@ export default ({
   }));
 
   useEffect(() => {
-    if (!value) {
-      onChange(options[0]);
+    if (R.isEmpty(value) || R.isNil(value)) {
+      if (defaultValue) {
+        onChange(defaultValue);
+      } else if (options[0]) {
+        onChange(options[0].value);
+      }
     }
   });
 

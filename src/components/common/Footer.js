@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { submit } from "redux-form";
-import { connect } from "react-redux";
-import * as R from "ramda";
 
 import { Button, Link } from "./";
 import { isFigma } from "@app/utils";
@@ -14,6 +11,7 @@ const Root = styled.div`
   padding: 16px;
   align-items: center;
   justify-content: space-between;
+  flex-grow: 0;
 `;
 
 const StyledButton = styled(Button)`
@@ -53,10 +51,5 @@ const Footer = ({ controls: { mainButton, leftButton, rightButton } }) => (
     </ButtonBlock>
   </Root>
 );
-/* 
-const Footer = connect(null, {
-  submitCreateChartForm: () => submit(forms.RANDOM),
-  startCustomizeStyle,
-})(FooterDumb); */
 
 export default Footer;

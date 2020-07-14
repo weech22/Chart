@@ -15,6 +15,9 @@ const Root = styled.span`
   color: ${({ theme: { white } }) => white};
   appearance: none;
   outline: none;
+  &:hover {
+    background: ${({ theme: { darkPink } }) => darkPink};
+  }
 `;
 
 export default ({ children, className, onClick }) => (

@@ -13,6 +13,7 @@ export const forms = {
   RANDOM: "RANDOM",
   SYNC_DATA: "SYNC_DATA",
   SYNCED_DATA: "SYNCED_DATA",
+  CUSTOM_STYLE: "CUSTOM_STYLE",
 };
 
 export const modules = {
@@ -23,6 +24,13 @@ export const modules = {
   ACCOUNT: "ACCOUNT",
   ADOBE: "ADOBE",
   SKETCH: "SKETCH",
+};
+
+export const componentTypes = {
+  NUM: "NUM",
+  STRING: "STRING",
+  COLOR: "COLOR",
+  SELECT: "SELECT",
 };
 
 export const figmaUi = {

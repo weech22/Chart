@@ -8,7 +8,7 @@ const Root = styled.div`
   padding: 0;
   margin: 0;
   position: relative;
-  width: 88px;
+  width: 100%;
 `;
 
 const Input = styled.input`
@@ -52,7 +52,7 @@ export default ({
     if (!value) {
       onChange(defaultValue);
     }
-  });
+  }, []);
 
   const isError = useMemo(() => error && touched, [error, touched]);
 

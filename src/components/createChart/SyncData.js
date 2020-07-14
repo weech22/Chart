@@ -22,7 +22,6 @@ const Root = styled.div`
   box-sizing: ${isFigma ? "border-box" : "auto"};
   padding: ${isAdobe ? "16px 0px 0 16px" : "16px 16px 0 16px"};
   height: 400px;
-  border: 1px solid red;
   flex-basis: ${isAdobe ? "100%" : "auto"};
   width: ${isFigma ? "496px" : "auto"};
   display: flex;

@@ -113,7 +113,37 @@ export const prepareGSForSync = createAction(
   `${modules.CREATE_CHART}/PREPARE_GS_FOR_SYNC`
 );
 
-// TODO: saveColor, editColor?
+export const preSelectTemplateId = createAction(
+  `${modules.CREATE_CHART}/PRE_SELECT_TEMPLATE_ID`
+);
+
+export const useThisStyleRequest = createAction(
+  `${modules.CREATE_CHART}/USE_THIS_STYLE_REQUEST`
+);
+
+export const useThisStyleSuccess = createAction(
+  `${modules.CREATE_CHART}/USE_THIS_STYLE_SUCCESS`
+);
+
+export const useThisStyleFailure = createAction(
+  `${modules.CREATE_CHART}/USE_THIS_STYLE_FAILURE`
+);
+
+export const fetchDocumentColorsRequest = createAction(
+  `${modules.CREATE_CHART}/FETCH_DOCUMENT_COLORS_REQUEST`
+);
+
+export const fetchDocumentColorsSuccess = createAction(
+  `${modules.CREATE_CHART}/FETCH_DOCUMENT_COLORS_SUCCESS`
+);
+
+export const fetchDocumentColorsFailure = createAction(
+  `${modules.CREATE_CHART}/FETCH_DOCUMENT_COLORS_FAILURE`
+);
+
+export const editColor = createAction(`${modules.CREATE_CHART}/EDIT_COLOR`);
+
+export const saveColor = createAction(`${modules.CREATE_CHART}/SAVE_COLOR`);
 
 export const clearTable = createAction(`${modules.CREATE_CHART}/CLEAR_TABLE`);
 
@@ -171,10 +201,19 @@ const isCustomizeStyleShowing = handleActions(
 
 const isColorPickerShowing = handleActions(
   {
-    [showColorPicker]: R.T,
+    [editColor]: R.T,
+    [saveColor]: R.F,
     [hideColorPicker]: R.F,
   },
   false
+);
+
+const currentlyEditedColor = handleActions(
+  {
+    [editColor]: (_, { payload }) => payload,
+    [saveColor]: R.always(null),
+  },
+  null
 );
 
 const gsSheets = handleActions(
@@ -215,12 +254,33 @@ const syncedData = handleActions(
   { data: null, type: null }
 );
 
-const a = generateEmptyGrid(GRID_SIZE);
 const tableGrid = handleActions(
   {
     [updateTable]: (_, { payload }) => payload,
   },
-  a
+  generateEmptyGrid(GRID_SIZE)
+);
+
+const currentStyle = handleActions(
+  {
+    [useThisStyleSuccess]: (_, { payload }) => payload,
+    [selectChartTabSuccess]: R.always({}),
+  },
+  {}
+);
+
+const preSelectedTemplateId = handleActions(
+  {
+    [preSelectTemplateId]: (_, { payload }) => payload,
+  },
+  0
+);
+
+const documentColors = handleActions(
+  {
+    [fetchDocumentColorsSuccess]: (_, { payload }) => payload,
+  },
+  []
 );
 
 const CreateChartReducer = combineReducers({
@@ -233,6 +293,10 @@ const CreateChartReducer = combineReducers({
   gsSheets,
   syncedData,
   tableGrid,
+  preSelectedTemplateId,
+  currentStyle,
+  documentColors,
+  currentlyEditedColor,
 });
 
 export default CreateChartReducer;

@@ -2,7 +2,6 @@ import * as R from "ramda";
 import { createAction, handleActions, combineActions } from "redux-actions";
 import { combineReducers } from "redux";
 import { modules } from "../../constants";
-// import { setSelectedCategory } from '../categories'
 
 export const selectTemplate = createAction(
   `${modules.TEMPLATES}/SELECT_TEMPLATE`
@@ -51,7 +50,7 @@ export const cancelTemplatesLoading = createAction(
 );
 
 export const clearTemplates = createAction(
-  `${modules.TEMPLATES}/CLEAR_TemplateS`
+  `${modules.TEMPLATES}/CLEAR_TEMPLATES`
 );
 
 export const deleteTemplateRequest = createAction(
@@ -101,12 +100,11 @@ const isCreatingTemplate = handleActions(
 
 const templateList = handleActions(
   {
-    [fetchTemplatesRequest]: R.always([]),
+    [fetchTemplatesRequest]: (state) => state,
+    [fetchTemplatesSuccess]: (_, { payload }) => payload,
+    [fetchTemplatesFailure]: (state) => state,
   },
-  [
-    { label: "Default template", value: 0 },
-    { label: "Cool template", value: 2 },
-  ]
+  []
 );
 
 const TemplatesReducer = combineReducers({

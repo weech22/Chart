@@ -39,6 +39,7 @@ const NoFieldsMessage = styled.div`
 const StyledInput = styled(Input)`
   flex-basis: calc(25% - 8px);
   margin-right: 8px;
+  width: 88px;
 `;
 
 const StyledDropdown = styled(Dropdown)`
@@ -46,6 +47,7 @@ const StyledDropdown = styled(Dropdown)`
   margin-right: 8px;
 `;
 
+// TODO: Ruse from utils
 const getComponent = (type) => {
   if (type === "input") return StyledInput;
   if (type === "select") return StyledDropdown;
@@ -60,7 +62,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
   return (
     <Root>
       <Form onSubmit={handleSubmit(createChart)}>
-        {!R.isNil(dataFields) && (
+        {!R.isEmpty(dataFields) && (
           <FieldLine>
             {dataFields.map(
               ({ name, type, label, defaultValue, options = {} }) => (
@@ -78,7 +80,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
             )}
           </FieldLine>
         )}
-        {!R.isNil(rangeFields) && (
+        {!R.isEmpty(rangeFields) && (
           <FieldLine>
             {rangeFields.map(({ name, type, label, defaultValue }) => (
               <Field

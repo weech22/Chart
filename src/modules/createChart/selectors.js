@@ -70,3 +70,13 @@ export const getIsColorPickerShowing = R.pipe(
   getCreateChart,
   R.prop("isColorPickerShowing")
 );
+
+export const getDocumentColors = R.pipe(
+  getCreateChart,
+  R.prop("documentColors")
+);
+
+export const getCurrentlyEditedColor = R.pipe(
+  getCreateChart,
+  R.prop("currentlyEditedColor")
+);

@@ -15,19 +15,23 @@ import {
 
 function* fetchTemplatesSaga() {
   try {
-    const templates = yield call(Manager.fetchTemplates);
+    const templates = [
+      { label: "Default template", value: 0 },
+      { label: "Cool template", value: 1 },
+    ]; // yield call(Manager.fetchTemplates);
 
-    // yield put(getTemplatesSuccess());
+    yield put(fetchTemplatesSuccess(templates));
   } catch (ex) {
     console.log(ex);
-    // yield put(getTemplatesFailure(ex.localeMessage));
+    yield put(fetchTemplatesFailure(ex));
   }
 }
 
 function* deleteTemplateSaga({ payload: id }) {
   try {
+    deleteTemplateSuccess();
   } catch (ex) {
-    //
+    deleteTemplateFailure();
   }
 }
 

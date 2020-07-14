@@ -25,6 +25,12 @@ import {
   clearTable,
   transposeTable,
   updateTable,
+  useThisStyleRequest,
+  useThisStyleSuccess,
+  useThisStyleFailure,
+  fetchDocumentColorsRequest,
+  fetchDocumentColorsSuccess,
+  fetchDocumentColorsFailure,
 } from "./duck";
 
 import Manager from "./Manager";
@@ -177,6 +183,66 @@ function* transposeTableSaga() {
   }
 }
 
+function* useThisStyleSaga({ payload }) {
+  console.log("use this style", payload);
+  try {
+    // TODO: If preSelectedTemplateId === -1 {
+    // submit form or whatever
+    // } else { templateId }
+
+    yield put(useThisStyleSuccess(payload));
+  } catch (ex) {
+    console.log(ex);
+  }
+}
+
+function* fetchDocumentColorsSaga({ payload }) {
+  try {
+    const documentColors = [
+      {
+        h: 38,
+        s: 0.27,
+        l: 0.12,
+        a: 1,
+      },
+      {
+        h: 111,
+        s: 0.14,
+        l: 0.93,
+        a: 1,
+      },
+      {
+        h: 333,
+        s: 0.2,
+        l: 0.33,
+        a: 0.3,
+      },
+      {
+        h: 13,
+        s: 0.2,
+        l: 0.33,
+        a: 0.3,
+      },
+      {
+        h: 189,
+        s: 0.67,
+        l: 0.11,
+        a: 1,
+      },
+      {
+        h: 227,
+        s: 0.19,
+        l: 0.87,
+        a: 1,
+      },
+    ];
+    yield put(fetchDocumentColorsSuccess(documentColors));
+  } catch (ex) {
+    console.log(ex);
+    yield put(fetchDocumentColorsFailure(ex));
+  }
+}
+
 function* accountSaga() {
   yield all([
     takeLatest(createChartRequest, createChartSaga),
@@ -187,6 +253,8 @@ function* accountSaga() {
     takeLatest(uploadJSONRequest, uploadJSONSaga),
     takeLatest(clearTable, clearTableSaga),
     takeLatest(transposeTable, transposeTableSaga),
+    takeLatest(useThisStyleRequest, useThisStyleSaga),
+    takeLatest(fetchDocumentColorsRequest, fetchDocumentColorsSaga),
   ]);
 }
 

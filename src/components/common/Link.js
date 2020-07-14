@@ -7,6 +7,9 @@ const Root = styled.a`
   line-height: 16px;
   font-size: 14px;
   color: ${({ theme: { pink } }) => pink};
+  &:hover {
+    color: ${({ theme: { darkPink } }) => darkPink};
+  }
 `;
 
 export default ({ children, className, onClick }) => (
