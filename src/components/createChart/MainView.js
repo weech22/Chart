@@ -12,7 +12,7 @@ import {
   startCustomizeStyle,
   createChartRequest,
 } from "@modules/createChart";
-import { tabs } from "@app/constants";
+import { charts } from "@app/constants";
 
 const Root = styled.div`
   background: ${({ theme: { white } }) => white};
@@ -29,7 +29,7 @@ const MainViewDumb = ({
   currentChart,
   isCustomizeStyleShowing,
   startCustomizeStyle,
-  createChartRequest,
+  createChart,
 }) => {
   const footerControls = {
     leftButton: {
@@ -41,7 +41,7 @@ const MainViewDumb = ({
       caption: "Support",
     },
     mainButton: {
-      onClick: createChartRequest,
+      onClick: createChart,
       caption: "Create chart",
     },
   };
@@ -51,7 +51,7 @@ const MainViewDumb = ({
       {isCustomizeStyleShowing && <CustomizeStyle />}
       {!isCustomizeStyleShowing && (
         <Fragment>
-          <StyledTitle>{tabs[currentChart].title}</StyledTitle>
+          <StyledTitle>{charts[currentChart].title}</StyledTitle>
           <TabMenu />
           <Footer controls={footerControls} />
         </Fragment>
@@ -65,7 +65,7 @@ const MainView = connect(
     currentChart: getCurrentChart,
     isCustomizeStyleShowing: getIsCustomizeStyleShowing,
   }),
-  { startCustomizeStyle, createChartRequest }
+  { startCustomizeStyle, createChart: () => submit(forms.RANDOM) }
 )(MainViewDumb);
 
 export default MainView;

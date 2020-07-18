@@ -1,4 +1,5 @@
 import assets from "./assets";
+
 import { generateEmptyGrid } from "./utils";
 
 export const styleSettingsTypes = {
@@ -45,6 +46,12 @@ export const figmaMessageTypes = {
   MENU_COMMAND: "@@FIGMA/MENU_COMMAND",
 };
 
+export const tabs = {
+  RANDOM: 0,
+  TABLE: 1,
+  JSON: 2,
+};
+
 export const chartTypes = {
   LINE_CHART: "LINE_CHART",
   AREA_CHART: "AREA_CHART",
@@ -67,28 +74,28 @@ export const chartTypes = {
 export const freeChartTypes = [chartTypes.LINE_CHART, chartTypes.AREA_CHART];
 
 export const navigationTabs = [
-  { type: chartTypes.LINE_CHART, icon: assets.icons.lineChart },
-  { type: chartTypes.AREA_CHART, icon: assets.icons.areaChart },
-  { type: chartTypes.STACKED_AREA_CHART, icon: assets.icons.stackedAreaChart },
-  { type: chartTypes.STREAM_GRAPH, icon: assets.icons.streamGraph },
-  { type: chartTypes.VERTICAL_BAR_CHART, icon: assets.icons.verticalBarChart },
+  { type: chartTypes.LINE_CHART, icon: assets.charts.lineChart },
+  { type: chartTypes.AREA_CHART, icon: assets.charts.areaChart },
+  { type: chartTypes.STACKED_AREA_CHART, icon: assets.charts.stackedAreaChart },
+  { type: chartTypes.STREAM_GRAPH, icon: assets.charts.streamGraph },
+  { type: chartTypes.VERTICAL_BAR_CHART, icon: assets.charts.verticalBarChart },
   {
     type: chartTypes.HORIZONTAL_BAR_CHART,
-    icon: assets.icons.horizontalBarChart,
+    icon: assets.charts.horizontalBarChart,
   },
-  { type: chartTypes.GROUPED_BAR_CHART, icon: assets.icons.groupedBarChart },
+  { type: chartTypes.GROUPED_BAR_CHART, icon: assets.charts.groupedBarChart },
   {
     type: chartTypes.GROUPED_HORIZONTAL_BAR_CHART,
-    icon: assets.icons.groupedHorizontalBarChart,
+    icon: assets.charts.groupedHorizontalBarChart,
   },
-  { type: chartTypes.PIE_CHART, icon: assets.icons.pieChart },
-  { type: chartTypes.DONUT_CHART, icon: assets.icons.donutChart },
-  { type: chartTypes.PROGRESS_CHART, icon: assets.icons.progressChart },
-  { type: chartTypes.SPARKLINE, icon: assets.icons.sparkline },
-  { type: chartTypes.SCATTER_PLOT, icon: assets.icons.scatterPlot },
-  { type: chartTypes.CANDLESTICK_CHART, icon: assets.icons.candlestickChart },
-  { type: chartTypes.HISTOGRAM, icon: assets.icons.histogram },
-  { type: chartTypes.HEATMAP, icon: assets.icons.heatmap },
+  { type: chartTypes.PIE_CHART, icon: assets.charts.pieChart },
+  { type: chartTypes.DONUT_CHART, icon: assets.charts.donutChart },
+  { type: chartTypes.PROGRESS_CHART, icon: assets.charts.progressChart },
+  { type: chartTypes.SPARKLINE, icon: assets.charts.sparkline },
+  { type: chartTypes.SCATTER_PLOT, icon: assets.charts.scatterPlot },
+  { type: chartTypes.CANDLESTICK_CHART, icon: assets.charts.candlestickChart },
+  { type: chartTypes.HISTOGRAM, icon: assets.charts.histogram },
+  { type: chartTypes.HEATMAP, icon: assets.charts.heatmap },
 ];
 
 export const dataDistributionTypes = {
@@ -114,28 +121,29 @@ export const syncDataTypes = {
   GS: "GS",
 };
 
-export const tabs = {
+export const charts = {
   [chartTypes.LINE_CHART]: {
     title: "Line chart",
+    icon: assets.charts.areaChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "lines",
           label: "Lines",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 1,
         },
         {
           name: "points",
           label: "Points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -144,13 +152,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -158,26 +166,26 @@ export const tabs = {
   },
   [chartTypes.AREA_CHART]: {
     title: "Area chart",
-    icon: assets.icons.areaChart,
+    icon: assets.charts.areaChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "areas",
           label: "Areas",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
           name: "points",
           label: "Points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -186,13 +194,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -200,26 +208,26 @@ export const tabs = {
   },
   [chartTypes.STACKED_AREA_CHART]: {
     title: "Stacked area chart",
-    icon: assets.icons.stackedAreaChart,
+    icon: assets.charts.stackedAreaChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "areas",
           label: "Areas",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
           name: "points",
           label: "Points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -228,13 +236,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -242,26 +250,26 @@ export const tabs = {
   },
   [chartTypes.STREAM_GRAPH]: {
     title: "Stream graph",
-    icon: assets.icons.streamGraph,
+    icon: assets.charts.streamGraph,
     proTip: "",
     fields: {
       data: [
         {
           name: "areas",
           label: "Areas",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
           name: "points",
           label: "Points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -270,13 +278,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -284,26 +292,26 @@ export const tabs = {
   },
   [chartTypes.VERTICAL_BAR_CHART]: {
     title: "Vertical bar chart",
-    icon: assets.icons.verticalBarChart,
+    icon: assets.charts.verticalBarChart,
     proTip: "use stacks = 2 or more to get stacked bar chart.",
     fields: {
       data: [
         {
           name: "stacks",
           label: "Stacks",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 1,
         },
         {
           name: "bars",
           label: "Bars",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -312,13 +320,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -326,26 +334,26 @@ export const tabs = {
   },
   [chartTypes.HORIZONTAL_BAR_CHART]: {
     title: "Horizontal bar chart",
-    icon: assets.icons.horizontalBarChart,
+    icon: assets.charts.horizontalBarChart,
     proTip: "use stacks = 2 or more to get stacked bar chart.",
     fields: {
       data: [
         {
           name: "stacks",
           label: "Stacks",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 1,
         },
         {
           name: "bars",
           label: "Bars",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -354,13 +362,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -368,26 +376,26 @@ export const tabs = {
   },
   [chartTypes.GROUPED_BAR_CHART]: {
     title: "Grouped bar chart",
-    icon: assets.icons.groupedBarChart,
+    icon: assets.charts.groupedBarChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "categories",
           label: "Categories",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
           name: "bars",
           label: "Bars",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -396,13 +404,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -410,26 +418,26 @@ export const tabs = {
   },
   [chartTypes.GROUPED_HORIZONTAL_BAR_CHART]: {
     title: "Horizontal grouped bar chart",
-    icon: assets.icons.groupedHorizontalBarChart,
+    icon: assets.charts.groupedHorizontalBarChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "categories",
           label: "Categories",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
           name: "bars",
           label: "Bars",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
           name: "dataDistribution",
           label: "Data distribution",
-          type: "select",
+          type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
         },
@@ -438,13 +446,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -452,14 +460,14 @@ export const tabs = {
   },
   [chartTypes.PIE_CHART]: {
     title: "Pie chart",
-    icon: assets.icons.pieChart,
+    icon: assets.charts.pieChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "segments",
           label: "Segments",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
       ],
@@ -467,14 +475,14 @@ export const tabs = {
   },
   [chartTypes.DONUT_CHART]: {
     title: "Donut chart",
-    icon: assets.icons.donutChart,
+    icon: assets.charts.donutChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "segments",
           label: "Segments",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 5,
         },
       ],
@@ -482,20 +490,20 @@ export const tabs = {
   },
   [chartTypes.PROGRESS_CHART]: {
     title: "Progress chart",
-    icon: assets.icons.progressChart,
+    icon: assets.charts.progressChart,
     proTip:
       "if you use Oval or Square as a canvas, you will get circular progress bar, otherwise you will get a linear progress bar.",
   },
   [chartTypes.SPARKLINE]: {
     title: "Sparkline",
-    icon: assets.icons.sparkline,
+    icon: assets.charts.sparkline,
     proTip: "",
     fields: {
       data: [
         {
           name: "points",
           label: "Points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 20,
         },
       ],
@@ -503,21 +511,21 @@ export const tabs = {
   },
   [chartTypes.SCATTER_PLOT]: {
     title: "Scatter plot",
-    icon: assets.icons.scatterPlot,
+    icon: assets.charts.scatterPlot,
     proTip: "",
     fields: {
       data: [
         {
           name: "type",
           label: "Type",
-          type: "select",
+          type: componentTypes.SELECT,
           options: scatterPlotTypes,
           defaultValue: scatterPlotTypes.SCATTER.value,
         },
         {
           name: "points",
           label: "Points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 20,
         },
       ],
@@ -525,25 +533,25 @@ export const tabs = {
         {
           name: "y-min",
           label: "Y-Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "y-max",
           label: "Y-Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
         {
           name: "x-min",
           label: "X-Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "x-max",
           label: "X-Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -551,14 +559,14 @@ export const tabs = {
   },
   [chartTypes.CANDLESTICK_CHART]: {
     title: "Candlestick chart",
-    icon: assets.icons.candlestickChart,
+    icon: assets.charts.candlestickChart,
     proTip: "",
     fields: {
       data: [
         {
           name: "candles",
           label: "Candles",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 10,
         },
       ],
@@ -566,13 +574,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -580,14 +588,14 @@ export const tabs = {
   },
   [chartTypes.HISTOGRAM]: {
     title: "Histogram",
-    icon: assets.icons.histogram,
+    icon: assets.charts.histogram,
     proTip: "",
     fields: {
       data: [
         {
           name: "dataPoints",
           label: "Data points",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
@@ -595,20 +603,20 @@ export const tabs = {
   },
   [chartTypes.HEATMAP]: {
     title: "Heatmap",
-    icon: assets.icons.heatmap,
+    icon: assets.charts.heatmap,
     proTip: "",
     fields: {
       data: [
         {
           name: "columns",
           label: "Columns",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 6,
         },
         {
           name: "rows",
           label: "Rows",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 4,
         },
       ],
@@ -616,13 +624,13 @@ export const tabs = {
         {
           name: "min",
           label: "Min",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
           name: "max",
           label: "Max",
-          type: "input",
+          type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],

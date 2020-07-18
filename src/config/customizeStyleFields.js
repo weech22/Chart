@@ -45,13 +45,13 @@ const LABELS = [
   },
   {
     name: "fontName",
-    label: "--Font name--",
+    label: "Font name",
     type: componentTypes.STRING,
     defaultValue: "Helvetica",
   },
   {
     name: "fontStyle",
-    label: "--Font style--",
+    label: "Font style",
     type: componentTypes.STRING,
     defaultValue: "Regular",
   },
@@ -167,7 +167,7 @@ const margin = (defaultValue) => ({
 
 const internalMargin = (defaultValue) => ({
   name: "internalMargin",
-  label: "--Internal margin--",
+  label: "Internal margin",
   type: componentTypes.NUM,
   defaultValue,
 });

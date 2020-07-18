@@ -5,8 +5,23 @@ import * as R from "ramda";
 import { Field, reduxForm, Form } from "redux-form";
 
 import { getCurrentChart, createChartRequest } from "@modules/createChart";
-import { tabs, forms, dataDistributionTypes } from "@app/constants";
+import {
+  charts,
+  forms,
+  dataDistributionTypes,
+  componentTypes,
+} from "@app/constants";
 import { Input, Dropdown } from "@components/common";
+
+const validate = (values) => {
+  const errors = {};
+
+  if (values.min > values.max || values.max < values.min) {
+    errors.min = true;
+    errors.max = true;
+  }
+  return errors;
+};
 
 const Root = styled.div`
   margin-right: -8px;
@@ -19,7 +34,7 @@ const FieldLine = styled.div`
 `;
 
 const getNoFieldsMessage = (chartType) =>
-  `${tabs[chartType].title} doesn’t have any settings for random data :-)`;
+  `${charts[chartType].title} doesn’t have any settings for random data :-)`;
 
 const ProTip = styled.div`
   line-height: 16px;
@@ -49,20 +64,20 @@ const StyledDropdown = styled(Dropdown)`
 
 // TODO: Ruse from utils
 const getComponent = (type) => {
-  if (type === "input") return StyledInput;
-  if (type === "select") return StyledDropdown;
+  if (type === componentTypes.NUM) return StyledInput;
+  if (type === componentTypes.SELECT) return StyledDropdown;
 };
 
 const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
   const {
     fields: { range: rangeFields, data: dataFields } = { range: [], data: [] },
     proTip = "",
-  } = tabs[currentChart];
+  } = charts[currentChart];
 
   return (
     <Root>
       <Form onSubmit={handleSubmit(createChart)}>
-        {!R.isEmpty(dataFields) && (
+        {!R.isEmpty(dataFields) && !R.isNil(dataFields) && (
           <FieldLine>
             {dataFields.map(
               ({ name, type, label, defaultValue, options = {} }) => (
@@ -70,7 +85,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
                   name={name}
                   component={getComponent(type)}
                   label={label}
-                  key={name}
+                  key={`${currentChart}_${name}`}
                   type={type}
                   options={options}
                   small={name === "type"}
@@ -80,7 +95,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
             )}
           </FieldLine>
         )}
-        {!R.isEmpty(rangeFields) && (
+        {!R.isEmpty(rangeFields) && !R.isNil(rangeFields) && (
           <FieldLine>
             {rangeFields.map(({ name, type, label, defaultValue }) => (
               <Field
@@ -88,7 +103,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
                 type={type}
                 component={getComponent(type)}
                 label={label}
-                key={name}
+                key={`${currentChart}_${name}`}
                 defaultValue={defaultValue}
               />
             ))}
@@ -110,6 +125,7 @@ const Random = R.compose(
   reduxForm({
     form: forms.RANDOM,
     enableReinitialize: true,
+    validate,
   })
 )(RandomDumb);
 

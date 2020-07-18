@@ -11,7 +11,7 @@ import {
   transposeTable,
   updateTable,
   getTableSize,
-} from "@modules/createChart";
+} from "../../modules/createChart";
 import "./react-datasheet.css";
 
 const Container = styled.div`

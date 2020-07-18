@@ -35,8 +35,8 @@ import {
 
 import Manager from "./Manager";
 import { getCurrentChart, getTableGrid } from "./selectors";
-import { forms } from "../../constants";
-import { isAdobe, readFileContent, transpose, clearGrid } from "../../utils";
+import { forms } from "@app/constants";
+import { isAdobe, readFileContent, transpose, clearGrid } from "@app/utils";
 
 // TODO: Send active tab
 function* createChartSaga({ payload }) {

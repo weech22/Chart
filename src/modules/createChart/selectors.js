@@ -1,7 +1,10 @@
 import * as R from "ramda";
-import { tabs, syncDataTypes } from "../../constants";
+import { syncDataTypes } from "../../constants";
+
+export const getForm = R.prop("form");
 
 const getCreateChart = R.prop("createChart");
+
 export const getSyncedData = R.pipe(getCreateChart, R.prop("syncedData"));
 
 export const getCurrentChart = R.pipe(getCreateChart, R.prop("currentChart"));
@@ -20,6 +23,8 @@ export const getIsCustomizeStyleShowing = R.pipe(
   getCreateChart,
   R.prop("isCustomizeStyleShowing")
 );
+
+export const getCurrentTab = R.pipe(getCreateChart, R.prop("currentTab"));
 
 export const getIsAPISynced = (state) => {
   const syncedData = state.createChart.syncedData;

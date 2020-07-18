@@ -24,6 +24,7 @@ const StyledTab = styled(Tab)`
   cursor: pointer;
   padding-bottom: 5px;
   margin-right: 8px;
+  font-size: 14px;
 `;
 
 const StyledTabList = styled(TabList)`

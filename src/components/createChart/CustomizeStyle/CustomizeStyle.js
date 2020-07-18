@@ -6,7 +6,7 @@ import { submit } from "redux-form";
 
 import TabMenu from "./TabMenu";
 import { Title, Dropdown, Footer, Link } from "@components/common";
-import { tabs, forms } from "@app/constants";
+import { charts, forms } from "@app/constants";
 import { isAdobe } from "@app/utils";
 import {
   getCurrentChart,
@@ -75,7 +75,7 @@ const CustomizeStyleDumb = ({
 
   const footerControls = {
     mainButton: {
-      onClick: submitForm,
+      onClick: stopCustomizeStyle, // submitForm,
       caption: "Use this style",
     },
   };
@@ -93,7 +93,7 @@ const CustomizeStyleDumb = ({
       <Container>
         {isColorPickerShowing && <ColorPickerModal />}
         <StyledTitle onClose={stopCustomizeStyle}>
-          Style: {tabs[currentChart].title}
+          Style: {charts[currentChart].title}
         </StyledTitle>
         <StyledDropdown
           label="Style template"

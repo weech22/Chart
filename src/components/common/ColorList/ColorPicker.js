@@ -37,6 +37,7 @@ const HueContainer = styled.div`
   background: ${isAdobe
     ? "linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)"
     : "#fff"};
+  cursor: default;
 `;
 
 const Pointer = styled.div`
@@ -152,7 +153,7 @@ const ColorPicker = memo(({ color, onChange }) => {
 
   const handleSaturationChange = (hsv) => {
     const newColor = tinycolor(hsv).toHsl();
-    console.log("hsv", hsv);
+
     setHsv(hsv);
     setHsl(newColor);
   };
@@ -162,6 +163,16 @@ const ColorPicker = memo(({ color, onChange }) => {
 
     setHex(newValue);
     onChange(newValue);
+  };
+
+  const handleAlphaChange = (value) => {
+    const a = parseInt(value) / 100;
+
+    console.log("a", a);
+    console.log("parseInt(value)", parseInt(value));
+    console.log("value", value);
+
+    onChange({ ...hsl, a });
   };
 
   // TODO: Substitute these inputs for mine
@@ -197,8 +208,8 @@ const ColorPicker = memo(({ color, onChange }) => {
 
         <EditableInput
           style={alphaInputStyles}
-          value={hsl.a}
-          /* onChange={this.props.onChange} */
+          value={`${hsl.a * 100}%`}
+          onChange={handleAlphaChange}
         />
       </InputContainer>
     </Container>

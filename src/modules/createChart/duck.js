@@ -1,9 +1,15 @@
 import * as R from "ramda";
 import { createAction, handleActions, combineActions } from "redux-actions";
 import { combineReducers } from "redux";
-import { modules, chartTypes, syncDataTypes, GRID_SIZE } from "../../constants";
+import {
+  modules,
+  chartTypes,
+  syncDataTypes,
+  GRID_SIZE,
+  tabs,
+} from "@app/constants";
 
-import { generateEmptyGrid } from "../../utils";
+import { generateEmptyGrid } from "@app/utils";
 
 export const selectChartTabRequest = createAction(
   `${modules.CREATE_CHART}/SELECT_CHART_TAB_REQUEST`
@@ -157,6 +163,10 @@ export const openExternalLink = createAction(
   `${modules.CREATE_CHART}/OPEN_EXTERNAL_LINK`
 );
 
+export const setCurrentTab = createAction(
+  `${modules.CREATE_CHART}/SET_CURRENT_TAB`
+);
+
 const currentChart = handleActions(
   {
     [selectChartTabSuccess]: (_, { payload }) => payload,
@@ -195,6 +205,7 @@ const isCustomizeStyleShowing = handleActions(
   {
     [startCustomizeStyle]: R.T,
     [stopCustomizeStyle]: R.F,
+    [useThisStyleSuccess]: R.F,
   },
   false
 );
@@ -283,8 +294,16 @@ const documentColors = handleActions(
   []
 );
 
+const currentTab = handleActions(
+  {
+    [setCurrentTab]: (_, { payload }) => payload,
+  },
+  tabs.RANDOM
+);
+
 const CreateChartReducer = combineReducers({
   currentChart,
+  currentTab,
   isCreatingChart,
   isSyncGSShowing,
   isSyncAPIShowing,

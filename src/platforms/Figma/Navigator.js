@@ -9,7 +9,9 @@ import {
   EditChart,
   Templates,
   MyAccount,
-} from "../../screens";
+} from "@app/screens";
+
+import { Preloader } from "@components/common";
 
 const Root = styled.div``;
 
@@ -26,7 +28,7 @@ const Navigator = ({ currentUIScreen }) => {
     case uiScreens.MY_ACCOUNT:
       return <MyAccount />;
     default:
-      return <Root>Preloader</Root>;
+      return <div />;
   }
 };
 

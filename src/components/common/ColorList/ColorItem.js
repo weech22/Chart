@@ -15,6 +15,7 @@ const ColorSample = styled.span`
 
 const HexColor = styled.span`
   margin-left: 8px;
+  font-size: 12px;
 `;
 
 const Root = styled.div`
@@ -32,12 +33,14 @@ const InfoBlock = styled.span`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Opacity = styled.span`
   ${Root}:hover & {
     display: ${({ isInList }) => (isInList ? "none" : "block")};
   }
+  font-size: 12px;
 `;
 
 const ControlBlock = styled.span`

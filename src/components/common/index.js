@@ -10,3 +10,4 @@ export { default as Multiselect } from "./Multiselect";
 export { default as Spreadsheet } from "./Spreadsheet";
 export { default as ColorList } from "./ColorList";
 export { default as ColorInput } from "./ColorInput";
+export { default as Preloader } from "./Preloader";

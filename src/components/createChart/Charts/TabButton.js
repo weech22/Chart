@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from "react";
 import styled from "styled-components";
 
-const Root = styled.button`
+const Root = styled.span`
   width: 32px;
   height: 32px;
   margin: 0;
@@ -35,13 +35,12 @@ const TabButton = memo(
       selectChartTab(type);
     }, [type, selectChartTab]);
 
+    const Icon = icon;
+
     return (
-      <Root
-        icon={icon}
-        disabled={isDisabled}
-        isActive={isActive}
-        onClick={onClick}
-      />
+      <Root disabled={isDisabled} isActive={isActive} onClick={onClick}>
+        <Icon offset={{ top: 2, left: 2 }} />
+      </Root>
     );
   }
 );

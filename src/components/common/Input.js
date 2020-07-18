@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { platform, isAdobe, isFigma } from "../../utils";
+import { componentTypes } from "@app/constants";
 
 const Root = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const Root = styled.div`
 const Input = styled.input`
   appearance: none;
   height: 32px;
-  border: none;
+  border: ${({ isError }) => (isError ? "1px solid #E95454" : "none")};
   border-radius: 4px;
   background: ${({ theme: { grey } }) => grey};
   font-size: 14px;
@@ -36,7 +37,7 @@ export default ({
   className,
   label,
   type,
-  input: { onChange, value = "" },
+  input: { onChange, value },
   meta: { touched, error },
   defaultValue,
   placeholder,
@@ -45,26 +46,26 @@ export default ({
     ({ target: { value } }) => {
       onChange(value);
     },
-    [onChange]
+    [value]
   );
 
+  const handleFocus = (event) => event.target.select();
+
   useEffect(() => {
-    if (!value) {
-      onChange(defaultValue);
-    }
+    onChange(defaultValue);
   }, []);
 
-  const isError = useMemo(() => error && touched, [error, touched]);
-
+  const calculatedType = type === componentTypes.NUM ? "number" : "text";
   return (
     <Root className={className}>
       <Label>{label}</Label>
       <Input
+        onFocus={handleFocus}
         placeholder={placeholder}
-        type={type}
+        type={calculatedType}
         onChange={handleChange}
-        isError={isError}
-        value={value || defaultValue}
+        isError={error}
+        value={value}
       />
     </Root>
   );

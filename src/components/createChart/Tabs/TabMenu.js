@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
+import { setCurrentTab, getCurrentTab } from "@modules/createChart";
 import Random from "./Random";
 import Table from "./Table";
 import JSON from "./JSON";
@@ -48,19 +49,17 @@ const StyledTabList = styled(TabList)`
 const StyledTabPanel = styled(TabPanel)``;
 
 // TODO: Lift acive tab to state
-const TabMenu = () => {
-  const [selected, setSelected] = useState(0);
-
+const TabMenuDumb = ({ currentTab, setCurrentTab }) => {
   return (
     <Root>
       <StyledTabs
-        selectedIndex={selected}
-        onSelect={(tabIndex) => setSelected(tabIndex)}
+        selectedIndex={currentTab}
+        onSelect={(tabIndex) => setCurrentTab(tabIndex)}
       >
         <StyledTabList>
-          <StyledTab selected={selected === 0}>Random</StyledTab>
-          <StyledTab selected={selected === 1}>Table</StyledTab>
-          <StyledTab selected={selected === 2}>JSON</StyledTab>
+          <StyledTab selected={currentTab === 0}>Random</StyledTab>
+          <StyledTab selected={currentTab === 1}>Table</StyledTab>
+          <StyledTab selected={currentTab === 2}>JSON</StyledTab>
         </StyledTabList>
 
         <StyledTabPanel>
@@ -76,5 +75,9 @@ const TabMenu = () => {
     </Root>
   );
 };
+
+const TabMenu = connect(R.applySpec({ currentTab: getCurrentTab }), {
+  setCurrentTab,
+})(TabMenuDumb);
 
 export default TabMenu;

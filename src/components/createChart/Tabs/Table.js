@@ -20,6 +20,7 @@ const Root = styled.div`
   font-size: 12px;
   display: flex;
   flex-direction: column;
+  margin-right: -1px;
 `;
 
 const StyledLink = styled(Link)`
