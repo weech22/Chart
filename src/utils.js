@@ -1,4 +1,4 @@
-import { freeChartTypes } from "./constants";
+import { freeChartTypes, linkRegEx, jsonRegEx } from "./constants";
 import * as R from "ramda";
 
 export const isFigma = window.name === "Plugin Iframe";
@@ -24,6 +24,14 @@ export const readFileContent = (file) => {
     reader.readAsText(file);
   }).then((data) => data);
 };
+
+export const isValidGSLink = (link) =>
+  link.match(linkRegEx) && link.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+
+export const isValidJSONLink = (link) =>
+  link.match(linkRegEx) && getTitleFromUrl(link).match(jsonRegEx);
+
+export const getTitleFromUrl = (url) => /[^/]*$/.exec(url)[0];
 
 export const transpose = (a) =>
   R.map((c) => R.map((r) => r[c], a), R.keys(a[0]));
@@ -73,3 +81,6 @@ export const swap = R.curry((index1, index2, list) => {
     R.set(R.lensIndex(index2), value1)
   )(list);
 });
+
+export const getSheetLink = (spreadsheetId, gid) =>
+  `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit#gid=${gid}`;

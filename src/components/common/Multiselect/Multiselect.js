@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
 import styled from "styled-components";
 import * as R from "ramda";
 
@@ -10,17 +16,26 @@ const Root = styled.div`
   border-radius: 4px;
   background: ${({ theme: { grey } }) => grey};
   position: relative;
+  height: 176px;
+  flex: 1;
+  overflow-y: ${isFigma ? "scroll" : "auto"};
 `;
 
 const Options = styled.div`
-  overflow-y: scroll;
-  height: ${isFigma ? "158" : "128"}px;
+  height: 128px;
   padding: 8px;
+  margin-top: ${isFigma ? "32px" : "auto"};
 `;
 
 const Header = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 8px;
+  position: fixed;
+  display: flex;
+  flex: 1;
+  background: ${({ theme: { grey } }) => grey};
+  z-index: 100;
+  width: 34%;
 `;
 
 const Label = styled.span`
@@ -36,6 +51,12 @@ const HeaderOption = styled(Option)`
 
 const StyledOption = styled(Option)`
   margin-bottom: 16px;
+`;
+
+const Div = styled.div`
+  position: relative;
+  display: flex;
+  flex-basis: 50%;
 `;
 
 export default ({ className, label, options, input: { onChange, value } }) => {
@@ -81,28 +102,32 @@ export default ({ className, label, options, input: { onChange, value } }) => {
   const isOptionChecked = (option) => checkedOptions.includes(option);
 
   return (
-    <Root className={className}>
-      <Label>{label}</Label>
-      <Header>
-        <HeaderOption
-          onCheck={checkAll}
-          checked={allChecked}
-          someChecked={someChecked}
-        >
-          Select all
-        </HeaderOption>
-      </Header>
-      <Options>
-        {options.map((option) => (
-          <StyledOption
-            key={option}
-            onCheck={handleCheck}
-            checked={isOptionChecked(option)}
+    <Div>
+      {isFigma && <Label>{label}</Label>}
+      <Root className={className}>
+        {!isFigma && <Label>{label}</Label>}
+        <Header>
+          <HeaderOption
+            onCheck={checkAll}
+            checked={allChecked}
+            someChecked={someChecked}
           >
-            {option}
-          </StyledOption>
-        ))}
-      </Options>
-    </Root>
+            Select all
+          </HeaderOption>
+        </Header>
+
+        <Options>
+          {options.map((option) => (
+            <StyledOption
+              key={option}
+              onCheck={handleCheck}
+              checked={isOptionChecked(option)}
+            >
+              {option}
+            </StyledOption>
+          ))}
+        </Options>
+      </Root>
+    </Div>
   );
 };

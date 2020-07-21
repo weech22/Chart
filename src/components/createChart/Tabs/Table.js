@@ -14,6 +14,7 @@ import {
   clearTable,
   transposeTable,
 } from "@modules/createChart";
+import { links } from "@app/constants";
 
 const Root = styled.div`
   padding-top: 8px;
@@ -86,7 +87,9 @@ const TableDumb = ({
         <Fragment>
           <Spreadsheet />
           <TableFooter>
-            <StyledLink>How to use Table data?</StyledLink>
+            <StyledLink href={links.TABLE_HOW_TO}>
+              How to use Table data?
+            </StyledLink>
             <Controls>
               <StyledLink onClick={transposeTable}>Transpose</StyledLink>
               <StyledLink onClick={clearTable}>Clear table</StyledLink>

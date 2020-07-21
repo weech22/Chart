@@ -12,7 +12,7 @@ import {
   startCustomizeStyle,
   createChartRequest,
 } from "@modules/createChart";
-import { charts } from "@app/constants";
+import { charts, links } from "@app/constants";
 
 const Root = styled.div`
   background: ${({ theme: { white } }) => white};
@@ -38,6 +38,7 @@ const MainViewDumb = ({
     },
     rightButton: {
       onClick: () => {},
+      href: links.SUPPORT,
       caption: "Support",
     },
     mainButton: {

@@ -26,7 +26,10 @@ const StyledDropdown = styled(Dropdown)`
   width: 100%;
 `;
 
-const StyledLink = styled(Link)``;
+const StyledLink = styled(Link)`
+  position: relative;
+  top: ${isFigma ? "20" : "0"}px;
+`;
 
 const FieldBlock = styled.div`
   display: flex;
@@ -40,6 +43,7 @@ const Col = styled.div`
   justify-content: space-between;
   padding-right: 4px;
   margin-right: 4px;
+  flex: 1;
   flex-basis: 50%;
 `;
 

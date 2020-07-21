@@ -8,7 +8,7 @@ const Root = styled.div`
   width: 100%;
   display: flex;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 12px 16px;
   align-items: center;
   justify-content: space-between;
   flex-grow: 0;
@@ -26,30 +26,33 @@ const ButtonBlock = styled.div`
 
 const StyledLink = styled(Link)``;
 
-const Footer = ({ controls: { mainButton, leftButton, rightButton } }) => (
-  <Root>
-    {leftButton ? (
-      <StyledLink onClick={leftButton.onClick}>{leftButton.caption}</StyledLink>
-    ) : (
-      <span />
-    )}
-    <ButtonBlock>
-      {rightButton ? (
-        <StyledLink onClick={rightButton.onClick}>
-          {rightButton.caption}
+const Footer = ({ controls: { mainButton, leftButton, rightButton } }) =>
+  console.log(rightButton) || (
+    <Root>
+      {leftButton ? (
+        <StyledLink onClick={leftButton.onClick}>
+          {leftButton.caption}
         </StyledLink>
       ) : (
         <span />
       )}
-      {mainButton ? (
-        <StyledButton onClick={mainButton.onClick}>
-          {mainButton.caption}
-        </StyledButton>
-      ) : (
-        <span />
-      )}
-    </ButtonBlock>
-  </Root>
-);
+      <ButtonBlock>
+        {rightButton ? (
+          <StyledLink onClick={rightButton.onClick} href={rightButton.href}>
+            {rightButton.caption}
+          </StyledLink>
+        ) : (
+          <span />
+        )}
+        {mainButton ? (
+          <StyledButton onClick={mainButton.onClick}>
+            {mainButton.caption}
+          </StyledButton>
+        ) : (
+          <span />
+        )}
+      </ButtonBlock>
+    </Root>
+  );
 
 export default Footer;

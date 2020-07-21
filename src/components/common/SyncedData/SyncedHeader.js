@@ -23,6 +23,7 @@ const StyledLink = styled(Link)`
   max-width: ${isFigma ? "240" : "270"}px;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 14px;
 `;
 
 const Title = styled.span`
@@ -32,14 +33,15 @@ const Title = styled.span`
   overflow: hidden;
   white-space: nowrap;
   color: ${({ theme: { black } }) => black};
+  font-size: 14px;
 `;
 
 const StyledCloseButton = styled(CloseButton)`
   position: absolute;
-  top: ${isFigma ? "10" : "4"}px;
-  right: 12px;
-  width: 8px;
-  hight: 8px;
+  top: ${isFigma ? "9" : "3"}px;
+  right: ${isFigma ? "8" : "4"}px;
+  width: 8.5px;
+  hight: 8.5px;
 `;
 
 const sourceTypes = {
@@ -49,16 +51,17 @@ const sourceTypes = {
   [syncDataTypes.JSON]: "Uploaded JSON:",
 };
 
-const SyncedHeader = ({ onClose, type, source: { title, url } }) => (
-  <Root>
-    {onClose && <StyledCloseButton onClick={onClose} />}
-    {sourceTypes[type]}
-    {type === syncDataTypes.GS || type === syncDataTypes.API ? (
-      <StyledLink>{title}</StyledLink>
-    ) : (
-      <Title>{title}</Title>
-    )}
-  </Root>
-);
+const SyncedHeader = ({ onClose, type, source: { title, url } }) =>
+  console.log("url", url) || (
+    <Root>
+      {onClose && <StyledCloseButton onClick={onClose} />}
+      {sourceTypes[type]}
+      {type === syncDataTypes.GS || type === syncDataTypes.API ? (
+        <StyledLink href={url}>{title}</StyledLink>
+      ) : (
+        <Title>{title}</Title>
+      )}
+    </Root>
+  );
 
 export default SyncedHeader;

@@ -24,6 +24,10 @@ const Input = styled.input`
   outline: none;
   padding: 8px;
   margin: 0;
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  box-sizing: border-box;
 `;
 
 const Label = styled.span`

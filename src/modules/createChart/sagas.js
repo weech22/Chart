@@ -2,7 +2,7 @@ import { call, all, put, takeLatest, select, delay } from "redux-saga/effects";
 import { reset } from "redux-form";
 import * as Papa from "papaparse";
 
-import { uploadFile } from "../../platforms/Adobe/utils";
+import { uploadFile } from "@app/platforms/Adobe/utils";
 import {
   createChartRequest,
   createChartSuccess,
@@ -34,9 +34,18 @@ import {
 } from "./duck";
 
 import Manager from "./Manager";
-import { getCurrentChart, getTableGrid } from "./selectors";
+import { getCurrentChart, getTableGrid, getGSSheets } from "./selectors";
 import { forms } from "@app/constants";
-import { isAdobe, readFileContent, transpose, clearGrid } from "@app/utils";
+import {
+  isAdobe,
+  readFileContent,
+  transpose,
+  clearGrid,
+  getTitleFromUrl,
+  isValidJSONLink,
+  isValidGSLink,
+  getSheetLink,
+} from "@app/utils";
 
 // TODO: Send active tab
 function* createChartSaga({ payload }) {
@@ -61,62 +70,92 @@ function* selectChartTabSaga({ payload: nextChart }) {
   }
 }
 
-function* syncGSRequestSaga({ payload: { syncGS, gsSheet } }) {
-  const spreadsheetId = syncGS
-    ? syncGS.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/)[1]
-    : -1;
+function* syncGSRequestSaga({ payload: { syncGS, gsSheetId } }) {
+  if (isValidGSLink(syncGS)) {
+    const spreadsheetId = syncGS
+      ? syncGS.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/)[1] // TODO: Move to utils
+      : -1;
 
-  const apiKey = "AIzaSyAOyxH85I1NqnV2Ta-rHKn7_MZpwVBTzmk"; // TODO: store in env
+    const apiKey = "AIzaSyAOyxH85I1NqnV2Ta-rHKn7_MZpwVBTzmk"; // TODO: store in env
 
-  const sheetTitle = gsSheet
-    ? gsSheet.value
-      ? gsSheet.value
-      : gsSheet
-    : undefined;
+    const gsSheets = yield select(getGSSheets); // {value: id, title: 'str'}
 
-  try {
-    const { sheets, title, url } = yield call(Manager.fetchSpreadsheetInfo, {
-      spreadsheetId,
-      apiKey,
-    });
+    const gsSheetById = gsSheets.find(
+      (sheet) => Number(sheet.value) === Number(gsSheetId)
+    );
 
-    if (sheetTitle && spreadsheetId) {
-      const data = yield call(Manager.fetchGoogleSpreadsheet, {
+    const sheetTitle = gsSheetById ? gsSheetById.label : undefined;
+
+    try {
+      const { sheets, title, url } = yield call(Manager.fetchSpreadsheetInfo, {
         spreadsheetId,
-        sheetTitle: encodeURIComponent(sheetTitle),
         apiKey,
       });
 
-      yield put(syncGSSuccess({ data, source: { title: sheetTitle, url } }));
-    } else if (spreadsheetId) {
-      if (sheets.length > 1) {
-        const newSheets = sheets.map(({ properties: { title } }) => ({
-          value: title,
-          label: title,
-        }));
-
-        yield put(prepareGSForSync(newSheets));
-      } else {
+      if (sheetTitle && spreadsheetId) {
         const data = yield call(Manager.fetchGoogleSpreadsheet, {
           spreadsheetId,
-          sheetTitle: "",
+          sheetTitle: encodeURIComponent(sheetTitle),
           apiKey,
         });
 
-        yield put(syncGSSuccess({ data, source: { title, url } }));
+        console.log("data", data);
+        console.log("sheetTitle", sheetTitle);
+        console.log(
+          "getSheetLink(spreadsheetId, gsSheetId)",
+          getSheetLink(spreadsheetId, gsSheetId)
+        );
+        console.log("gsSheetId", gsSheetId);
+
+        yield put(
+          syncGSSuccess({
+            data,
+            source: {
+              title: sheetTitle,
+              url: getSheetLink(spreadsheetId, gsSheetId),
+            },
+          })
+        );
+      } else if (spreadsheetId) {
+        if (sheets.length > 1) {
+          const newSheets = sheets.map(
+            ({ properties: { title, sheetId } }) => ({
+              value: sheetId,
+              label: title,
+            })
+          );
+
+          yield put(prepareGSForSync(newSheets));
+        } else {
+          const data = yield call(Manager.fetchGoogleSpreadsheet, {
+            spreadsheetId,
+            sheetTitle: "",
+            apiKey,
+          });
+
+          yield put(syncGSSuccess({ data, source: { title, url } }));
+        }
       }
+      yield put(syncGSFailure("empty"));
+    } catch (ex) {
+      console.log(ex);
+      yield put(syncGSFailure(ex));
     }
-    yield put(syncGSFailure("empty"));
-  } catch (ex) {
-    console.log(ex);
-    yield put(syncGSFailure(ex));
+  } else {
+    yield put(syncGSFailure({ error: "link" }));
   }
 }
 
 function* syncAPIRequestSaga({ payload: { syncAPI: url } }) {
   try {
-    const data = yield call(Manager.fetchJSON, { url });
-    yield put(syncAPISuccess({ data, source: { url, title: url } }));
+    if (isValidJSONLink(url)) {
+      const data = yield call(Manager.fetchJSON, { url });
+      yield put(
+        syncAPISuccess({ data, source: { url, title: getTitleFromUrl(url) } })
+      );
+    } else {
+      yield put(syncAPIFailure({ error: "link" }));
+    }
   } catch (ex) {
     console.log(ex);
     yield put(syncAPIFailure(ex));
@@ -137,7 +176,6 @@ function* uploadCSVSaga({ payload: FileList }) {
       yield put(uploadCSVSuccess({ data, source: { title: fileName } }));
     }
   } catch (ex) {
-    console.log(ex);
     yield put(uploadCSVFailure(ex));
   }
 }

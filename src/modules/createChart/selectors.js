@@ -19,6 +19,18 @@ export const getIsSyncAPIShowing = R.pipe(
   R.prop("isSyncAPIShowing")
 );
 
+export const getIsSyncLinkValid = R.pipe(
+  getCreateChart,
+  R.prop("isSyncLinkValid")
+);
+
+export const getIsSyncDataValid = R.pipe(
+  getCreateChart,
+  R.prop("isSyncDataValid")
+);
+
+export const getIsSyncing = R.pipe(getCreateChart, R.prop("isSyncing"));
+
 export const getIsCustomizeStyleShowing = R.pipe(
   getCreateChart,
   R.prop("isCustomizeStyleShowing")

@@ -301,6 +301,45 @@ const currentTab = handleActions(
   tabs.RANDOM
 );
 
+const isSyncing = handleActions(
+  {
+    [syncGSRequest]: R.T,
+    [syncGSSuccess]: R.F,
+    [syncGSFailure]: R.F,
+    [syncAPIRequest]: R.T,
+    [syncAPISuccess]: R.F,
+    [syncAPIFailure]: R.F,
+  },
+  false
+);
+
+// TODO: move 'link' into constants in case there are more error types
+const isSyncLinkValid = handleActions(
+  {
+    [syncGSFailure]: (_, { payload: { error } }) =>
+      error === "link" ? false : true,
+    [syncAPIFailure]: (_, { payload: { error } }) =>
+      error === "link" ? false : true,
+    [syncAPISuccess]: R.T,
+    [syncGSSuccess]: R.T,
+    [syncAPIRequest]: R.T,
+    [syncGSRequest]: R.T,
+  },
+  true
+);
+
+const isSyncDataValid = handleActions(
+  {
+    [uploadJSONFailure]: R.F,
+    [uploadCSVFailure]: R.F,
+    [uploadJSONRequest]: R.T,
+    [uploadCSVRequest]: R.T,
+    [uploadJSONSuccess]: R.T,
+    [uploadCSVSuccess]: R.T,
+  },
+  true
+);
+
 const CreateChartReducer = combineReducers({
   currentChart,
   currentTab,
@@ -316,6 +355,9 @@ const CreateChartReducer = combineReducers({
   currentStyle,
   documentColors,
   currentlyEditedColor,
+  isSyncing,
+  isSyncLinkValid,
+  isSyncDataValid,
 });
 
 export default CreateChartReducer;

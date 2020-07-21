@@ -38,5 +38,5 @@ export { default as arrowDown } from "./arrow-down.svg";
 export { default as smallArrowUp } from "./small-arrow-up.svg";
 export { default as smallArrowDown } from "./small-arrow-down.svg";
 export { default as cross } from "./cross.svg";
-export { default as tick } from "./tick.png";
+export { default as tick } from "./tick.svg";
 export { default as minus } from "./minus.svg";

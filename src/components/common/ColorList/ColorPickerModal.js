@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
 
@@ -14,9 +14,18 @@ const Backdrop = styled.div`
   top: ${isAdobe ? "35" : "0"}px;
   bottom: ${isAdobe ? "44" : "0"}px;
   left: ${isAdobe ? "36" : "0"}px;
-
+  overflow: hidden;
   background: rgba(0, 0, 0, 0.8);
   z-index: 5;
+`;
+
+const slide = keyframes`
+0% {
+  transform: translateX(0);
+}
+100% {
+  transform: translateX(-100%);
+}
 `;
 
 const Root = styled.div`
@@ -29,6 +38,7 @@ const Root = styled.div`
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
+
   z-index: 6;
 `;
 

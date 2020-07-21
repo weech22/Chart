@@ -77,6 +77,8 @@ const alphaInputStyles = {
     background: "#f5f5f5",
     padding: "8px",
     borderRadius: "4px",
+    fontSize: "14px",
+    lineHeight: "16px",
   },
   label: {
     fontSize: "14px",
@@ -94,6 +96,8 @@ const hexInputStyles = {
     background: "#f5f5f5",
     padding: "8px",
     borderRadius: "4px",
+    fontSize: "14px",
+    lineHeight: "16px",
   },
   label: {
     fontSize: "14px",
@@ -167,10 +171,6 @@ const ColorPicker = memo(({ color, onChange }) => {
 
   const handleAlphaChange = (value) => {
     const a = parseInt(value) / 100;
-
-    console.log("a", a);
-    console.log("parseInt(value)", parseInt(value));
-    console.log("value", value);
 
     onChange({ ...hsl, a });
   };

@@ -6,6 +6,7 @@ import assets from "@assets";
 const Root = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Label = styled.span`
@@ -18,9 +19,9 @@ const Checkbox = styled.div`
   width: 16px;
   height: 16px;
   border: 1px solid #000;
+  border-radius: 2px;
 
   outline: none;
-  cursor: pointer;
   background-color: ${({ theme: { grey } }) => grey};
   background-position: center;
   background-repeat: no-repeat;
@@ -34,12 +35,8 @@ const Checkbox = styled.div`
 
 export default ({ className, checked, onCheck, children, someChecked }) => {
   return (
-    <Root className={className}>
-      <Checkbox
-        checked={checked}
-        onClick={() => onCheck(children)}
-        someChecked={someChecked}
-      />
+    <Root className={className} onClick={() => onCheck(children)}>
+      <Checkbox checked={checked} someChecked={someChecked} />
       <Label>{children}</Label>
     </Root>
   );

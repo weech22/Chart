@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
+import { customizeStyleConfig } from "@config";
 import ColorsTab from "./ColorsTab";
 import SettingsTab from "./SettingsTab";
 import { getCurrentChart } from "@modules/createChart";
@@ -20,7 +21,7 @@ const StyledTab = styled(Tab)`
   list-style: none;
   color: ${({ selected }) => (selected ? "#000" : "rgba(0, 0, 0, 0.5)")};
   border-bottom: ${({ selected }) => (selected ? "2px solid #000" : "none")};
-  font-weight: ${({ selected }) => (selected ? "bold" : "normal")};
+  font-weight: bold;
   cursor: pointer;
   padding-bottom: 5px;
   margin-right: 8px;
@@ -39,8 +40,18 @@ const StyledTabPanel = styled(TabPanel)`
   padding: 0;
 `;
 
-const StyleTabSwitcher = () => {
+const StyleTabSwitcherDumb = ({ currentChart }) => {
   const [selected, setSelected] = useState(0);
+
+  const showSettingsFields = !!customizeStyleConfig[currentChart][
+    styleSettingsTypes.SETTINGS
+  ];
+  const showLabelsFields = !!customizeStyleConfig[currentChart][
+    styleSettingsTypes.LABELS
+  ];
+  const showGridFields = !!customizeStyleConfig[currentChart][
+    styleSettingsTypes.GRID
+  ];
 
   return (
     <Root>
@@ -50,9 +61,15 @@ const StyleTabSwitcher = () => {
       >
         <StyledTabList>
           <StyledTab selected={selected === 0}>Colors</StyledTab>
-          <StyledTab selected={selected === 1}>Settings</StyledTab>
-          <StyledTab selected={selected === 2}>Labels</StyledTab>
-          <StyledTab selected={selected === 3}>Grid</StyledTab>
+          {showSettingsFields && (
+            <StyledTab selected={selected === 1}>Settings</StyledTab>
+          )}
+          {showLabelsFields && (
+            <StyledTab selected={selected === 2}>Labels</StyledTab>
+          )}
+          {showGridFields && (
+            <StyledTab selected={selected === 3}>Grid</StyledTab>
+          )}
         </StyledTabList>
 
         <StyledTabPanel>
@@ -72,5 +89,9 @@ const StyleTabSwitcher = () => {
     </Root>
   );
 };
+
+const StyleTabSwitcher = connect(
+  R.applySpec({ currentChart: getCurrentChart })
+)(StyleTabSwitcherDumb);
 
 export default StyleTabSwitcher;

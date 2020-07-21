@@ -34,6 +34,8 @@ const StyledTab = styled(Tab)`
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
+  box-shadow: ${({ selected }) =>
+    selected ? "0px 1px 4px rgba(0, 0, 0, 0.05)" : "none"};
 `;
 
 const StyledTabList = styled(TabList)`

@@ -12,8 +12,8 @@ const Root = styled.a`
   }
 `;
 
-export default ({ children, className, onClick }) => (
-  <Root className={className} onClick={onClick}>
+export default ({ children, className, onClick, href }) => (
+  <Root className={className} onClick={onClick} href={href} target="_blank">
     {children}
   </Root>
 );

@@ -2,6 +2,19 @@ import assets from "./assets";
 
 import { generateEmptyGrid } from "./utils";
 
+export const links = {
+  SUPPORT: "https://pavel-kuligin.gitbook.io/chart/",
+  JSON_EXAMPLE: "",
+  GS_EXAMPLE: "",
+  API_EXAMPLE: "",
+  STYLE_HOW_TO: "",
+  TABLE_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
+  API_HOW_TO: "",
+  CSV_HOW_TO: "",
+  GS_HOW_TO: "",
+  JSON_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/json-data",
+};
+
 export const styleSettingsTypes = {
   SETTINGS: "SETTINGS",
   LABELS: "LABELS",
@@ -16,6 +29,12 @@ export const forms = {
   SYNCED_DATA: "SYNCED_DATA",
   CUSTOM_STYLE: "CUSTOM_STYLE",
 };
+
+export const linkRegEx = new RegExp(
+  "(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})"
+);
+
+export const jsonRegEx = new RegExp(".json$");
 
 export const modules = {
   TEMPLATE: "TEMPLATE",
