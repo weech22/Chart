@@ -36,6 +36,7 @@ const MainViewDumb = ({
       onClick: startCustomizeStyle,
       caption: "Customize chart style",
     },
+    // TODO: Stop passing onClick in there, but rather assign it a default value inside
     rightButton: {
       onClick: () => {},
       href: links.SUPPORT,

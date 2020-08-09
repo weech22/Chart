@@ -47,6 +47,7 @@ const Col = styled.div`
   flex-basis: 50%;
 `;
 
+// TODO: use lres + config
 const helpLinks = {
   [syncDataTypes.API]: {
     link: "",

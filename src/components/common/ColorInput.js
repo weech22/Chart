@@ -13,6 +13,7 @@ const Root = styled.div`
   position: relative;
 `;
 
+// TODO: Reuse
 const Label = styled.span`
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;

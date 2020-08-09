@@ -51,17 +51,16 @@ const sourceTypes = {
   [syncDataTypes.JSON]: "Uploaded JSON:",
 };
 
-const SyncedHeader = ({ onClose, type, source: { title, url } }) =>
-  console.log("url", url) || (
-    <Root>
-      {onClose && <StyledCloseButton onClick={onClose} />}
-      {sourceTypes[type]}
-      {type === syncDataTypes.GS || type === syncDataTypes.API ? (
-        <StyledLink href={url}>{title}</StyledLink>
-      ) : (
-        <Title>{title}</Title>
-      )}
-    </Root>
-  );
+const SyncedHeader = ({ onClose, type, source: { title, url } }) => (
+  <Root>
+    {onClose && <StyledCloseButton onClick={onClose} />}
+    {sourceTypes[type]}
+    {type === syncDataTypes.GS || type === syncDataTypes.API ? (
+      <StyledLink href={url}>{title}</StyledLink>
+    ) : (
+      <Title>{title}</Title>
+    )}
+  </Root>
+);
 
 export default SyncedHeader;

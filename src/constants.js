@@ -3,15 +3,17 @@ import assets from "./assets";
 import { generateEmptyGrid } from "./utils";
 
 export const links = {
-  SUPPORT: "https://pavel-kuligin.gitbook.io/chart/",
-  JSON_EXAMPLE: "",
-  GS_EXAMPLE: "",
-  API_EXAMPLE: "",
-  STYLE_HOW_TO: "",
+  SUPPORT:
+    "https://join.slack.com/t/chart-plugin/shared_invite/zt-61tsh8gx-C0TBYxSU8ShA~IK_v121dA",
+  GS_EXAMPLE:
+    "https://docs.google.com/spreadsheets/d/1UFptXqmtFexYAyX9CKIYr0x7XMtltog8_kUnrCxoRBo/edit#gid=0",
+  API_EXAMPLE:
+    "https://raw.githubusercontent.com/pavelkuligin/chart/master/data/data_linechart.json",
+  STYLE_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/templates",
   TABLE_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
-  API_HOW_TO: "",
-  CSV_HOW_TO: "",
-  GS_HOW_TO: "",
+  API_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/json-data",
+  CSV_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
+  GS_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
   JSON_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/json-data",
 };
 
@@ -21,7 +23,7 @@ export const styleSettingsTypes = {
   GRID: "GRID",
 };
 
-export const GRID_SIZE = 10;
+export const GRID_SIZE = 5;
 
 export const forms = {
   RANDOM: "RANDOM",
@@ -140,6 +142,7 @@ export const syncDataTypes = {
   GS: "GS",
 };
 
+// TODO: Move to configs
 export const charts = {
   [chartTypes.LINE_CHART]: {
     title: "Line chart",

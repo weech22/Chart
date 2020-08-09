@@ -13,6 +13,7 @@ import {
 } from "@app/constants";
 import { Input, Dropdown } from "@components/common";
 
+// TODO: Fix this
 const validate = (values) => {
   const errors = {};
 
@@ -33,6 +34,7 @@ const FieldLine = styled.div`
   margin-top: 24px;
 `;
 
+// TODO: lres
 const getNoFieldsMessage = (chartType) =>
   `${charts[chartType].title} doesn’t have any settings for random data :-)`;
 
@@ -62,7 +64,7 @@ const StyledDropdown = styled(Dropdown)`
   margin-right: 8px;
 `;
 
-// TODO: Ruse from utils
+// TODO: Reuse from utils
 const getComponent = (type) => {
   if (type === componentTypes.NUM) return StyledInput;
   if (type === componentTypes.SELECT) return StyledDropdown;

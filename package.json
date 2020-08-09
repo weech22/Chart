@@ -5,27 +5,36 @@
   "main": "code.js",
   "scripts": {
     "start": "npx webpack --mode=development --watch",
-    "prod": "npx webpack --mode=production"
+    "prod": "npx webpack --mode=production",
+    "build-sketch": "skpm-build && node fix-sketch-html.js",
+    "watch-sketch": "skpm-build --watch  && node fix-sketch-html.js",
+    "start-sketch": "skpm-build --watch --run  && node fix-sketch-html.js",
+    "postinstall-sketch": "npm run build && skpm-link"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-syntax-async-generators": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/runtime": "^7.11.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "core-js": "^3.6.5",
     "papaparse": "^5.2.0",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-color": "^2.18.1",
     "react-datasheet": "^1.4.4",
     "react-dom": "^16.13.1",
-    "react-hover-observer": "^2.1.1",
     "react-preloaders": "^3.0.3",
     "react-redux": "^7.2.0",
     "react-tabs": "^3.1.1",
+    "react-transition-group": "1",
     "react-virtualized": "^9.21.2",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-form": "^8.3.6",
     "redux-saga": "^1.1.3",
-    "sketch-module-web-view": "^3.2.1",
+    "sketch-module-web-view": "^3.1.0",
     "style-loader": "^1.2.1",
     "styled-components": "^5.1.1",
     "tinycolor2": "^1.4.1",
@@ -47,10 +56,30 @@
     "copy-webpack-plugin": "^6.0.2",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
+    "html-loader": "^0.5.5",
     "html-webpack-inline-source-plugin": "1.0.0-beta.2",
     "html-webpack-plugin": "4.0.0-beta.4",
     "ts-loader": "^7.0.5",
     "ttf-loader": "^1.0.2",
     "url-loader": "^4.1.0"
+  },
+  "engines": {
+    "sketch": ">=49.0"
+  },
+  "resources": [
+    "platforms/sketch/src/view/createChart.js",
+    "platforms/sketch/src/view/updateChart.js",
+    "platforms/sketch/src/view/editChart.js",
+    "platforms/sketch/src/view/myAccount.js",
+    "platforms/sketch/src/view/templates.js"
+  ],
+  "skpm": {
+    "name": "chart2",
+    "manifest": "platforms/sketch/src/manifest.json",
+    "main": "platforms/sketch/chart2.sketchplugin",
+    "assets": [
+      "assets/**/*"
+    ],
+    "sketch-assets-file": "sketch-assets/icons.sketch"
   }
 }

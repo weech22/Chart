@@ -75,7 +75,7 @@ const CustomizeStyleDumb = ({
 
   const footerControls = {
     mainButton: {
-      onClick: stopCustomizeStyle, // submitForm,
+      onClick: stopCustomizeStyle, // TODO: submitForm,
       caption: "Use this style",
     },
   };

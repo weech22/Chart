@@ -25,6 +25,7 @@ const InstructionsLine = styled.div`
   margin-bottom: 6px;
 `;
 
+// TODO: lres
 const JSONDumb = ({
   startSyncAPI,
   isAPISynced,

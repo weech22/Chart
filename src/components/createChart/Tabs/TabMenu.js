@@ -11,9 +11,9 @@ import JSON from "./JSON";
 
 import { isFigma } from "@app/utils";
 
+// Here used to be flex-basis: 100%;
 const Root = styled.div`
   padding: 0 16px 16px 16px;
-  flex-basis: 100%;
   flex: 1;
 `;
 
@@ -50,7 +50,6 @@ const StyledTabList = styled(TabList)`
 
 const StyledTabPanel = styled(TabPanel)``;
 
-// TODO: Lift acive tab to state
 const TabMenuDumb = ({ currentTab, setCurrentTab }) => {
   return (
     <Root>

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, memo } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { AutoSizer } from "react-virtualized";
@@ -26,7 +26,59 @@ const Scroller = styled.div`
   height: 100%;
 `;
 
-const SpreadsheetDumb = ({ updateTable, tableGrid, tableSize }) => {
+const cellsAreEqual = (prevCell, nextCell) => {
+  if (prevCell.children._owner.key !== nextCell.children._owner.key) {
+    console.log("children._owner.key");
+  }
+  if (prevCell.col !== nextCell.col) {
+    console.log("col");
+  }
+  if (prevCell.row !== nextCell.row) {
+    console.log("row");
+  }
+  if (prevCell.children.props.value !== nextCell.children.props.value) {
+    console.log("children.props.value");
+  }
+
+  if (prevCell.className !== nextCell.className) {
+    console.log("className");
+  }
+  if (prevCell.cell.value !== nextCell.cell.value) {
+    console.log("cell.value");
+  }
+
+  if (prevCell.selected !== nextCell.selected) {
+    console.log("selected");
+  }
+
+  if (prevCell.editing !== nextCell.editing) {
+    console.log("editing");
+  }
+
+  if (prevCell.updated !== nextCell.updated) {
+    console.log("updated");
+  }
+
+  return (
+    prevCell.children._owner.key === nextCell.children._owner.key &&
+    prevCell.col === nextCell.col &&
+    prevCell.row === nextCell.row &&
+    prevCell.children.props.value === nextCell.children.props.value &&
+    prevCell.className === nextCell.className &&
+    prevCell.cell.value === nextCell.cell.value &&
+    prevCell.selected === nextCell.selected &&
+    prevCell.editing === nextCell.editing &&
+    prevCell.updated === nextCell.updated
+  );
+};
+
+const tablesAreEqual = (prevTable, nextTable) => {
+  console.log("prevTable", prevTable);
+  console.log("nextTable", nextTable);
+  return false;
+};
+
+const SpreadsheetDumb = memo(({ updateTable, tableGrid, tableSize }) => {
   const handler = (changes) => {
     const newGrid = tableGrid.map((row) => [...row]);
 
@@ -37,7 +89,8 @@ const SpreadsheetDumb = ({ updateTable, tableGrid, tableSize }) => {
     updateTable(newGrid);
   };
 
-  const renderCell = ({ children, row, col, className, ...props }) => {
+  const renderCell = memo(({ children, row, col, className, ...props }) => {
+    console.log("render cell", console.log());
     const { cols: maxCol, rows: maxRow } = tableSize;
 
     const isLeftMost = col === 0;
@@ -53,7 +106,7 @@ const SpreadsheetDumb = ({ updateTable, tableGrid, tableSize }) => {
         {children}
       </td>
     );
-  };
+  }, cellsAreEqual);
 
   return (
     <Container>
@@ -67,7 +120,7 @@ const SpreadsheetDumb = ({ updateTable, tableGrid, tableSize }) => {
       </Scroller>
     </Container>
   );
-};
+}, tablesAreEqual);
 
 const Spreadsheet = connect(
   R.applySpec({ tableGrid: getTableGrid, tableSize: getTableSize }),

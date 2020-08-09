@@ -14,15 +14,13 @@ const Root = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  margin-right: -8px;
-  margin-bottom: -24px;
+  margin-right: 0 -8px -24px 0;
 `;
 
 const FieldContainer = styled.div`
-  margin-bottom: 24px;
   display: flex;
   flex-basis: calc(50% - 8px);
-  margin-right: 8px;
+  margin-right: 0 8px 24px 0;
 `;
 
 const StyledInput = styled(Input)``;

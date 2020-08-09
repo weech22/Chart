@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
+import { CSSTransitionGroup } from "react-transition-group";
 
 import { Title, Footer } from "@components/common";
 import { hideColorPicker, getCurrentlyEditedColor } from "@modules/createChart";
@@ -38,7 +39,6 @@ const Root = styled.div`
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
-
   z-index: 6;
 `;
 

@@ -23,6 +23,7 @@ const Root = styled.div`
   font-size: 14px;
 `;
 
+// TODO: lres
 const InvalidDataDumb = ({}) => {
   return (
     <Root>

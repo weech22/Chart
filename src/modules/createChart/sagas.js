@@ -99,14 +99,6 @@ function* syncGSRequestSaga({ payload: { syncGS, gsSheetId } }) {
           apiKey,
         });
 
-        console.log("data", data);
-        console.log("sheetTitle", sheetTitle);
-        console.log(
-          "getSheetLink(spreadsheetId, gsSheetId)",
-          getSheetLink(spreadsheetId, gsSheetId)
-        );
-        console.log("gsSheetId", gsSheetId);
-
         yield put(
           syncGSSuccess({
             data,

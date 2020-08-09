@@ -3,19 +3,15 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import * as R from "ramda";
 
-import { Link, CloseButton } from "@components/common";
-
 import {
   MainView,
   Charts,
   SyncData,
   InvalidData,
 } from "@components/createChart";
-
 import {
   getIsSyncGSShowing,
   getIsSyncAPIShowing,
-  getIsCustomizeStyleShowing,
   getIsSyncDataValid,
 } from "@modules/createChart";
 

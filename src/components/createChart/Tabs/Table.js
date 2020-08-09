@@ -51,6 +51,7 @@ const Controls = styled.div`
   width: 140px;
 `;
 
+// TODO: lres
 const TableDumb = ({
   startSyncGS,
   isGSSynced,

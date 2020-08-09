@@ -26,33 +26,30 @@ const ButtonBlock = styled.div`
 
 const StyledLink = styled(Link)``;
 
-const Footer = ({ controls: { mainButton, leftButton, rightButton } }) =>
-  console.log(rightButton) || (
-    <Root>
-      {leftButton ? (
-        <StyledLink onClick={leftButton.onClick}>
-          {leftButton.caption}
+const Footer = ({ controls: { mainButton, leftButton, rightButton } }) => (
+  <Root>
+    {leftButton ? (
+      <StyledLink onClick={leftButton.onClick}>{leftButton.caption}</StyledLink>
+    ) : (
+      <span />
+    )}
+    <ButtonBlock>
+      {rightButton ? (
+        <StyledLink onClick={rightButton.onClick} href={rightButton.href}>
+          {rightButton.caption}
         </StyledLink>
       ) : (
         <span />
       )}
-      <ButtonBlock>
-        {rightButton ? (
-          <StyledLink onClick={rightButton.onClick} href={rightButton.href}>
-            {rightButton.caption}
-          </StyledLink>
-        ) : (
-          <span />
-        )}
-        {mainButton ? (
-          <StyledButton onClick={mainButton.onClick}>
-            {mainButton.caption}
-          </StyledButton>
-        ) : (
-          <span />
-        )}
-      </ButtonBlock>
-    </Root>
-  );
+      {mainButton ? (
+        <StyledButton onClick={mainButton.onClick}>
+          {mainButton.caption}
+        </StyledButton>
+      ) : (
+        <span />
+      )}
+    </ButtonBlock>
+  </Root>
+);
 
 export default Footer;

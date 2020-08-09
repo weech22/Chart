@@ -11,8 +11,7 @@ import { customizeStyleConfig } from "@config";
 import { useThisStyleRequest, getCurrentChart } from "@modules/createChart";
 
 const Root = styled.div`
-  padding-top: 16px;
-  padding-right: 16px;
+  padding: 16px 16px 0 0;
   flex: 1;
 `;
 
