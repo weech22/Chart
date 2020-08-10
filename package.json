@@ -4,12 +4,12 @@
   "description": "Your Figma Plugin",
   "main": "code.js",
   "scripts": {
-    "start": "npx webpack --mode=development --watch",
-    "prod": "npx webpack --mode=production",
-    "build-sketch": "skpm-build && node fix-sketch-html.js",
-    "watch-sketch": "skpm-build --watch  && node fix-sketch-html.js",
-    "start-sketch": "skpm-build --watch --run  && node fix-sketch-html.js",
-    "postinstall-sketch": "npm run build && skpm-link"
+    "build-sketch": "env NODE_ENV=production skpm-build && node fix-sketch-html.js",
+    "build-figma-adobe": "npx webpack --mode=production",
+    "start-figma-adobe": "npx webpack --mode=development --watch",
+    "start-sketch": "skpm-build --watch",
+    "build": "yarn build-sketch && yarn build-figma-adobe",
+    "start": "yarn start-sketch && yarn start-figma-adobe"
   },
   "author": "",
   "license": "ISC",

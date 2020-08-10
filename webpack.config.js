@@ -18,13 +18,7 @@ const figmaConfig = (_, argv) => ({
     rules: [
       {
         test: /\.m?js$/,
-        exclude: [
-          './src/platforms/Adobe',
-          './src/platforms/Sketch',
-          './node_modules',
-          './platforms/sketch',
-          './platforms/adobe',
-        ],
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -35,24 +29,13 @@ const figmaConfig = (_, argv) => ({
 
       {
         test: /\.css$/,
-        exclude: [
-          './src/platforms/Adobe',
-          './src/platforms/Sketch',
-          './platforms/sketch',
-          './platforms/adobe',
-        ],
+        exclude: /node_modules/,
         loader: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
 
       {
         test: /\.(png|jpg|gif|webp|svg)$/,
-        exclude: [
-          './platforms/sketch',
-          './platforms/adobe',
-          './src/platforms/Adobe',
-          './src/platforms/Sketch',
-          './node_modules',
-        ],
+        exclude: /node_modules/,
         loader: [{ loader: 'url-loader' }],
       },
     ],
@@ -110,13 +93,7 @@ const adobeConfig = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: [
-          './platforms/sketch',
-          './platforms/figma',
-          './src/platforms/Figma',
-          './src/platforms/Sketch',
-          './node_modules',
-        ],
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -126,23 +103,12 @@ const adobeConfig = {
       },
       {
         test: /\.css$/,
-        exclude: [
-          './src/platforms/Figma',
-          './src/platforms/Sketch',
-          './platforms/sketch',
-          './platforms/figma',
-        ],
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpg|gif|webp|svg)$/,
-        exclude: [
-          './platforms/sketch',
-          './platforms/figma',
-          './src/platforms/Figma',
-          './src/platforms/Sketch',
-          './node_modules',
-        ],
+        exclude: /node_modules/,
         loader: [{ loader: 'url-loader' }],
       },
     ],

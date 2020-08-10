@@ -1,19 +1,14 @@
 const path = require('path')
-// TODO: js loader add exclude
+const CopyPlugin = require('copy-webpack-plugin')
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = (config) => {
-  console.log('config: ', config)
+  config.mode = isProd ? 'production' : 'development'
+  config.devtool = isProd ? 'none' : 'source-map'
 
   config.module.rules = config.module.rules.map((rule) => ({
     ...rule,
-    exclude: {
-      and: [
-        path.resolve(__dirname, '/platforms/adobe'),
-        path.resolve(__dirname, '/platforms/figma'),
-        path.resolve(__dirname, '/src/platforms/Adobe'),
-        path.resolve(__dirname, '/src/platforms/Figma'),
-        path.resolve(__dirname, '/node_modules'),
-      ],
-    },
+    exclude: /node_modules/,
   }))
 
   config.resolve = {
@@ -31,15 +26,7 @@ module.exports = (config) => {
 
   config.module.rules.push({
     test: /\.(html)$/,
-    exclude: {
-      and: [
-        path.resolve(__dirname, '/platforms/adobe'),
-        path.resolve(__dirname, '/platforms/figma'),
-        path.resolve(__dirname, '/src/platforms/Adobe'),
-        path.resolve(__dirname, '/src/platforms/Figma'),
-        path.resolve(__dirname, '/node_modules'),
-      ],
-    },
+    exclude: /node_modules/,
     use: [
       {
         loader: 'html-loader',
@@ -53,13 +40,7 @@ module.exports = (config) => {
 
   config.module.rules.push({
     test: /\.(png|jpg|gif|webp|svg)$/,
-    exclude: [
-      path.resolve(__dirname, '/platforms/adobe'),
-      path.resolve(__dirname, '/platforms/figma'),
-      path.resolve(__dirname, '/src/platforms/Figma'),
-      path.resolve(__dirname, '/src/platforms/Adobe'),
-      path.resolve(__dirname, '/node_modules'),
-    ],
+    exclude: /node_modules/,
     loader: [{ loader: 'url-loader' }],
   })
 
@@ -71,15 +52,26 @@ module.exports = (config) => {
 
   config.module.rules.push({
     test: /\.(css)$/,
-    exclude: {
-      and: [
-        path.resolve(__dirname, '/platforms/adobe'),
-        path.resolve(__dirname, '/platforms/figma'),
-        path.resolve(__dirname, '/src/platforms/Adobe'),
-        path.resolve(__dirname, '/src/platforms/Figma'),
-        path.resolve(__dirname, '/node_modules'),
-      ],
-    },
+    exclude: /node_modules/,
     use: ['css-loader'],
   })
+
+  config.plugins.push(
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(
+            `${__dirname}/platforms/sketch/src/view`,
+            'index.css'
+          ),
+          to: path.resolve(
+            `${__dirname}/platforms/sketch/chart2.sketchplugin/Contents/Resources/_webpack_resources`
+          ),
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    })
+  )
 }

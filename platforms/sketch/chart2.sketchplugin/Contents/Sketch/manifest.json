@@ -3,62 +3,62 @@
   "bundleVersion": 1,
   "identifier": "com.chart2",
   "version": "1.0",
-  "description": "An introduction on how to build plugins.",
+  "description": "Chart app",
   "authorEmail": "developer@sketch.com",
-  "name": "Messages",
+  "name": "Chart2",
   "commands": [
     {
       "name": "Create chart",
       "identifier": "createChart",
-      "script": "__createChart.js",
+      "script": "__commandHandlers.js",
       "handlers": {
-        "run": "onRun",
+        "run": "createChart",
         "actions": {
-          "Shutdown": "onShutdown"
+          "Shutdown": "onCreateChartShutdown"
         }
       }
     },
     {
       "name": "Update chart",
       "identifier": "updateChart",
-      "script": "__updateChart.js",
+      "script": "__commandHandlers.js",
       "handlers": {
-        "run": "onRun",
+        "run": "updateChart",
         "actions": {
-          "Shutdown": "onShutdown"
+          "Shutdown": "onUpdateChartShutdown"
         }
       }
     },
     {
       "name": "Edit chart",
       "identifier": "editChart",
-      "script": "__editChart.js",
+      "script": "__commandHandlers.js",
       "handlers": {
-        "run": "onRun",
+        "run": "editChart",
         "actions": {
-          "Shutdown": "onShutdown"
+          "Shutdown": "onEditChartShutdown"
         }
       }
     },
     {
       "name": "Templates",
       "identifier": "templates",
-      "script": "__templates.js",
+      "script": "__commandHandlers.js",
       "handlers": {
-        "run": "onRun",
+        "run": "templates",
         "actions": {
-          "Shutdown": "onShutdown"
+          "Shutdown": "onTemplatesShutdown"
         }
       }
     },
     {
       "name": "My account",
       "identifier": "myAccount",
-      "script": "__myAccount.js",
+      "script": "__commandHandlers.js",
       "handlers": {
-        "run": "onRun",
+        "run": "myAccount",
         "actions": {
-          "Shutdown": "onShutdown"
+          "Shutdown": "onMyAccountShutdown"
         }
       }
     }

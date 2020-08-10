@@ -1,21 +1,21 @@
-import React, { memo } from "react";
-import styled from "styled-components";
-import * as R from "ramda";
-import { connect } from "react-redux";
+import React, { memo } from 'react'
+import styled from 'styled-components'
+import * as R from 'ramda'
+import { connect } from 'react-redux'
 
-import { selectChartTabRequest, getCurrentChart } from "@modules/createChart";
-import { getIsPro } from "@modules/account";
-import { navigationTabs } from "@app/constants";
-import TabButton from "./TabButton";
-import { isAdobe, isChartDisabled } from "@app/utils";
+import { selectChartTabRequest, getCurrentChart } from '@modules/createChart'
+import { getIsPro } from '@modules/account'
+import { navigationTabs } from '@app/constants'
+import TabButton from './TabButton'
+import { isAdobe, isChartDisabled } from '@app/utils'
 
 const Root = styled.div`
   padding: 8px;
   background: ${({ theme: { grey } }) => grey};
-  height: 400px;
+  height: 100vh;
   flex-basis: 88px;
-  min-width: ${isAdobe ? "88px" : "0"};
-`;
+  min-width: ${isAdobe ? '88px' : '0'};
+`
 
 const TabContainer = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const TabContainer = styled.div`
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-between;
-`;
+`
 
 const ChartsDumb = memo(({ selectChartTab, currentChart, isPro }) => {
   return (
@@ -42,14 +42,14 @@ const ChartsDumb = memo(({ selectChartTab, currentChart, isPro }) => {
         ))}
       </TabContainer>
     </Root>
-  );
-});
+  )
+})
 
 const Charts = connect(
   R.applySpec({ currentChart: getCurrentChart, isPro: getIsPro }),
   {
     selectChartTab: selectChartTabRequest,
   }
-)(ChartsDumb);
+)(ChartsDumb)
 
-export default Charts;
+export default Charts

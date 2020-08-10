@@ -1,23 +1,23 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import * as R from "ramda";
+import React, { Fragment } from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import * as R from 'ramda'
 
 import {
   MainView,
   Charts,
   SyncData,
   InvalidData,
-} from "@components/createChart";
+} from '@components/createChart'
 import {
   getIsSyncGSShowing,
   getIsSyncAPIShowing,
   getIsSyncDataValid,
-} from "@modules/createChart";
+} from '@modules/createChart'
 
 const Root = styled.div`
   display: flex;
-`;
+`
 
 const CreateChartDumb = ({
   isSyncAPIShowing,
@@ -36,8 +36,8 @@ const CreateChartDumb = ({
         </Fragment>
       )}
     </Root>
-  );
-};
+  )
+}
 
 const CreateChart = connect(
   R.applySpec({
@@ -45,6 +45,6 @@ const CreateChart = connect(
     isSyncGSShowing: getIsSyncGSShowing,
     isSyncDataValid: getIsSyncDataValid,
   })
-)(CreateChartDumb);
+)(CreateChartDumb)
 
-export default CreateChart;
+export default CreateChart

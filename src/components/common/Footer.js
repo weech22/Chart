@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import { Button, Link } from "./";
-import { isFigma } from "@app/utils";
+import { Button, Link } from './'
+import { afs } from '@app/utils'
 
 const Root = styled.div`
   width: 100%;
@@ -12,19 +12,18 @@ const Root = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-grow: 0;
-`;
+`
 
 const StyledButton = styled(Button)`
   margin-left: 16px;
-`;
+`
 
 const ButtonBlock = styled.div`
   display: flex;
   align-items: center;
-  margin-right: ${isFigma ? "30" : "0"}px;
-`;
+`
 
-const StyledLink = styled(Link)``;
+const StyledLink = styled(Link)``
 
 const Footer = ({ controls: { mainButton, leftButton, rightButton } }) => (
   <Root>
@@ -50,6 +49,6 @@ const Footer = ({ controls: { mainButton, leftButton, rightButton } }) => (
       )}
     </ButtonBlock>
   </Root>
-);
+)
 
-export default Footer;
+export default Footer

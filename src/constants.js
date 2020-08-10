@@ -1,98 +1,98 @@
-import assets from "./assets";
+import assets from './assets'
 
-import { generateEmptyGrid } from "./utils";
+import { generateEmptyGrid } from './utils'
 
 export const links = {
   SUPPORT:
-    "https://join.slack.com/t/chart-plugin/shared_invite/zt-61tsh8gx-C0TBYxSU8ShA~IK_v121dA",
+    'https://join.slack.com/t/chart-plugin/shared_invite/zt-61tsh8gx-C0TBYxSU8ShA~IK_v121dA',
   GS_EXAMPLE:
-    "https://docs.google.com/spreadsheets/d/1UFptXqmtFexYAyX9CKIYr0x7XMtltog8_kUnrCxoRBo/edit#gid=0",
+    'https://docs.google.com/spreadsheets/d/1UFptXqmtFexYAyX9CKIYr0x7XMtltog8_kUnrCxoRBo/edit#gid=0',
   API_EXAMPLE:
-    "https://raw.githubusercontent.com/pavelkuligin/chart/master/data/data_linechart.json",
-  STYLE_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/templates",
-  TABLE_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
-  API_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/json-data",
-  CSV_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
-  GS_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/tabulated-data",
-  JSON_HOW_TO: "https://pavel-kuligin.gitbook.io/chart/json-data",
-};
+    'https://raw.githubusercontent.com/pavelkuligin/chart/master/data/data_linechart.json',
+  STYLE_HOW_TO: 'https://pavel-kuligin.gitbook.io/chart/templates',
+  TABLE_HOW_TO: 'https://pavel-kuligin.gitbook.io/chart/tabulated-data',
+  API_HOW_TO: 'https://pavel-kuligin.gitbook.io/chart/json-data',
+  CSV_HOW_TO: 'https://pavel-kuligin.gitbook.io/chart/tabulated-data',
+  GS_HOW_TO: 'https://pavel-kuligin.gitbook.io/chart/tabulated-data',
+  JSON_HOW_TO: 'https://pavel-kuligin.gitbook.io/chart/json-data',
+}
 
 export const styleSettingsTypes = {
-  SETTINGS: "SETTINGS",
-  LABELS: "LABELS",
-  GRID: "GRID",
-};
+  SETTINGS: 'SETTINGS',
+  LABELS: 'LABELS',
+  GRID: 'GRID',
+}
 
-export const GRID_SIZE = 5;
+export const GRID_SIZE = 5
 
 export const forms = {
-  RANDOM: "RANDOM",
-  SYNC_DATA: "SYNC_DATA",
-  SYNCED_DATA: "SYNCED_DATA",
-  CUSTOM_STYLE: "CUSTOM_STYLE",
-};
+  RANDOM: 'RANDOM',
+  SYNC_DATA: 'SYNC_DATA',
+  SYNCED_DATA: 'SYNCED_DATA',
+  CUSTOM_STYLE: 'CUSTOM_STYLE',
+}
 
 export const linkRegEx = new RegExp(
-  "(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})"
-);
+  '(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})'
+)
 
-export const jsonRegEx = new RegExp(".json$");
+export const jsonRegEx = new RegExp('.json$')
 
 export const modules = {
-  TEMPLATE: "TEMPLATE",
-  CREATE_CHART: "CREATE_CHART",
-  SETTINGS: "SETTINGS",
-  FIGMA: "FIGMA",
-  ACCOUNT: "ACCOUNT",
-  ADOBE: "ADOBE",
-  SKETCH: "SKETCH",
-};
+  TEMPLATE: 'TEMPLATE',
+  CREATE_CHART: 'CREATE_CHART',
+  SETTINGS: 'SETTINGS',
+  FIGMA: 'FIGMA',
+  ACCOUNT: 'ACCOUNT',
+  ADOBE: 'ADOBE',
+  SKETCH: 'SKETCH',
+}
 
 export const componentTypes = {
-  NUM: "NUM",
-  STRING: "STRING",
-  COLOR: "COLOR",
-  SELECT: "SELECT",
-};
+  NUM: 'NUM',
+  STRING: 'STRING',
+  COLOR: 'COLOR',
+  SELECT: 'SELECT',
+}
 
 export const figmaUi = {
-  CREATE_CHART: "CREATE_CHART",
-  UPDATE_CHART: "UPDATE_CHART",
-  EDIT_CHART: "EDIT_CHART",
-  TEMPLATES: "TEMPLATES",
-  MY_ACCOUNT: "MY_ACCOUNT",
-};
+  CREATE_CHART: 'CREATE_CHART',
+  UPDATE_CHART: 'UPDATE_CHART',
+  EDIT_CHART: 'EDIT_CHART',
+  TEMPLATES: 'TEMPLATES',
+  MY_ACCOUNT: 'MY_ACCOUNT',
+}
 
 export const figmaMessageTypes = {
-  MENU_COMMAND: "@@FIGMA/MENU_COMMAND",
-};
+  MENU_COMMAND: '@@FIGMA/MENU_COMMAND',
+}
 
 export const tabs = {
   RANDOM: 0,
   TABLE: 1,
   JSON: 2,
-};
+}
 
 export const chartTypes = {
-  LINE_CHART: "LINE_CHART",
-  AREA_CHART: "AREA_CHART",
-  STACKED_AREA_CHART: "STACKED_AREA_CHART",
-  STREAM_GRAPH: "STREAM_GRAPH",
-  VERTICAL_BAR_CHART: "VERTICAL_BAR_CHART",
-  HORIZONTAL_BAR_CHART: "HORIZONTAL_BAR_CHART",
-  GROUPED_BAR_CHART: "GROUPED_BAR_CHART",
-  GROUPED_HORIZONTAL_BAR_CHART: "GROUPED_HORIZONTAL_BAR_CHART",
-  PIE_CHART: "PIE_CHART",
-  DONUT_CHART: "DONUT_CHART",
-  PROGRESS_CHART: "PROGRESS_CHART",
-  SPARKLINE: "SPARKLINE",
-  SCATTER_PLOT: "SCATTER_PLOT",
-  CANDLESTICK_CHART: "CANDLESTICK_CHART",
-  HISTOGRAM: "HISTOGRAM",
-  HEATMAP: "HEATMAP",
-};
+  LINE_CHART: 'LINE_CHART',
+  AREA_CHART: 'AREA_CHART',
+  STACKED_AREA_CHART: 'STACKED_AREA_CHART',
+  STREAM_GRAPH: 'STREAM_GRAPH',
+  VERTICAL_BAR_CHART: 'VERTICAL_BAR_CHART',
+  HORIZONTAL_BAR_CHART: 'HORIZONTAL_BAR_CHART',
+  GROUPED_BAR_CHART: 'GROUPED_BAR_CHART',
+  GROUPED_HORIZONTAL_BAR_CHART: 'GROUPED_HORIZONTAL_BAR_CHART',
+  PIE_CHART: 'PIE_CHART',
+  DONUT_CHART: 'DONUT_CHART',
+  PROGRESS_CHART: 'PROGRESS_CHART',
+  SPARKLINE: 'SPARKLINE',
+  SCATTER_PLOT: 'SCATTER_PLOT',
+  CANDLESTICK_CHART: 'CANDLESTICK_CHART',
+  HISTOGRAM: 'HISTOGRAM',
+  HEATMAP: 'HEATMAP',
+}
 
-export const freeChartTypes = [chartTypes.LINE_CHART, chartTypes.AREA_CHART];
+export const freeChartTypes = [chartTypes.LINE_CHART, chartTypes.AREA_CHART]
 
 export const navigationTabs = [
   { type: chartTypes.LINE_CHART, icon: assets.charts.lineChart },
@@ -117,54 +117,54 @@ export const navigationTabs = [
   { type: chartTypes.CANDLESTICK_CHART, icon: assets.charts.candlestickChart },
   { type: chartTypes.HISTOGRAM, icon: assets.charts.histogram },
   { type: chartTypes.HEATMAP, icon: assets.charts.heatmap },
-];
+]
 
 export const dataDistributionTypes = {
-  RANDOM: { value: "RANDOM", label: "Random" },
-  TREND_UP: { value: "TREND_UP", label: "Trend up" },
-  TREND_DOWN: { value: "TREND_DOWN", label: "Trend down" },
+  RANDOM: { value: 'RANDOM', label: 'Random' },
+  TREND_UP: { value: 'TREND_UP', label: 'Trend up' },
+  TREND_DOWN: { value: 'TREND_DOWN', label: 'Trend down' },
   NORMAL_DISTRIBUTION: {
-    value: "NORMAL_DISTRIBUTION",
-    label: "Normal distribution",
+    value: 'NORMAL_DISTRIBUTION',
+    label: 'Normal distribution',
   },
-  MIXED: { value: "MIXED", label: "Mixed" },
-};
+  MIXED: { value: 'MIXED', label: 'Mixed' },
+}
 
 export const scatterPlotTypes = {
-  SCATTER: { value: "SCATTER", label: "Scatter" },
-  BUBBLE: { value: "BUBBLE", label: "Bubble" },
-};
+  SCATTER: { value: 'SCATTER', label: 'Scatter' },
+  BUBBLE: { value: 'BUBBLE', label: 'Bubble' },
+}
 
 export const syncDataTypes = {
-  API: "API",
-  JSON: "JSON",
-  CSV: "CSV",
-  GS: "GS",
-};
+  API: 'API',
+  JSON: 'JSON',
+  CSV: 'CSV',
+  GS: 'GS',
+}
 
 // TODO: Move to configs
 export const charts = {
   [chartTypes.LINE_CHART]: {
-    title: "Line chart",
+    title: 'Line chart',
     icon: assets.charts.areaChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "lines",
-          label: "Lines",
+          name: 'lines',
+          label: 'Lines',
           type: componentTypes.NUM,
           defaultValue: 1,
         },
         {
-          name: "points",
-          label: "Points",
+          name: 'points',
+          label: 'Points',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -172,14 +172,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -187,26 +187,26 @@ export const charts = {
     },
   },
   [chartTypes.AREA_CHART]: {
-    title: "Area chart",
+    title: 'Area chart',
     icon: assets.charts.areaChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "areas",
-          label: "Areas",
+          name: 'areas',
+          label: 'Areas',
           type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
-          name: "points",
-          label: "Points",
+          name: 'points',
+          label: 'Points',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -214,14 +214,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -229,26 +229,26 @@ export const charts = {
     },
   },
   [chartTypes.STACKED_AREA_CHART]: {
-    title: "Stacked area chart",
+    title: 'Stacked area chart',
     icon: assets.charts.stackedAreaChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "areas",
-          label: "Areas",
+          name: 'areas',
+          label: 'Areas',
           type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
-          name: "points",
-          label: "Points",
+          name: 'points',
+          label: 'Points',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -256,14 +256,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -271,26 +271,26 @@ export const charts = {
     },
   },
   [chartTypes.STREAM_GRAPH]: {
-    title: "Stream graph",
+    title: 'Stream graph',
     icon: assets.charts.streamGraph,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "areas",
-          label: "Areas",
+          name: 'areas',
+          label: 'Areas',
           type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
-          name: "points",
-          label: "Points",
+          name: 'points',
+          label: 'Points',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -298,14 +298,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -313,26 +313,26 @@ export const charts = {
     },
   },
   [chartTypes.VERTICAL_BAR_CHART]: {
-    title: "Vertical bar chart",
+    title: 'Vertical bar chart',
     icon: assets.charts.verticalBarChart,
-    proTip: "use stacks = 2 or more to get stacked bar chart.",
+    proTip: 'use stacks = 2 or more to get stacked bar chart.',
     fields: {
       data: [
         {
-          name: "stacks",
-          label: "Stacks",
+          name: 'stacks',
+          label: 'Stacks',
           type: componentTypes.NUM,
           defaultValue: 1,
         },
         {
-          name: "bars",
-          label: "Bars",
+          name: 'bars',
+          label: 'Bars',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -340,14 +340,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -355,26 +355,26 @@ export const charts = {
     },
   },
   [chartTypes.HORIZONTAL_BAR_CHART]: {
-    title: "Horizontal bar chart",
+    title: 'Horizontal bar chart',
     icon: assets.charts.horizontalBarChart,
-    proTip: "use stacks = 2 or more to get stacked bar chart.",
+    proTip: 'use stacks = 2 or more to get stacked bar chart.',
     fields: {
       data: [
         {
-          name: "stacks",
-          label: "Stacks",
+          name: 'stacks',
+          label: 'Stacks',
           type: componentTypes.NUM,
           defaultValue: 1,
         },
         {
-          name: "bars",
-          label: "Bars",
+          name: 'bars',
+          label: 'Bars',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -382,14 +382,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -397,26 +397,26 @@ export const charts = {
     },
   },
   [chartTypes.GROUPED_BAR_CHART]: {
-    title: "Grouped bar chart",
+    title: 'Grouped bar chart',
     icon: assets.charts.groupedBarChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "categories",
-          label: "Categories",
+          name: 'categories',
+          label: 'Categories',
           type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
-          name: "bars",
-          label: "Bars",
+          name: 'bars',
+          label: 'Bars',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -424,14 +424,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -439,26 +439,26 @@ export const charts = {
     },
   },
   [chartTypes.GROUPED_HORIZONTAL_BAR_CHART]: {
-    title: "Horizontal grouped bar chart",
+    title: 'Horizontal grouped bar chart',
     icon: assets.charts.groupedHorizontalBarChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "categories",
-          label: "Categories",
+          name: 'categories',
+          label: 'Categories',
           type: componentTypes.NUM,
           defaultValue: 2,
         },
         {
-          name: "bars",
-          label: "Bars",
+          name: 'bars',
+          label: 'Bars',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
         {
-          name: "dataDistribution",
-          label: "Data distribution",
+          name: 'dataDistribution',
+          label: 'Data distribution',
           type: componentTypes.SELECT,
           options: dataDistributionTypes,
           defaultValue: dataDistributionTypes.RANDOM.value,
@@ -466,14 +466,14 @@ export const charts = {
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -481,14 +481,14 @@ export const charts = {
     },
   },
   [chartTypes.PIE_CHART]: {
-    title: "Pie chart",
+    title: 'Pie chart',
     icon: assets.charts.pieChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "segments",
-          label: "Segments",
+          name: 'segments',
+          label: 'Segments',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
@@ -496,14 +496,14 @@ export const charts = {
     },
   },
   [chartTypes.DONUT_CHART]: {
-    title: "Donut chart",
+    title: 'Donut chart',
     icon: assets.charts.donutChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "segments",
-          label: "Segments",
+          name: 'segments',
+          label: 'Segments',
           type: componentTypes.NUM,
           defaultValue: 5,
         },
@@ -511,20 +511,20 @@ export const charts = {
     },
   },
   [chartTypes.PROGRESS_CHART]: {
-    title: "Progress chart",
+    title: 'Progress chart',
     icon: assets.charts.progressChart,
     proTip:
-      "if you use Oval or Square as a canvas, you will get circular progress bar, otherwise you will get a linear progress bar.",
+      'if you use Oval or Square as a canvas, you will get circular progress bar, otherwise you will get a linear progress bar.',
   },
   [chartTypes.SPARKLINE]: {
-    title: "Sparkline",
+    title: 'Sparkline',
     icon: assets.charts.sparkline,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "points",
-          label: "Points",
+          name: 'points',
+          label: 'Points',
           type: componentTypes.NUM,
           defaultValue: 20,
         },
@@ -532,47 +532,47 @@ export const charts = {
     },
   },
   [chartTypes.SCATTER_PLOT]: {
-    title: "Scatter plot",
+    title: 'Scatter plot',
     icon: assets.charts.scatterPlot,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "type",
-          label: "Type",
+          name: 'type',
+          label: 'Type',
           type: componentTypes.SELECT,
           options: scatterPlotTypes,
           defaultValue: scatterPlotTypes.SCATTER.value,
         },
         {
-          name: "points",
-          label: "Points",
+          name: 'points',
+          label: 'Points',
           type: componentTypes.NUM,
           defaultValue: 20,
         },
       ],
       range: [
         {
-          name: "y-min",
-          label: "Y-Min",
+          name: 'y-min',
+          label: 'Y-Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "y-max",
-          label: "Y-Max",
+          name: 'y-max',
+          label: 'Y-Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
         {
-          name: "x-min",
-          label: "X-Min",
+          name: 'x-min',
+          label: 'X-Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "x-max",
-          label: "X-Max",
+          name: 'x-max',
+          label: 'X-Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -580,28 +580,28 @@ export const charts = {
     },
   },
   [chartTypes.CANDLESTICK_CHART]: {
-    title: "Candlestick chart",
+    title: 'Candlestick chart',
     icon: assets.charts.candlestickChart,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "candles",
-          label: "Candles",
+          name: 'candles',
+          label: 'Candles',
           type: componentTypes.NUM,
           defaultValue: 10,
         },
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -609,14 +609,14 @@ export const charts = {
     },
   },
   [chartTypes.HISTOGRAM]: {
-    title: "Histogram",
+    title: 'Histogram',
     icon: assets.charts.histogram,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "dataPoints",
-          label: "Data points",
+          name: 'dataPoints',
+          label: 'Data points',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
@@ -624,38 +624,38 @@ export const charts = {
     },
   },
   [chartTypes.HEATMAP]: {
-    title: "Heatmap",
+    title: 'Heatmap',
     icon: assets.charts.heatmap,
-    proTip: "",
+    proTip: '',
     fields: {
       data: [
         {
-          name: "columns",
-          label: "Columns",
+          name: 'columns',
+          label: 'Columns',
           type: componentTypes.NUM,
           defaultValue: 6,
         },
         {
-          name: "rows",
-          label: "Rows",
+          name: 'rows',
+          label: 'Rows',
           type: componentTypes.NUM,
           defaultValue: 4,
         },
       ],
       range: [
         {
-          name: "min",
-          label: "Min",
+          name: 'min',
+          label: 'Min',
           type: componentTypes.NUM,
           defaultValue: 0,
         },
         {
-          name: "max",
-          label: "Max",
+          name: 'max',
+          label: 'Max',
           type: componentTypes.NUM,
           defaultValue: 100,
         },
       ],
     },
   },
-};
+}

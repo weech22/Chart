@@ -3,6 +3,13 @@
   -webkit-user-select: none;
 }
 
+html {
+  box-sizing: border-box;
+  background: transparent;
+  overflow: hidden;
+  cursor: default;
+}
+
 body {
   font-family: sans-serif;
 }
@@ -18,20 +25,19 @@ input::-webkit-inner-spin-button {
   background: transparent;
 }
 
-.example-enter {
-  opacity: 0.01;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+input,
+textarea {
+  -webkit-user-select: auto;
+  user-select: auto;
 }

@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const path =
+const htmlPath =
   './platforms/sketch/chart2.sketchplugin/Contents/Resources/_webpack_resources'
 
 const changes = [
@@ -9,27 +9,27 @@ const changes = [
   { regEx: new RegExp('[ \\t]+ [<]', 'g'), newString: '<' },
   { regEx: new RegExp('\\\\n', 'g'), newString: '' },
   { regEx: new RegExp('\\\\"', 'g'), newString: '"' },
-  {
-    regEx: new RegExp('\\Q"\\s+\\srequire\\("\\E', 'g'),
-    newString: '',
-  },
+  { regEx: new RegExp('\\) \\+ \\"\\"', 'g'), newString: '' },
+  { regEx: new RegExp('\\"\\" \\+ require\\(', 'g'), newString: '' },
 ]
 
-fs.readdir(path, (_, files) => {
+fs.readdir(htmlPath, (_, files) => {
   files.forEach((file) => {
-    fs.readFile(`${path}/${file}`, 'utf8', (err, fileString) => {
+    fs.readFile(`${htmlPath}/${file}`, 'utf8', (err, fileString) => {
       if (err) throw err
 
-      const result = changes.reduce(
-        (string, change) => string.replace(change.regEx, change.newString),
-        fileString
-      )
+      if (file.endsWith('.html')) {
+        const result = changes.reduce(
+          (string, change) => string.replace(change.regEx, change.newString),
+          fileString
+        )
 
-      fs.writeFile(`${path}/${file}`, result, (err) => {
-        if (err) console.log(err)
+        fs.writeFile(`${htmlPath}/${file}`, result, (err) => {
+          if (err) console.log(err)
 
-        console.log('Successfully Written to File.')
-      })
+          console.log('Successfully Written to File.')
+        })
+      }
     })
   })
 })

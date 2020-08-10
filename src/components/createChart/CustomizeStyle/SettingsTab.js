@@ -1,48 +1,51 @@
-import React from "react";
-import styled from "styled-components";
-import * as R from "ramda";
-import { connect } from "react-redux";
-import { Field, reduxForm, Form } from "redux-form";
+import React from 'react'
+import styled from 'styled-components'
+import * as R from 'ramda'
+import { connect } from 'react-redux'
+import { Field, reduxForm, Form } from 'redux-form'
 
-import { getCurrentChart, useThisStyleRequest } from "@modules/createChart";
-import { customizeStyleConfig } from "@config";
-import { forms, componentTypes } from "@app/constants";
-import { Dropdown, Input, ColorInput } from "@components/common";
+import { getCurrentChart, useThisStyleRequest } from '@modules/createChart'
+import { customizeStyleConfig } from '@config'
+import { forms, componentTypes } from '@app/constants'
+import { Dropdown, Input, ColorInput } from '@components/common'
+import { afs } from '@app/utils'
 
 const Root = styled.div`
   padding-top: 32px;
+  padding-bottom: -24px;
   display: flex;
   flex-wrap: wrap;
-
-  margin-right: 0 -8px -24px 0;
-`;
+  margin-top: 0;
+  margin-right: ${afs('-8px', '8px', '-10px')};
+`
 
 const FieldContainer = styled.div`
   display: flex;
   flex-basis: calc(50% - 8px);
-  margin-right: 0 8px 24px 0;
-`;
+  margin: 0 8px 24px 0;
+  max-width: ${afs('auto', 'auto', '184px')};
+`
 
-const StyledInput = styled(Input)``;
+const StyledInput = styled(Input)``
 
-const StyledDropdown = styled(Dropdown)``;
+const StyledDropdown = styled(Dropdown)``
 
-const StyledColorInput = styled(ColorInput)``;
+const StyledColorInput = styled(ColorInput)``
 
 // TODO: Reuse from utils
 const getComponent = (type) => {
   switch (type) {
     case componentTypes.NUM:
     case componentTypes.STRING:
-      return StyledInput;
+      return StyledInput
     case componentTypes.SELECT:
-      return StyledDropdown;
+      return StyledDropdown
     case componentTypes.COLOR:
-      return StyledColorInput;
+      return StyledColorInput
     default:
-      return "input";
+      return 'input'
   }
-};
+}
 
 const SettingsTabDumb = ({
   currentChart,
@@ -50,7 +53,7 @@ const SettingsTabDumb = ({
   useThisStyleRequest,
   handleSubmit,
 }) => {
-  const fields = customizeStyleConfig[currentChart][tab];
+  const fields = customizeStyleConfig[currentChart][tab]
 
   return (
     <Form onSubmit={handleSubmit(useThisStyleRequest)}>
@@ -71,8 +74,8 @@ const SettingsTabDumb = ({
           ))}
       </Root>
     </Form>
-  );
-};
+  )
+}
 
 const SettingsTab = R.compose(
   connect(R.applySpec({ currentChart: getCurrentChart }), {
@@ -84,6 +87,6 @@ const SettingsTab = R.compose(
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
   })
-)(SettingsTabDumb);
+)(SettingsTabDumb)
 
-export default SettingsTab;
+export default SettingsTab
