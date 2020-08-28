@@ -1,49 +1,49 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import * as R from "ramda";
-import { Field, reduxForm, Form } from "redux-form";
+import React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import * as R from 'ramda'
+import { Field, reduxForm, Form } from 'redux-form'
 
-import { getCurrentChart, createChartRequest } from "@modules/createChart";
+import { getCurrentChart, createChartRequest } from '@modules/createChart'
 import {
   charts,
   forms,
   dataDistributionTypes,
   componentTypes,
-} from "@app/constants";
-import { Input, Dropdown } from "@components/common";
+} from '@app/constants'
+import { Input, Dropdown } from '@components/common'
 
 // TODO: Fix this
 const validate = (values) => {
-  const errors = {};
+  const errors = {}
 
   if (values.min > values.max || values.max < values.min) {
-    errors.min = true;
-    errors.max = true;
+    errors.min = true
+    errors.max = true
   }
-  return errors;
-};
+  return errors
+}
 
 const Root = styled.div`
   margin-right: -8px;
-`;
+`
 
 const FieldLine = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-top: 24px;
-`;
+`
 
-// TODO: lres
+// TODO: text config
 const getNoFieldsMessage = (chartType) =>
-  `${charts[chartType].title} doesn’t have any settings for random data :-)`;
+  `${charts[chartType].title} doesn’t have any settings for random data :-)`
 
 const ProTip = styled.div`
   line-height: 16px;
   margin-top: 16px;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.5);
-`;
+`
 
 const NoFieldsMessage = styled.div`
   line-height: 16px;
@@ -51,30 +51,30 @@ const NoFieldsMessage = styled.div`
   color: rgba(0, 0, 0, 0.5);
   margin-bottom: 24px;
   margin-top: 16px;
-`;
+`
 
 const StyledInput = styled(Input)`
   flex-basis: calc(25% - 8px);
   margin-right: 8px;
   width: 88px;
-`;
+`
 
 const StyledDropdown = styled(Dropdown)`
-  flex-basis: calc(${({ small }) => (small ? "25" : "50")}% - 8px);
+  flex-basis: calc(${({ small }) => (small ? '25' : '50')}% - 8px);
   margin-right: 8px;
-`;
+`
 
 // TODO: Reuse from utils
 const getComponent = (type) => {
-  if (type === componentTypes.NUM) return StyledInput;
-  if (type === componentTypes.SELECT) return StyledDropdown;
-};
+  if (type === componentTypes.NUM) return StyledInput
+  if (type === componentTypes.SELECT) return StyledDropdown
+}
 
 const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
   const {
     fields: { range: rangeFields, data: dataFields } = { range: [], data: [] },
-    proTip = "",
-  } = charts[currentChart];
+    proTip = '',
+  } = charts[currentChart]
 
   return (
     <Root>
@@ -90,7 +90,7 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
                   key={`${currentChart}_${name}`}
                   type={type}
                   options={options}
-                  small={name === "type"}
+                  small={name === 'type'}
                   defaultValue={defaultValue}
                 />
               )
@@ -117,8 +117,8 @@ const RandomDumb = ({ currentChart, createChart, handleSubmit }) => {
       )}
       {proTip && <ProTip>Pro tip: {proTip}</ProTip>}
     </Root>
-  );
-};
+  )
+}
 
 const Random = R.compose(
   connect(R.applySpec({ currentChart: getCurrentChart }), {
@@ -129,6 +129,6 @@ const Random = R.compose(
     enableReinitialize: true,
     validate,
   })
-)(RandomDumb);
+)(RandomDumb)
 
-export default Random;
+export default Random

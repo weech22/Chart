@@ -42,7 +42,7 @@ const StyledTitle = styled(Title)`
   padding: ${isAdobe ? '10px 7px 0 16px' : '16px 16px 0 16px'};
 `
 
-// TODO: Move these into lres
+// TODO: Move all text to config
 const message =
   'Template is an easy way to save styles of your charts once and use it everywhere. '
 

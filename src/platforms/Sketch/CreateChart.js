@@ -8,8 +8,6 @@ import CreateChart from '@app/screens/CreateChart'
 import { standartTheme } from '@app/styles'
 import { interceptClickEvent } from './utils'
 
-console.log('document', document)
-
 // listen for link click events at the document level
 document.addEventListener('click', interceptClickEvent)
 

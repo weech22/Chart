@@ -1,41 +1,41 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
-import * as R from "ramda";
+import React from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import * as R from 'ramda'
 
-import Link from "../Link";
-import Multiselect from "../Multiselect";
-import Dropdown from "../Dropdown";
-import SyncedHeader from "./SyncedHeader";
-import { getSyncedData, discardSyncedData } from "@modules/createChart";
-import { isFigma } from "@app/utils";
-import { forms, syncDataTypes } from "@app/constants";
+import Link from '../Link'
+import Multiselect from '../Multiselect'
+import Dropdown from '../Dropdown'
+import SyncedHeader from './SyncedHeader'
+import { getSyncedData, discardSyncedData } from '@modules/createChart'
+import { isFigma } from '@app/utils'
+import { forms, syncDataTypes } from '@app/constants'
 
 const Root = styled.div`
   flex: 1;
   flex-basis: 100%;
-`;
+`
 
 const StyledMultiselect = styled(Multiselect)`
   flex-basis: 50%;
-`;
+`
 
 const StyledDropdown = styled(Dropdown)`
   flex-basis: 100%;
   width: 100%;
-`;
+`
 
 const StyledLink = styled(Link)`
   position: relative;
-  top: ${isFigma ? "20" : "0"}px;
-`;
+  top: ${isFigma ? '20' : '0'}px;
+`
 
 const FieldBlock = styled.div`
   display: flex;
   margin-top: 24px;
-  max-height: ${isFigma ? "158" : "136"}px;
-`;
+  max-height: ${isFigma ? '158' : '136'}px;
+`
 
 const Col = styled.div`
   display: flex;
@@ -45,52 +45,52 @@ const Col = styled.div`
   margin-right: 4px;
   flex: 1;
   flex-basis: 50%;
-`;
+`
 
-// TODO: use lres + config
+// TODO: use text constants config
 const helpLinks = {
   [syncDataTypes.API]: {
-    link: "",
-    label: "How to use data from API?",
+    link: '',
+    label: 'How to use data from API?',
   },
   [syncDataTypes.GS]: {
-    link: "",
-    label: "How to use data from GS?",
+    link: '',
+    label: 'How to use data from GS?',
   },
   [syncDataTypes.CSV]: {
-    link: "",
-    label: "How to use data from CSV?",
+    link: '',
+    label: 'How to use data from CSV?',
   },
   [syncDataTypes.JSON]: {
-    link: "",
-    label: "How to use data from JSON?",
+    link: '',
+    label: 'How to use data from JSON?',
   },
-};
+}
 
 const SyncedDataDumb = ({
   discardSyncedData,
   discardable,
   syncedData: { data = [], type, source },
 }) => {
-  let options;
+  let options
   switch (type) {
     case syncDataTypes.GS:
-      options = data[0];
+      options = data[0]
 
-      break;
+      break
     case syncDataTypes.API:
-      options = Object.keys(data[0]);
+      options = Object.keys(data[0])
 
-      break;
+      break
     case syncDataTypes.CSV:
-      options = data[0];
+      options = data[0]
 
-      break;
+      break
     case syncDataTypes.JSON:
-      options = Object.keys(data[0]);
-      break;
+      options = Object.keys(data[0])
+      break
     default:
-      options = [];
+      options = []
   }
 
   return (
@@ -104,26 +104,26 @@ const SyncedDataDumb = ({
       <FieldBlock>
         <Col>
           <Field
-            name="labels"
+            name='labels'
             component={StyledDropdown}
             options={options.map((option) => ({
               value: option,
               label: option,
             }))}
-            label="Labels"
+            label='Labels'
           />
           <StyledLink>{helpLinks[type].label}</StyledLink>
         </Col>
         <Field
-          name="dataColumns"
+          name='dataColumns'
           component={StyledMultiselect}
           options={options}
-          label="Data columns"
+          label='Data columns'
         />
       </FieldBlock>
     </Root>
-  );
-};
+  )
+}
 
 const SyncedData = R.compose(
   connect(R.applySpec({ syncedData: getSyncedData }), {
@@ -133,6 +133,6 @@ const SyncedData = R.compose(
     form: forms.SYNCED_DATA,
     enableReinitialize: true,
   })
-)(SyncedDataDumb);
+)(SyncedDataDumb)
 
-export default SyncedData;
+export default SyncedData

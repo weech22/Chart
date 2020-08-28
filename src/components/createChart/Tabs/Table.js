@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import * as R from "ramda";
+import React, { Fragment } from 'react'
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+import * as R from 'ramda'
 
-import { Link, Spreadsheet, SyncedData } from "@components/common";
-import { isAdobe, isFigma } from "@app/utils";
+import { Link, Spreadsheet, SyncedData } from '@components/common'
+import { isAdobe, isFigma } from '@app/utils'
 import {
   startSyncGS,
   getIsGSSynced,
@@ -13,8 +13,8 @@ import {
   getSyncedData,
   clearTable,
   transposeTable,
-} from "@modules/createChart";
-import { links } from "@app/constants";
+} from '@modules/createChart'
+import { links } from '@app/constants'
 
 const Root = styled.div`
   padding-top: 8px;
@@ -22,15 +22,15 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: -1px;
-`;
+`
 
 const StyledLink = styled(Link)`
   font-size: 12px;
-`;
+`
 
 const InstructionsLine = styled.div`
   margin-bottom: 6px;
-`;
+`
 
 const TableFooter = styled.div`
   margin-top: -18px;
@@ -43,15 +43,15 @@ const TableFooter = styled.div`
   justify-content: space-between;
 
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-`;
+`
 
 const Controls = styled.div`
   display: flex;
   justify-content: space-between;
   width: 140px;
-`;
+`
 
-// TODO: lres
+// TODO: text config
 const TableDumb = ({
   startSyncGS,
   isGSSynced,
@@ -62,23 +62,23 @@ const TableDumb = ({
   transposeTable,
 }) => {
   const handleClick = () => {
-    document.getElementById("hiddenFileInput").click();
-  };
+    document.getElementById('hiddenFileInput').click()
+  }
 
-  const handleUploadCSV = isAdobe ? uploadCSV : handleClick;
+  const handleUploadCSV = isAdobe ? uploadCSV : handleClick
   return (
     <Root>
       <InstructionsLine>
-        {"Type or paste data into table. "}
+        {'Type or paste data into table. '}
         <StyledLink onClick={startSyncGS}>Sync with Google Sheet</StyledLink>
-        {" or "}
+        {' or '}
         <StyledLink onClick={handleUploadCSV}>upload CSV</StyledLink>
         {isFigma && (
           <input
-            accept=".csv"
-            id="hiddenFileInput"
-            style={{ display: "none" }}
-            type="file"
+            accept='.csv'
+            id='hiddenFileInput'
+            style={{ display: 'none' }}
+            type='file'
             onChange={(e) => uploadCSV(e.target.files)}
           />
         )}
@@ -99,8 +99,8 @@ const TableDumb = ({
         </Fragment>
       )}
     </Root>
-  );
-};
+  )
+}
 
 const Table = connect(
   R.applySpec({ isGSSynced: getIsGSSynced, isCSVUploaded: getIsCSVUploaded }),
@@ -111,6 +111,6 @@ const Table = connect(
     clearTable,
     transposeTable,
   }
-)(TableDumb);
+)(TableDumb)
 
-export default Table;
+export default Table

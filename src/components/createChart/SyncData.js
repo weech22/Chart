@@ -71,7 +71,7 @@ const InvalidData = styled.div`
   margin-top: 16px;
 `
 
-// TODO: Create lres module for this + Create a config and then derive these values from there
+// TODO: Create a config and then derive these values from there
 const gsTitle = 'Sync with Google Sheet'
 const apiTitle = 'Sync with HTTPS API'
 
